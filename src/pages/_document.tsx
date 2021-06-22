@@ -55,19 +55,19 @@ export default class MyDocument extends Document {
           <link
             rel="mask-icon"
             href="/favicons/safari-pinned-tab.svg"
-            color="#18191F"
+            color="#6138fe"
           />
+          <meta name="msapplication-TileColor" content="#6138fe" />
+          <meta name="theme-color" content="#fefefe" />
           <meta
             name="apple-mobile-web-app-title"
             content="Perfect Product Finder"
           />
           <meta name="application-name" content="Perfect Product Finder" />
-          <meta name="msapplication-TileColor" content="#18191F" />
           <meta
             name="msapplication-config"
             content="/favicons/browserconfig.xml"
           />
-          <meta name="theme-color" content="#18191F" />
 
           <link rel="preconnect" href="https://img2.storyblok.com" />
           <link rel="preconnect" href="https://www.googletagmanager.com" />
