@@ -1,0 +1,67 @@
+image: node:14
+
+cache:
+  paths:
+    - node_modules/
+
+variables:
+  NOW_BUILD_PARAMS: '--confirm'
+
+stages:
+  - test
+  - deploy
+  - audit
+
+test:
+  before_script:
+    - yarn config set cache-folder .yarn
+    - yarn install
+  stage: test
+  script: yarn jest --coverage
+  only:
+    - merge_requests
+
+before_script:
+  - npm install -g vercel --silent --unsafe-perm
+
+staging:
+  stage: deploy
+  script:
+    - echo "Deploying app to [staging] environment"
+    - VERCEL_ORG_ID=$VERCEL_ORG_ID
+      VERCEL_PROJECT_ID=$STG_VERCEL_PROJECT_ID
+      vercel --token=$NOW_DEPLOY_TOKEN $NOW_BUILD_PARAMS --prod
+  environment:
+    name: production
+    url: https://perfectproductfinder.storyofams.dev
+  only:
+    - staging
+
+production:
+  stage: deploy
+  script:
+    - echo "Deploying app to [production] environment"
+    - VERCEL_ORG_ID=$VERCEL_ORG_ID
+      VERCEL_PROJECT_ID=$PROD_VERCEL_PROJECT_ID
+      vercel --token=$NOW_DEPLOY_TOKEN $NOW_BUILD_PARAMS --prod
+  environment:
+    name: production
+    url: https://perfectproductfinder.com
+  only:
+    - master
+
+runLighthouse:
+  stage: audit
+  image: cypress/browsers:node14.15.0-chrome86-ff82
+  script:
+    - |
+      npx @lhci/cli autorun \
+        --collect.url=https://perfectproductfinder.storyofams.dev \
+        --collect.settings.chromeFlags="--no-sandbox" \
+        --collect.settings.throttling.cpuSlowdownMultiplier=2.5 \
+        --collect.settings.extraHeaders="{\"Cookie\": \"next-password-protect=$NEXT_PASSWORD_JWT\"}" \
+        --upload.target=lhci \
+        --upload.serverBaseUrl=https://lighthouse.storyofams.dev/ \
+        --upload.token=$LIGHTHOUSE_CI_BUILD_TOKEN
+  only:
+    - staging

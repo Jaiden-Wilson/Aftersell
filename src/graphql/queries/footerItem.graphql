@@ -1,0 +1,21 @@
+query footerItem($slug: ID!) {
+  FooterItem(id: $slug) {
+    uuid
+    content {
+      _editable
+      _uid
+      button_1_label
+      button_1_url {
+        cachedUrl
+      }
+      button_2_label
+      button_2_url {
+        cachedUrl
+      }
+      component
+      description
+      links
+      shopify_plus_logo
+    }
+  }
+}

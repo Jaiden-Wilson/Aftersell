@@ -1,0 +1,26 @@
+@font-face {
+    font-family: 'Nuvo pro';
+    src: url('Nuvo-pro.woff2') format('woff2'),
+        url('Nuvo-pro.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bitter';
+    src: url('Bitter-Bold.woff2') format('woff2'),
+        url('Bitter-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bitter';
+    src: url('Bitter-Regular.woff2') format('woff2'),
+        url('Bitter-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}

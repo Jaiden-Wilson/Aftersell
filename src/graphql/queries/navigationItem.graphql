@@ -1,0 +1,18 @@
+query navigationItem($slug: ID!) {
+  NavigationItem(id: $slug) {
+    uuid
+    content {
+      button_1_label
+      button_1_url {
+        cachedUrl
+      }
+      button_2_label
+      button_2_url {
+        cachedUrl
+      }
+      links
+      component
+      _editable
+    }
+  }
+}
