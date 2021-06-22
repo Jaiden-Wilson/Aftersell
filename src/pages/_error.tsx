@@ -29,7 +29,7 @@ const Error = ({ statusCode }) => {
       <Container minHeight="100vh">
         <Heading
           textAlign="center"
-          color={'aloe' as any}
+          color="black"
           fontSize={[5, 7]}
           lineHeight="heading"
           as="h1"
@@ -38,7 +38,7 @@ const Error = ({ statusCode }) => {
         </Heading>
         <Text
           textAlign="center"
-          color={'black' as any}
+          color="grey500"
           fontSize={[2, 2.5]}
           lineHeight="high"
           maxWidth="480px"

@@ -54,7 +54,7 @@ export const Footer: FC<FooterProps> = ({ content }) => {
   const { background, reset } = useCursor();
 
   return (
-    <Box bg={'cashew' as any}>
+    <Box bg="white">
       <motion.div
         onHoverStart={() => {
           background();
@@ -104,7 +104,7 @@ export const Footer: FC<FooterProps> = ({ content }) => {
                 fontWeight="medium"
                 mb={-0.5}
                 mr={1}
-                color="#6d6d6d"
+                color="grey500"
                 fontSize={2.25}
               >
                 Copyright © 2021 Story of AMS

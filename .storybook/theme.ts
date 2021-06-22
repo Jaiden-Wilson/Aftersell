@@ -6,12 +6,12 @@ import _LOGO from '../public/static/logo.png'
 export default create({
   base: 'light',
 
-  colorPrimary: theme.colors.cashew,
-  colorSecondary: theme.colors.tiger,
+  colorPrimary: theme.colors.primary500,
+  colorSecondary: theme.colors.pink500,
 
   // UI
   appBg: theme.colors.white,
-  appBorderColor: theme.colors.banana,
+  appBorderColor: theme.colors.primary200,
 
   // Typography
   fontBase: theme.fonts.body,
@@ -20,7 +20,7 @@ export default create({
   textColor: theme.colors.black,
 
   // Toolbar default and active colors
-  barTextColor: theme.colors.lapiz,
+  barTextColor: theme.colors.grey500,
 
   inputTextColor: theme.colors.black,
 
