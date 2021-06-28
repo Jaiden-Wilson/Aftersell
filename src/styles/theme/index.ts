@@ -15,15 +15,15 @@ const theme = {
     black: '#18191F',
   },
   fontWeights: {
-    thin: 250,
-    regular: 400,
-    medium: 600,
-    bold: 700,
+    thin: 300,
+    regular: 'normal',
+    medium: 500,
+    bold: 'bold',
     extraBold: 900,
   },
   fonts: {
-    heading: `'Nuvo pro', serif`,
-    body: `'Bitter', serif`,
+    heading: `'Aeonik', serif`,
+    body: `'Aeonik', serif`,
   },
   fontSizes: {
     1.25: space['1.25'],
