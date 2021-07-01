@@ -32,9 +32,15 @@ export interface SectionProps {
   first?: boolean;
   sectionType: string;
   background?: 'none' | 'color' | 'gradient';
+  text_align?: 'center' | 'left';
 }
 
-const Item = ({ content, sectionType, background }: SectionProps) => {
+const Item = ({
+  content,
+  sectionType,
+  background,
+  text_align,
+}: SectionProps) => {
   let item = null;
 
   switch (sectionType) {
@@ -59,7 +65,12 @@ const Item = ({ content, sectionType, background }: SectionProps) => {
       item = <List content={content?.list} />;
       break;
     case 'text':
-      item = <RichText text={content?.text} />;
+      item = (
+        <RichText
+          alignItems={text_align === 'center' ? 'center' : 'flex-start'}
+          text={content?.text}
+        />
+      );
   }
 
   return item;
@@ -118,6 +129,7 @@ export const SectionDynamic = ({
               content={section}
               first={i === 0}
               background={content?.background}
+              text_align={content?.text_align}
             />
           </>
         </SbEditable>

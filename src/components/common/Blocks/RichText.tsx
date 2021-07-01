@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Heading, Box, Text, SystemProps, css } from '@storyofams/react-ui';
+import { Heading, Flex, Text, SystemProps, css } from '@storyofams/react-ui';
 import {
   render,
   MARK_BOLD,
@@ -26,7 +26,8 @@ export const RichText: FC<RichTextProps> = ({
   text,
   ...props
 }) => (
-  <Box
+  <Flex
+    flexDirection="column"
     css={css({ '> div:last-child': { pb: 0 }, '.small': { fontSize: 2 } })}
     {...props}
   >
@@ -71,5 +72,5 @@ export const RichText: FC<RichTextProps> = ({
         ...nodeResolvers,
       },
     })}
-  </Box>
+  </Flex>
 );

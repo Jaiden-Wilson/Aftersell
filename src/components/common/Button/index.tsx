@@ -14,8 +14,9 @@ const variants = {
     color: 'white',
 
     '&:hover, &:focus': {
-      bg: 'pink500',
-      borderColor: 'pink500',
+      bg: 'black',
+      borderColor: 'black',
+      color: 'white',
     },
   },
   outline: {
@@ -23,8 +24,9 @@ const variants = {
     color: 'primary500',
 
     '&:hover, &:focus': {
-      borderColor: 'pink500',
-      color: 'pink500',
+      borderColor: 'black',
+      bg: 'black',
+      color: 'white',
     },
   },
   secondary: {
@@ -33,15 +35,20 @@ const variants = {
     color: 'primary500',
 
     '&:hover, &:focus': {
-      bg: 'primary200',
-      borderColor: 'primary200',
+      bg: 'black',
+      borderColor: 'black',
+      color: 'white',
     },
   },
   'secondary-outline': {
     borderColor: 'white',
     color: 'white',
 
-    '&:hover, &:focus': { borderColor: 'primary200', color: 'primary200' },
+    '&:hover, &:focus': {
+      bg: 'white',
+      borderColor: 'white',
+      color: 'primary500',
+    },
   },
 };
 
