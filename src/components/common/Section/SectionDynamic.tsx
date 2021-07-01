@@ -3,7 +3,7 @@ import SbEditable from 'storyblok-react';
 
 import { ContentImage } from '~components';
 
-import { Title, Video, RichText } from '../Blocks';
+import { Pricing, Title, Video, RichText } from '../Blocks';
 import { Divider } from '../Divider';
 import { Container } from './Container';
 
@@ -35,7 +35,7 @@ const Item = ({ content, sectionType, first }: SectionProps) => {
       item = <Video src={content?.url} />;
       break;
     case 'price_selector':
-      item = 'hi';
+      item = <Pricing content={content?.price} />;
       break;
     case 'divider':
       item = <Divider />;

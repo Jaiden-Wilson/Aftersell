@@ -14,7 +14,7 @@ export const headingVariants = {
     lineHeight: '120%',
   },
   h3: {
-    fontSize: [4, 4],
+    fontSize: [3, 4],
     fontWeight: 'semiBold',
     lineHeight: '120%',
   },
@@ -24,7 +24,7 @@ export const headingVariants = {
     lineHeight: '120%',
   },
   h5: {
-    fontSize: 2.5,
+    fontSize: [2, 3],
     fontWeight: 'semiBold',
     lineHeight: '120%',
   },
