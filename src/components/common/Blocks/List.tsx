@@ -5,6 +5,7 @@ import {
   Text,
   Grid,
   SystemProps,
+  css,
 } from '@storyofams/react-ui';
 import { Heading } from '~components';
 import {
@@ -96,7 +97,6 @@ export const Icon = ({ type, ...props }) => {
 };
 
 export const List = ({ content }: ListProps) => {
-  console.log(content);
   return (
     <Grid
       width="100%"
@@ -104,9 +104,14 @@ export const List = ({ content }: ListProps) => {
       rowSize={[1, 2, 3]}
       rowGap={[2, 6]}
       columnGap={2}
+      css={css({
+        '>div': {
+          justifyContent: content?.length > 3 ? 'flex-start' : 'center',
+        },
+      })}
     >
       {content?.map(({ icon, title, description }) => (
-        <Stack flexDirection="column" space={2}>
+        <Stack flexDirection="column" space={2} maxWidth="400px">
           <Flex
             alignItems={content?.length > 3 ? 'flex-start' : 'center'}
             flexDirection={content?.length > 3 ? 'row' : 'column'}
