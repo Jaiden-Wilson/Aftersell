@@ -33,7 +33,7 @@ staging:
       vercel --token=$NOW_DEPLOY_TOKEN $NOW_BUILD_PARAMS --prod
   environment:
     name: production
-    url: https://perfectproductfinder.storyofams.dev
+    url: https://ppf.storyofams.dev
   only:
     - staging
 
@@ -46,7 +46,7 @@ production:
       vercel --token=$NOW_DEPLOY_TOKEN $NOW_BUILD_PARAMS --prod
   environment:
     name: production
-    url: https://perfectproductfinder.com
+    url: https://ppf.storyofams.com
   only:
     - master
 
@@ -56,7 +56,7 @@ runLighthouse:
   script:
     - |
       npx @lhci/cli autorun \
-        --collect.url=https://perfectproductfinder.storyofams.dev \
+        --collect.url=https://ppf.storyofams.dev \
         --collect.settings.chromeFlags="--no-sandbox" \
         --collect.settings.throttling.cpuSlowdownMultiplier=2.5 \
         --collect.settings.extraHeaders="{\"Cookie\": \"next-password-protect=$NEXT_PASSWORD_JWT\"}" \
