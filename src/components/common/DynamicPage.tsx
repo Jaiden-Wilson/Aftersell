@@ -31,11 +31,6 @@ export const DynamicPage = ({
             content={section}
             first={!!(i === 0)}
             key={`section-${i}`}
-            extraPadding={
-              story?.content?.body?.[i + 1]?.component === 'content section' &&
-              story?.content?.body?.[i + 1]?.body?.[0]?.component ===
-                'gallery' && [100, 136]
-            }
           />
         ))}
       </Layout>

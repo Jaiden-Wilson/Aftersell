@@ -49,7 +49,8 @@ export const Container = ({
     <ContainerWrapper background={background}>
       <Box
         position="relative"
-        py={background !== 'none' && [4, 10]}
+        pt={background !== 'none' && [4, 10]}
+        pb={background !== 'none' && [4, 10]}
         px={[0, 6]}
         color={background === 'gradient' ? 'white' : 'black'}
         css={css({
@@ -69,6 +70,7 @@ export const Container = ({
             left={[0, 6]}
             bottom={[4, 10]}
             right={[0, 6]}
+            className="background"
           />
         )}
         <Stack
@@ -78,7 +80,8 @@ export const Container = ({
           alignItems="center"
           width="100%"
           maxWidth="maxWidth"
-          py={[4, 10]}
+          pt={background === 'color' && [4, 10]}
+          pb={background === 'color' && [4, 10]}
           px={[2, 6]}
           margin="0 auto"
           zIndex="docked"
@@ -89,12 +92,12 @@ export const Container = ({
             <Box
               position="absolute"
               borderRadius="full"
-              top="50%"
-              left={[0, 6]}
-              right={[0, 6]}
+              bottom={[0, '50%']}
+              left="50%"
+              width={['100%', 'calc(100% - 96px)']}
               mt="0 !important"
-              pt="calc(100% - 96px)"
-              transform="translateY(-50%)"
+              pt={['100%', 'calc(100% - 96px)']}
+              transform="translate(-50%, 50%)"
               zIndex="hide"
               css={css({
                 background: 'linear-gradient(180deg, #6138FE 0%, #F087B3 100%)',
