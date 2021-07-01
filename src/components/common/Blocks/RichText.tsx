@@ -26,7 +26,10 @@ export const RichText: FC<RichTextProps> = ({
   text,
   ...props
 }) => (
-  <Box css={css({ '> div:last-child': { pb: 0 } })} {...props}>
+  <Box
+    css={css({ '> div:last-child': { pb: 0 }, '.small': { fontSize: 2 } })}
+    {...props}
+  >
     {render(text, {
       markResolvers: {
         [MARK_BOLD]: (children) => (

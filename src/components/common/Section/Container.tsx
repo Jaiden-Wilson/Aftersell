@@ -52,11 +52,14 @@ export const Container = ({
         pt={background !== 'none' && [4, 10]}
         pb={background !== 'none' && [4, 10]}
         px={[0, 6]}
-        color={background === 'gradient' ? 'white' : 'black'}
         css={css({
           background:
             background === 'gradient' &&
             'linear-gradient(180deg, #6138FE 0%, #F087B3 100%)',
+          color: background === 'gradient' ? 'white' : 'grey500',
+          'h1, h2, h3, h4, h5': {
+            color: background === 'gradient' ? 'white' : 'black',
+          },
         })}
         overflow="hidden"
         {...props}

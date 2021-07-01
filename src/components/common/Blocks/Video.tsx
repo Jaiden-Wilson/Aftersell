@@ -74,8 +74,8 @@ const PlayButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 88px;
-  width: 88px;
+  height: 106px;
+  width: 106px;
   border-radius: 50%;
   transition: all 0.5s;
 
@@ -222,7 +222,7 @@ export const Video = ({ src }) => {
         aria-label="Play showreel"
       >
         <PlayButton>
-          <Icon icon={<Play />} color="white" fontSize="36px" width="25.5px" />
+          <Icon icon={<Play />} color="white" fontSize="36px" />
         </PlayButton>
       </PlayButtonOuter>
 
