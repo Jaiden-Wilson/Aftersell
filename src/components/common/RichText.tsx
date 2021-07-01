@@ -8,7 +8,7 @@ import {
   NODE_HEADING,
   NODE_IMAGE,
 } from 'storyblok-rich-text-react-renderer';
-import { ContentImage } from '../Blocks';
+import { ContentImage } from './Blocks';
 
 interface RichTextProps extends SystemProps {
   text: any;
@@ -21,10 +21,6 @@ interface RichTextProps extends SystemProps {
 }
 
 export const RichText: FC<RichTextProps> = ({
-  paragraphColor = 'grey500',
-  titleColor = 'black',
-  boldColor = 'black',
-  linkColor = 'primary500',
   markResolvers = {},
   nodeResolvers = {},
   text,
@@ -34,14 +30,14 @@ export const RichText: FC<RichTextProps> = ({
     {render(text, {
       markResolvers: {
         [MARK_BOLD]: (children) => (
-          <Text color={boldColor} fontWeight="bold" as="span">
+          <Text fontWeight="bold" as="span">
             {children}
           </Text>
         ),
         [MARK_LINK]: (children, props) => {
           const { href } = props;
           return (
-            <Text color={linkColor} textDecoration="underline" as="span">
+            <Text color="primary500" textDecoration="underline" as="span">
               <a href={href} target="_blank" rel="noopener noreferrer">
                 {children}
               </a>
@@ -53,24 +49,16 @@ export const RichText: FC<RichTextProps> = ({
       nodeResolvers: {
         [NODE_HEADING]: (children, { level }) => (
           <Heading
-            color={titleColor as any}
-            fontSize={[5, 7]}
             lineHeight="heading"
             as={`h${level}` as any}
-            pb={[3, 4]}
+            pb={[2, 3]}
             maxWidth="800px"
           >
             {children}
           </Heading>
         ),
         [NODE_PARAGRAPH]: (children) => (
-          <Text
-            maxWidth="560px"
-            color={paragraphColor}
-            fontSize={[2, 2.5]}
-            lineHeight="high"
-            pb={2}
-          >
+          <Text maxWidth="560px" fontSize={[2, 2.5]} lineHeight="high" pb={2}>
             {children}
           </Text>
         ),
