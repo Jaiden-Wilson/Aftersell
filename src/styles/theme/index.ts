@@ -10,6 +10,7 @@ const theme = {
     transparent: 'rgba(255, 255, 255, 0);',
     white: '#ffffff',
     grey100: '#FEFEFE',
+    grey300: '#CACBD2',
     grey500: '#76777C',
     grey600: '#65666B',
     black: '#18191F',
