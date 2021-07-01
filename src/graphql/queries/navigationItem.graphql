@@ -1,14 +1,22 @@
 query navigationItem($slug: ID!) {
-  NavigationItem(id: $slug) {
+  NavigationItem(id: $slug, resolve_links: "url") {
     uuid
     content {
       button_1_label
       button_1_url {
-        cachedUrl
+        story {
+          fullSlug
+        }
+        url
+        linktype
       }
       button_2_label
       button_2_url {
-        cachedUrl
+        story {
+          fullSlug
+        }
+        url
+        linktype
       }
       links
       component

@@ -51,24 +51,24 @@ export const Links = ({ content }) => {
 };
 
 export const Footer: FC<FooterProps> = ({ content }) => {
-  const { background, reset } = useCursor();
+  // const { background, reset } = useCursor();
 
   return (
     <Box bg="white">
       <motion.div
-        onHoverStart={() => {
-          background();
-        }}
-        onHoverEnd={() => {
-          reset(true);
-        }}
+      // onHoverStart={() => {
+      //   background();
+      // }}
+      // onHoverEnd={() => {
+      //   reset(true);
+      // }}
       >
         <Box
           width="100%"
           maxWidth="maxWidth"
-          px={[2, 2, 2, '132px', 20]}
-          margin={'0 auto' as any}
+          margin="0 auto"
           py={[8, 20]}
+          px={[2, 6]}
         >
           <Flex
             flexDirection={['column', 'row']}

@@ -631,10 +631,18 @@ export type FooterItemQuery = { __typename?: 'QueryType' } & {
             | 'shopify_plus_logo'
           > & {
               button_1_url?: Maybe<
-                { __typename?: 'Link' } & Pick<Link, 'cachedUrl'>
+                { __typename?: 'Link' } & Pick<Link, 'url'> & {
+                    story?: Maybe<
+                      { __typename?: 'Story' } & Pick<Story, 'fullSlug'>
+                    >;
+                  }
               >;
               button_2_url?: Maybe<
-                { __typename?: 'Link' } & Pick<Link, 'cachedUrl'>
+                { __typename?: 'Link' } & Pick<Link, 'url'> & {
+                    story?: Maybe<
+                      { __typename?: 'Story' } & Pick<Story, 'fullSlug'>
+                    >;
+                  }
               >;
             }
         >;
@@ -659,10 +667,18 @@ export type NavigationItemQuery = { __typename?: 'QueryType' } & {
             | '_editable'
           > & {
               button_1_url?: Maybe<
-                { __typename?: 'Link' } & Pick<Link, 'cachedUrl'>
+                { __typename?: 'Link' } & Pick<Link, 'url' | 'linktype'> & {
+                    story?: Maybe<
+                      { __typename?: 'Story' } & Pick<Story, 'fullSlug'>
+                    >;
+                  }
               >;
               button_2_url?: Maybe<
-                { __typename?: 'Link' } & Pick<Link, 'cachedUrl'>
+                { __typename?: 'Link' } & Pick<Link, 'url' | 'linktype'> & {
+                    story?: Maybe<
+                      { __typename?: 'Story' } & Pick<Story, 'fullSlug'>
+                    >;
+                  }
               >;
             }
         >;
@@ -701,18 +717,24 @@ export type PageItemsQuery = { __typename?: 'QueryType' } & {
 
 export const FooterItemDocument = gql`
   query footerItem($slug: ID!) {
-    FooterItem(id: $slug) {
+    FooterItem(id: $slug, resolve_links: "url") {
       uuid
       content {
         _editable
         _uid
         button_1_label
         button_1_url {
-          cachedUrl
+          story {
+            fullSlug
+          }
+          url
         }
         button_2_label
         button_2_url {
-          cachedUrl
+          story {
+            fullSlug
+          }
+          url
         }
         component
         description
@@ -724,16 +746,24 @@ export const FooterItemDocument = gql`
 `;
 export const NavigationItemDocument = gql`
   query navigationItem($slug: ID!) {
-    NavigationItem(id: $slug) {
+    NavigationItem(id: $slug, resolve_links: "url") {
       uuid
       content {
         button_1_label
         button_1_url {
-          cachedUrl
+          story {
+            fullSlug
+          }
+          url
+          linktype
         }
         button_2_label
         button_2_url {
-          cachedUrl
+          story {
+            fullSlug
+          }
+          url
+          linktype
         }
         links
         component
