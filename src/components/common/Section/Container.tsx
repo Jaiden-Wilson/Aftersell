@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { css, Box, Stack, SystemProps } from '@storyofams/react-ui';
 import { motion } from 'framer-motion';
 
-import { useCursor } from './Cursor';
+import { useCursor } from '../Cursor';
 
 type ContainerProps = {
   children?: ReactNode;

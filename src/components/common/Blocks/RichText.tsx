@@ -8,7 +8,7 @@ import {
   NODE_HEADING,
   NODE_IMAGE,
 } from 'storyblok-rich-text-react-renderer';
-import { ContentImage } from './Blocks';
+import { ContentImage } from '.';
 
 interface RichTextProps extends SystemProps {
   text: any;

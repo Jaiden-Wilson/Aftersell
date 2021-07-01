@@ -3,11 +3,9 @@ import SbEditable from 'storyblok-react';
 
 import { ContentImage } from '~components';
 
-import { Title } from '../Blocks';
-import { Container } from '../Container';
+import { Title, Video, RichText } from '../Blocks';
 import { Divider } from '../Divider';
-import { RichText } from '../RichText';
-import { Video } from '../Video';
+import { Container } from './Container';
 
 type SectionDynamicProps = {
   first?: boolean;
@@ -35,6 +33,9 @@ const Item = ({ content, sectionType, first }: SectionProps) => {
       break;
     case 'video':
       item = <Video src={content?.url} />;
+      break;
+    case 'price_selector':
+      item = 'hi';
       break;
     case 'divider':
       item = <Divider />;
