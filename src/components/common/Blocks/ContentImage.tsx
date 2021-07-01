@@ -25,7 +25,7 @@ export const ContentImage = ({ content, ...props }) => {
       width="100%"
       css={css({
         img: {
-          borderRadius: ['8px', '32px'],
+          // borderRadius: ['8px', '32px'],
         },
       })}
       {...props}
