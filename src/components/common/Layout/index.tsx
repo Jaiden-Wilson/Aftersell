@@ -16,10 +16,10 @@ export const Layout: FC<LayoutProps> = ({
   ...props
 }) => {
   return (
-    <Box overflow="hidden" {...props}>
-      <Navigation content={navigation} />
+    <Box position="relative" minHeight="100vh" {...props}>
+      <Navigation content={navigation?.content} />
       {children}
-      <Footer content={footer} />
+      <Footer content={footer?.content} />
     </Box>
   );
 };

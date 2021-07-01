@@ -18,8 +18,7 @@ export const NavLink = ({ href, text, onClick, ...props }: NavLinkProps) => {
       onClick={onClick}
       stylingProps={{
         css: css({
-          fontSize: [2.25, 2.25, 1.5],
-          textTransform: 'uppercase',
+          fontSize: 2,
           textAlign: ['left', 'left', 'center'],
           color: router?.asPath === href ? 'black' : 'grey500',
           a: {
@@ -34,7 +33,7 @@ export const NavLink = ({ href, text, onClick, ...props }: NavLinkProps) => {
         }),
       }}
     >
-      <Text>{text}</Text>
+      <Text as={'a' as any}>{text}</Text>
     </Link>
   );
 };
