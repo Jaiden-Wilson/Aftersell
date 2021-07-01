@@ -3,6 +3,7 @@ import { createGlobalStyle, css } from 'styled-components';
 const themeStyles = ({ theme }) => css`
   html {
     font-size: ${theme.fontSizes.root}px;
+    letter-spacing: -0.04em;
     font-weight: ${theme.fontWeights.regular};
 
     /* outline only when the user is using tab */
@@ -30,6 +31,10 @@ const themeStyles = ({ theme }) => css`
     padding: 0;
     overflow: hidden;
     position: absolute;
+  }
+
+  [data-reach-menu] {
+    z-index: ${(p) => p.theme.zIndices.banner};
   }
 `;
 
