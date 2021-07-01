@@ -9,8 +9,6 @@ interface PricingProps extends SystemProps {
 }
 
 export const Pricing = ({ content, ...props }: PricingProps) => {
-  console.log(content);
-
   return (
     <Box width="100%" {...props}>
       <Stack

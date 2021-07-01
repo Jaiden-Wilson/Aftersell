@@ -774,7 +774,11 @@ export const NavigationItemDocument = gql`
 `;
 export const PageItemDocument = gql`
   query pageItem($slug: ID!) {
-    PageItem(id: $slug, resolve_relations: "price_selector.price") {
+    PageItem(
+      id: $slug
+      resolve_relations: "price_selector.price"
+      resolve_links: "url"
+    ) {
       content {
         seo
         body

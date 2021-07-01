@@ -39,7 +39,7 @@ const theme = {
     6: space['6'],
     7: space['7'],
     8: space['8'],
-    10: space['9'],
+    9: space['9'],
     20: space['20'],
     root: space['2'],
     heading: space['7'],

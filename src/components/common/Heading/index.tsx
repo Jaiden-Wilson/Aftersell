@@ -5,28 +5,19 @@ import { variant, ResponsiveValue } from 'styled-system';
 export const headingVariants = {
   h1: {
     fontSize: ['36px', 9],
-    fontWeight: 'semiBold',
-    lineHeight: '120%',
   },
   h2: {
     fontSize: ['36px', 7],
-    fontWeight: 'semiBold',
-    lineHeight: '120%',
   },
   h3: {
     fontSize: [3, 4],
-    fontWeight: 'semiBold',
-    lineHeight: '120%',
   },
   h4: {
     fontSize: 3,
-    fontWeight: 'semiBold',
-    lineHeight: '120%',
   },
   h5: {
     fontSize: [2, 3],
-    fontWeight: 'semiBold',
-    lineHeight: '120%',
+    fontWeight: 'bold',
   },
 };
 

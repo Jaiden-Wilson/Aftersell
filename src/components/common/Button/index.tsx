@@ -28,16 +28,20 @@ const variants = {
     },
   },
   secondary: {
-    bg: 'primary500',
-    color: 'white',
+    bg: 'white',
+    borderColor: 'white',
+    color: 'primary500',
 
-    '&:hover, &:focus': {},
+    '&:hover, &:focus': {
+      bg: 'primary200',
+      borderColor: 'primary200',
+    },
   },
   'secondary-outline': {
-    bg: 'primary500',
+    borderColor: 'white',
     color: 'white',
 
-    '&:hover, &:focus': {},
+    '&:hover, &:focus': { borderColor: 'primary200', color: 'primary200' },
   },
 };
 
