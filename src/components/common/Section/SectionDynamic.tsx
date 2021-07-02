@@ -1,4 +1,4 @@
-import { Box, css, SystemProps } from '@storyofams/react-ui';
+import { Stack, Box, css, SystemProps } from '@storyofams/react-ui';
 import SbEditable from 'storyblok-react';
 
 import { ContentImage } from '~components';
@@ -67,7 +67,7 @@ const Item = ({
     case 'text':
       item = (
         <RichText
-          alignItems={text_align === 'center' ? 'center' : 'flex-start'}
+          alignItems={text_align === 'left' ? 'flex-start' : 'center'}
           text={content?.text}
         />
       );
@@ -85,10 +85,10 @@ export const SectionDynamic = ({
     <Container
       background={content?.background}
       textAlign={content?.text_align || 'center'}
-      pt={content?.remove_padding === 'top' || first ? 0 : [4, 10]}
+      pt={content?.remove_padding === 'top' ? 0 : first ? [10, 20] : [4, 10]}
       pb={content?.remove_padding === 'bottom' ? 0 : [4, 10]}
       childProps={{
-        alignItems: content?.text_align === 'center' ? 'center' : 'flex-start',
+        alignItems: content?.text_align === 'left' ? 'flex-start' : 'center',
         pt:
           content?.remove_padding === 'top' || content?.background !== 'color'
             ? 0
@@ -115,12 +115,19 @@ export const SectionDynamic = ({
       })}
       {...props}
     >
-      {!!content?.title && <Title text={content?.title} h1={first} />}
-      {!!content?.description?.content?.[0].content ? (
-        <RichText text={content?.description} />
-      ) : (
-        <Box />
-      )}
+      <Stack
+        flexDirection={content?.text_align === 'left' ? 'row' : 'column'}
+        alignItems={content?.text_align === 'left' ? 'space-between' : 'center'}
+        space={[3, 5]}
+        width="100%"
+      >
+        {!!content?.title && (
+          <Title flex="1" text={content?.title} h1={first} />
+        )}
+        {!!content?.description?.content?.[0].content && (
+          <RichText flex="1" text={content?.description} />
+        )}
+      </Stack>
       {content?.content?.map((section, i) => (
         <SbEditable content={section} key={`section-${i}`}>
           <>

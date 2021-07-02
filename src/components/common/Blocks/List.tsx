@@ -107,6 +107,7 @@ export const List = ({ content }: ListProps) => {
       css={css({
         '>div': {
           justifyContent: content?.length > 3 ? 'flex-start' : 'center',
+          textAlign: content?.length > 3 ? 'left' : 'center',
         },
       })}
     >

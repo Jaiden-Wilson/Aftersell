@@ -45,9 +45,9 @@ const variants = {
     color: 'white',
 
     '&:hover, &:focus': {
-      bg: 'white',
-      borderColor: 'white',
-      color: 'primary500',
+      bg: 'black',
+      borderColor: 'black',
+      color: 'white',
     },
   },
 };

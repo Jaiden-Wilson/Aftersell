@@ -73,11 +73,16 @@ const StyledMenuList = styled.div`
 
 interface NavDropdownProps {
   content?: any;
+  colorChange?: boolean;
 }
 
-export const NavDropdown = ({ content, ...props }: NavDropdownProps) => {
+export const NavDropdown = ({
+  content,
+  colorChange,
+  ...props
+}: NavDropdownProps) => {
   const buttonContent = (
-    <Flex alignItems="center">
+    <Flex color={colorChange ? 'white' : 'grey500'} alignItems="center">
       <Text mr={1} fontSize={2} lineHeight="150%" letterSpacing="-0.04em">
         {content?.title}
       </Text>

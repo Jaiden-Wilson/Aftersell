@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Flex, Box, Stack } from '@storyofams/react-ui';
 
+import css from '@styled-system/css';
 import { getLinkProps } from '~lib';
 import { Logo } from '~components/common/Icon/library';
 import { Button } from '../Button';
@@ -11,9 +12,10 @@ import { NavLink } from './NavLink';
 
 interface NavigationProps {
   content: any;
+  navBackground?: boolean;
 }
 
-export const Navigation = ({ content }: NavigationProps) => {
+export const Navigation = ({ content, navBackground }: NavigationProps) => {
   const [isScrolled, setScrolled] = useState(false);
 
   const onScroll = () => {
@@ -36,14 +38,14 @@ export const Navigation = ({ content }: NavigationProps) => {
 
   return (
     <Box
-      position="sticky"
+      position="fixed"
       zIndex="sticky"
       top="0"
       left="0"
       right="0"
-      bg="grey100"
+      bg={isScrolled && 'grey100'}
       boxShadow={isScrolled && 'xs'}
-      transition="box-shadow 0.18s ease-in-out"
+      transition="box-shadow 0.18s ease-in-out, background-color 0.18s ease-in-out"
     >
       <Flex py={[1.5, 3]} px={[2, 12]}>
         <Link href="/" stylingProps={{ mr: [0, '76px'], cursor: 'pointer' }}>
@@ -52,7 +54,15 @@ export const Navigation = ({ content }: NavigationProps) => {
               width={['86px', '172px']}
               height={['24px', '48px']}
               icon={<Logo />}
-              color="primary500"
+              color={navBackground && !isScrolled ? 'white' : 'primary500'}
+              css={css({
+                '.svg-text': {
+                  fill: navBackground && !isScrolled ? 'white' : 'grey600',
+                },
+                '.svg-line': {
+                  stroke: navBackground && !isScrolled ? 'white' : 'grey600',
+                },
+              })}
             />
           </a>
         </Link>
@@ -65,7 +75,13 @@ export const Navigation = ({ content }: NavigationProps) => {
         >
           {content?.links?.map((item) => {
             if (item?.component === 'link_list') {
-              return <NavDropdown key={item?._uid} content={item} />;
+              return (
+                <NavDropdown
+                  key={item?._uid}
+                  content={item}
+                  colorChange={navBackground && !isScrolled}
+                />
+              );
             }
 
             return (
@@ -73,16 +89,25 @@ export const Navigation = ({ content }: NavigationProps) => {
                 key={item?._uid}
                 href={getLinkProps(item.link_url)}
                 text={item?.link_label}
+                colorChange={navBackground && !isScrolled}
               />
             );
           })}
         </Stack>
         {(content?.button_1_label || content?.button_2_label) && (
           <Stack alignItems="center" space={2}>
-            <Button variant="outline" to={getLinkProps(content?.button_1_url)}>
+            <Button
+              variant={
+                navBackground && !isScrolled ? 'secondary-outline' : 'outline'
+              }
+              to={getLinkProps(content?.button_1_url)}
+            >
               {content?.button_1_label}
             </Button>
-            <Button to={getLinkProps(content?.button_2_url)}>
+            <Button
+              variant={navBackground && !isScrolled ? 'secondary' : 'primary'}
+              to={getLinkProps(content?.button_2_url)}
+            >
               {content?.button_2_label}
             </Button>
           </Stack>

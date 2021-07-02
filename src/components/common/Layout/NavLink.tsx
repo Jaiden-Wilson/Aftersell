@@ -7,9 +7,16 @@ type NavLinkProps = {
   href: string;
   text: string;
   onClick?(): void;
+  colorChange?: boolean;
 } & SystemProps;
 
-export const NavLink = ({ href, text, onClick, ...props }: NavLinkProps) => {
+export const NavLink = ({
+  href,
+  text,
+  onClick,
+  colorChange,
+  ...props
+}: NavLinkProps) => {
   const router = useRouter();
 
   return (
@@ -20,14 +27,29 @@ export const NavLink = ({ href, text, onClick, ...props }: NavLinkProps) => {
         css: css({
           fontSize: 2,
           textAlign: ['left', 'left', 'center'],
-          color: router?.asPath === href ? 'black' : 'grey500',
+          color:
+            router?.asPath === href
+              ? colorChange
+                ? 'white'
+                : 'black'
+              : colorChange
+              ? 'white'
+              : 'grey500',
           a: {
             display: 'flex',
             flexDirection: ['row', 'row', 'column'],
             alignItems: 'center',
+            borderBottomStyle: 'solid',
+            borderBottomWidth: '1px',
+            borderBottomColor:
+              router?.asPath === href
+                ? colorChange
+                  ? 'white'
+                  : 'black'
+                : 'transparent',
           },
           '&:hover': {
-            color: 'black',
+            color: colorChange ? 'primary200' : 'black',
           },
           ...props,
         }),
