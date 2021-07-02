@@ -65,11 +65,12 @@ export const Navigation = ({ content }: NavigationProps) => {
         >
           {content?.links?.map((item) => {
             if (item?.component === 'link_list') {
-              return <NavDropdown content={item} />;
+              return <NavDropdown key={item?._uid} content={item} />;
             }
 
             return (
               <NavLink
+                key={item?._uid}
                 href={getLinkProps(item.link_url)}
                 text={item?.link_label}
               />

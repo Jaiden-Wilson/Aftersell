@@ -110,8 +110,8 @@ export const List = ({ content }: ListProps) => {
         },
       })}
     >
-      {content?.map(({ icon, title, description }) => (
-        <Stack flexDirection="column" space={2} maxWidth="400px">
+      {content?.map(({ icon, title, description, _uid }) => (
+        <Stack key={_uid} flexDirection="column" space={2} maxWidth="400px">
           <Flex
             alignItems={content?.length > 3 ? 'flex-start' : 'center'}
             flexDirection={content?.length > 3 ? 'row' : 'column'}
