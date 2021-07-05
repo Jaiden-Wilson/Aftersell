@@ -12,6 +12,7 @@ import {
   RichText,
   Slider,
   ContentImageDual,
+  QuestionList,
 } from '../Blocks';
 import { Divider } from '../Divider';
 import { Container } from './Container';
@@ -57,6 +58,9 @@ const Item = ({
       break;
     case 'divider':
       item = <Divider />;
+      break;
+    case 'question_list':
+      item = <QuestionList content={content?.list} />;
       break;
     case 'image_slider':
       item = <Slider content={content?.images} />;
@@ -130,10 +134,22 @@ export const SectionDynamic = ({
         width="100%"
       >
         {!!content?.title && (
-          <Title flex="1" text={content?.title} h1={first} />
+          <Title
+            width={
+              content?.text_align === 'left' &&
+              !!content?.description?.content?.[0].content
+                ? ['100%', '40%']
+                : 'auto'
+            }
+            text={content?.title}
+            h1={first}
+          />
         )}
         {!!content?.description?.content?.[0].content && (
-          <RichText flex="1" text={content?.description} />
+          <RichText
+            width={content?.text_align === 'left' ? ['100%', '60%'] : 'auto'}
+            text={content?.description}
+          />
         )}
       </Stack>
       {content?.content?.map((section, i) => (
