@@ -20,6 +20,9 @@ export const Slider = ({ content, ...props }: SliderProps) => {
         '.swiper-container': {
           overflow: 'visible',
         },
+        '.swiper-slide': {
+          width: 'auto !important',
+        },
       })}
       {...props}
     >

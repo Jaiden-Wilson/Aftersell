@@ -24,8 +24,6 @@ export const Links = ({ content }) => {
     },
   });
 
-  console.log(content);
-
   return (
     <Stack flexDirection="column" space={3} maxWidth="168px" pl={[0, 4]} pb={4}>
       <Heading variant="h6" as="h6" fontSize={2}>
@@ -89,7 +87,7 @@ export const Footer: FC<FooterProps> = ({ content }) => {
             </Stack>
           )}
         </Flex>
-        <Divider my={[2, 4]} />
+        <Divider mt={[2, 4]} mb={[2, 8]} />
         <Flex flexDirection={['column', 'row']}>
           <Box width={['100%', '40%']}>
             <Text fontWeight="thin" color="grey500">
