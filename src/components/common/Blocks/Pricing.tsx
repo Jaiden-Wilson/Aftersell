@@ -16,7 +16,7 @@ export const Pricing = ({ content, ...props }: PricingProps) => {
         flexDirection={['column', 'column', 'row']}
         space={3}
       >
-        {content?.map(({ content }) => (
+        {content?.map(({ content, uuid }) => (
           <Stack
             space={2}
             boxShadow="md"
@@ -26,7 +26,7 @@ export const Pricing = ({ content, ...props }: PricingProps) => {
             textAlign="left"
             borderRadius="md"
             flexDirection="column"
-            key={content?.uid}
+            key={uuid}
             maxWidth="400px"
           >
             <Heading as="h4" variant="h5" lineHeight="normal">
@@ -41,9 +41,15 @@ export const Pricing = ({ content, ...props }: PricingProps) => {
               {content?.price}$ / month
             </Heading>
             <Divider />
-            {content?.list?.map(({ text }) => (
-              <Text display="flex" as="p">
-                <Icon icon={<Tick />} color="white" fontSize={3} mr={1.5} />
+            {content?.list?.map(({ text, _uid }) => (
+              <Text display="flex" as="p" key={`${_uid}-list-item`}>
+                <Icon
+                  as="span"
+                  icon={<Tick />}
+                  color="white"
+                  fontSize={3}
+                  mr={1.5}
+                />
                 {text}
               </Text>
             ))}

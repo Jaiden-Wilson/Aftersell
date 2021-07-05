@@ -17,7 +17,10 @@ export const Layout: FC<LayoutProps> = ({
 }) => {
   return (
     <Box position="relative" minHeight="100vh" {...props}>
-      <Navigation content={navigation?.content} />
+      <Navigation
+        content={navigation?.content}
+        navBackground={navigation?.navBackground}
+      />
       {children}
       <Footer content={footer?.content} />
     </Box>

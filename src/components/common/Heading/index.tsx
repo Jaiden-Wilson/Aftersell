@@ -19,6 +19,10 @@ export const headingVariants = {
     fontSize: [2, 3],
     fontWeight: 'bold',
   },
+  h6: {
+    fontSize: 2,
+    fontWeight: 'bold',
+  },
 };
 
 type CustomProps = {

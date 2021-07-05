@@ -62,6 +62,7 @@ export const Container = ({
           },
         })}
         overflow="hidden"
+        textAlign="center"
         {...props}
       >
         {background === 'color' && (

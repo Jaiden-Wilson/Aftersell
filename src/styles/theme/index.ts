@@ -53,7 +53,7 @@ const theme = {
     ...space,
   },
   sizes: {
-    maxWidth: 1200,
+    maxWidth: 1296,
   },
   breakpoints: ['768px', '992px', '1024px', '1280px'] as Breakpoints,
   zIndices: {

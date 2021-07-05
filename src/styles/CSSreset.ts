@@ -261,6 +261,7 @@ const CSSreset = createGlobalStyle(
     h6 {
       font-family: ${theme.fonts.heading};
       font-weight: 900;
+      letter-spacing: -0.04em;
     }
     a {
       color: inherit;

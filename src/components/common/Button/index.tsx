@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Button as UIButton, SystemProps } from '@storyofams/react-ui';
+import { Button as UIButton, SystemProps, system } from '@storyofams/react-ui';
 import { motion } from 'framer-motion';
 
 import styled from 'styled-components';
@@ -45,9 +45,9 @@ const variants = {
     color: 'white',
 
     '&:hover, &:focus': {
-      bg: 'white',
-      borderColor: 'white',
-      color: 'primary500',
+      bg: 'black',
+      borderColor: 'black',
+      color: 'white',
     },
   },
 };
@@ -81,6 +81,7 @@ const StyledButton = styled(UIButton)<ButtonProps>`
     background-color 0.18s ease-in-out;
 
   ${variant({ variants })}
+  ${system}
 `;
 
 export const Button = ({

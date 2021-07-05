@@ -1,4 +1,5 @@
 import { default as Arrows } from './Arrows';
+import { default as Background } from './Background';
 import { default as Cart } from './Cart';
 import { default as Chart } from './Chart';
 import { default as ChevronDown } from './ChevronDown';
@@ -19,6 +20,7 @@ import { default as Tick } from './Tick';
 
 export {
   Arrows,
+  Background,
   Cart,
   Chart,
   ChevronDown,

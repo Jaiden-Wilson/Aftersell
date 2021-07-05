@@ -1,11 +1,12 @@
 import { FC } from 'react';
 import { Box, Text, Stack, Flex, css } from '@storyofams/react-ui';
-import { motion } from 'framer-motion';
 
-import { Logo, StoryOfAms } from '~components/common/Icon/library';
+import { getLinkProps } from '~lib';
+import { Logo, ShopifyPlus, StoryOfAms } from '~components/common/Icon/library';
 
-import { useCursor } from '../Cursor';
-
+import { Button } from '../Button';
+import { Divider } from '../Divider';
+import { Heading } from '../Heading';
 import { Link } from '../Link';
 import { Shape } from '../Shape';
 
@@ -14,10 +15,8 @@ interface FooterProps {
 }
 
 export const Links = ({ content }) => {
-  // const router = useRouter();
   const linkStyles = css({
     fontSize: 2,
-    textTransform: 'uppercase',
     transition: '0.18s color ease-in-out',
     color: 'grey500',
     '&:hover': {
@@ -26,93 +25,112 @@ export const Links = ({ content }) => {
   });
 
   return (
-    <>
-      {content?.map(({ hyperlink, name }, i) => (
-        <Link
-          href={
-            hyperlink?.url ||
-            (hyperlink?.cached_url === 'home'
-              ? '/'
-              : `/${hyperlink?.cached_url}`)
-          }
-          stylingProps={{
-            justifyContent: ['center', 'flex-start'],
-            textAlign: ['center', 'left'],
-          }}
-          key={`link-${i}`}
-        >
+    <Stack flexDirection="column" space={3} maxWidth="176px" pl={[0, 4]} pb={4}>
+      <Heading variant="h6" as="h6" fontSize={2}>
+        {content?.title}
+      </Heading>
+      {content?.list?.map(({ link_url, link_label }, i) => (
+        <Link href={getLinkProps(link_url)} key={`link-${i}`}>
           <Text as={'a' as any} css={linkStyles}>
-            {name}
+            {link_label}
           </Text>
         </Link>
       ))}
-    </>
+    </Stack>
   );
 };
 
 export const Footer: FC<FooterProps> = ({ content }) => {
-  // const { background, reset } = useCursor();
-
   return (
-    <Box bg="white">
-      <motion.div
-      // onHoverStart={() => {
-      //   background();
-      // }}
-      // onHoverEnd={() => {
-      //   reset(true);
-      // }}
+    <Box bg="white" boxShadow="0px 0px 100px rgba(0, 0, 0, 0.15)">
+      <Box
+        width="100%"
+        maxWidth="maxWidth"
+        margin="0 auto"
+        pt={[5, 8]}
+        pb={[4, 5]}
+        px={[2, 6]}
       >
-        <Box
+        <Flex
+          flexDirection={'row'}
+          alignItems="center"
+          justifyContent="space-between"
           width="100%"
-          maxWidth="maxWidth"
-          margin="0 auto"
-          py={[8, 20]}
-          px={[2, 6]}
         >
-          <Flex
-            flexDirection={['column', 'row']}
-            alignItems="center"
-            justifyContent="space-between"
-            width="100%"
-          >
-            <Link href="/" stylingProps={{ cursor: 'pointer' }}>
-              <a>
-                <Shape
-                  width={['37px', '74px']}
-                  height={['24px', '48px']}
-                  icon={<Logo />}
-                />
-              </a>
-            </Link>
-            <Stack space={2} flexDirection="column" px={[0, 2]} py={[4, 0]}>
-              {content?.content?.links && (
-                <Links content={content.content.links} />
+          <Link href="/" stylingProps={{ color: 'grey600', display: 'flex' }}>
+            <a>
+              <Shape
+                width={['86px', '172px']}
+                height={['24px', '48px']}
+                icon={<Logo />}
+              />
+            </a>
+          </Link>
+          {(content?.button_1_label || content?.button_2_label) && (
+            <Stack alignItems="center" space={2}>
+              {content?.button_1_label && (
+                <Button
+                  variant="outline"
+                  to={getLinkProps(content?.button_1_url)}
+                  px={[2, 2, 4]}
+                  py={[1, 1, 1.5]}
+                >
+                  {content?.button_1_label}
+                </Button>
+              )}
+              {content?.button_2_label && (
+                <Button
+                  variant="primary"
+                  to={getLinkProps(content?.button_2_url)}
+                  px={[2, 2, 4]}
+                  py={[1, 1, 1.5]}
+                >
+                  {content?.button_2_label}
+                </Button>
               )}
             </Stack>
-          </Flex>
+          )}
+        </Flex>
+        <Divider mt={[2, 4]} mb={[2, 8]} />
+        <Flex flexDirection={['column', 'row']}>
+          <Box width={['100%', '40%']}>
+            <Text fontWeight="thin" color="grey500">
+              {content?.description}
+            </Text>
+            {content?.shopify_plus_logo && (
+              <Shape
+                mt={[2, 4]}
+                color="grey500"
+                width={'150px'}
+                height={'31px'}
+                icon={<ShopifyPlus />}
+              />
+            )}
+          </Box>
           <Flex
-            flexDirection={['column-reverse', 'row']}
-            width="100%"
-            alignItems={['center', 'flex-end']}
+            flexDirection={['column', 'row']}
+            flexWrap="wrap"
+            py={[4, 0]}
+            width={['100%', '60%']}
             justifyContent="space-between"
           >
-            <Flex alignItems="flex-end" pt={4}>
-              <Shape width="76px" height="48px" icon={<StoryOfAms />} />
-              <Text
-                lineHeight="1.2"
-                fontWeight="medium"
-                mb={-0.5}
-                mr={1}
-                color="grey500"
-                fontSize={2.25}
-              >
-                Copyright © 2021 Story of AMS
-              </Text>
-            </Flex>
+            {content?.links &&
+              content?.links?.map((list) => <Links content={list} />)}
           </Flex>
-        </Box>
-      </motion.div>
+        </Flex>
+        <Divider mt={[0, 4]} mb={4} />
+        <Flex
+          flexDirection="column"
+          width="100%"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Shape width="76px" height="48px" icon={<StoryOfAms />} />
+          <Text lineHeight="1.2" mt={1.5} color="grey500" fontSize={1.5}>
+            Copyright © {new Date().getFullYear()} Story of AMS
+          </Text>
+        </Flex>
+      </Box>
     </Box>
   );
 };

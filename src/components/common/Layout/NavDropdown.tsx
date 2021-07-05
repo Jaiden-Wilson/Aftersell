@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Menu, MenuList, MenuButton, MenuItem } from '@reach/menu-button';
-import { Flex, Icon, Text } from '@storyofams/react-ui';
+import { css, Box, Flex, Icon, Text } from '@storyofams/react-ui';
 import '@reach/menu-button/styles.css';
 import styled from 'styled-components';
 
@@ -8,6 +8,7 @@ import { getLinkProps } from '~lib';
 import { ChevronDown } from '~components/common/Icon/library';
 
 import { Link } from '../Link';
+import { NavLink } from './NavLink';
 
 const StyledMenuButton = styled.button`
   && {
@@ -19,7 +20,7 @@ const StyledMenuButton = styled.button`
     line-height: 25px;
     user-select: none;
     cursor: pointer;
-    transition: color 0.2s ease-out;
+    transition: color 0.18s ease-out;
 
     &[aria-expanded='true'] {
       color: ${(p) => p.theme.colors.primary500};
@@ -29,10 +30,6 @@ const StyledMenuButton = styled.button`
     &:focus {
       color: ${(p) => p.theme.colors.black};
     }
-  }
-
-  &[aria-expanded='true'] .chevron-down {
-    transform: rotate(180deg);
   }
 `;
 
@@ -73,12 +70,52 @@ const StyledMenuList = styled.div`
 
 interface NavDropdownProps {
   content?: any;
+  colorChange?: boolean;
 }
 
-export const NavDropdown = ({ content, ...props }: NavDropdownProps) => {
+export const NavDropdown = ({
+  content,
+  colorChange,
+  ...props
+}: NavDropdownProps) => {
+  const [isOpen, setIsOpen] = useState(false);
   const buttonContent = (
-    <Flex alignItems="center">
-      <Text mr={1} fontSize={2} lineHeight="150%" letterSpacing="-0.04em">
+    <Flex
+      color={colorChange ? 'white' : 'grey500'}
+      alignItems="center"
+      css={css({
+        position: 'relative',
+
+        '&::before': {
+          content: "''",
+          position: 'absolute',
+          left: '50%',
+          bottom: '-4px',
+          height: '2px',
+          width: '0',
+          borderRadius: '1px',
+          transition:
+            'width 0.18s ease-in-out, background-color 0.18s ease-in-out',
+          bg: [colorChange ? 'white' : 'primary500'],
+          transform: 'translateX(-50%)',
+        },
+
+        '&:hover': {
+          color: colorChange ? 'white' : 'black',
+
+          '&::before': {
+            width: '100%',
+            bg: [colorChange ? 'white' : 'primary500'],
+          },
+        },
+      })}
+    >
+      <Text
+        mr={1}
+        fontSize={[2.25, 2.25, 2]}
+        lineHeight="150%"
+        letterSpacing="-0.04em"
+      >
         {content?.title}
       </Text>
 
@@ -87,22 +124,74 @@ export const NavDropdown = ({ content, ...props }: NavDropdownProps) => {
         icon={ChevronDown}
         fontSize={1.5}
         className="chevron-down"
+        transition="transform 0.18s ease-out"
       />
     </Flex>
   );
 
   return (
-    <Menu {...props}>
-      <MenuButton as={StyledMenuButton}>{buttonContent}</MenuButton>
-      <MenuList as={StyledMenuList}>
-        {content?.list.map(({ link_url, link_label, _uid }) => (
-          <Link key={_uid} href={getLinkProps(link_url)}>
-            <MenuItem as="a" onSelect={() => {}}>
-              {link_label}
-            </MenuItem>
-          </Link>
-        ))}
-      </MenuList>
-    </Menu>
+    <>
+      <Box
+        display={['none', 'none', 'block']}
+        css={css({
+          "button[aria-expanded='true'] > div": {
+            color: colorChange ? 'white' : 'black',
+
+            '&::before': {
+              width: '100%',
+              bg: [colorChange ? 'white' : 'primary500'],
+            },
+
+            '.chevron-down': {
+              transform: 'rotate(-180deg)',
+            },
+          },
+        })}
+      >
+        <Menu {...props}>
+          <MenuButton as={StyledMenuButton}>{buttonContent}</MenuButton>
+          <MenuList as={StyledMenuList}>
+            {content?.list.map(({ link_url, link_label, _uid }) => (
+              <Link key={_uid} href={getLinkProps(link_url)}>
+                <MenuItem as="a" onSelect={() => {}}>
+                  {link_label}
+                </MenuItem>
+              </Link>
+            ))}
+          </MenuList>
+        </Menu>
+      </Box>
+      <Box as={'ul'} display={['block', 'block', 'none']} width="100%">
+        <Flex
+          as="button"
+          justifyContent="space-between"
+          alignItems="center"
+          onClick={() => setIsOpen(!isOpen)}
+          color="black"
+        >
+          <Text fontSize={[2.25, 2.25, 2]}>{content?.title}</Text>
+          <Icon
+            mb="-2px"
+            icon={ChevronDown}
+            fontSize={1.5}
+            className="chevron-down"
+            ml={1}
+            transform={isOpen ? 'rotate(-180deg)' : 'none'}
+            transition="transform 0.18s ease-out"
+          />
+        </Flex>
+        <Box display={isOpen ? 'block' : 'none'}>
+          {content?.list.map(({ link_url, link_label, _uid }, i) => (
+            <Box mt={2} ml={2}>
+              <NavLink
+                key={_uid}
+                href={getLinkProps(link_url)}
+                text={link_label}
+              />
+            </Box>
+          ))}
+        </Box>
+      </Box>
+    </>
   );
 };
