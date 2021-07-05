@@ -25,31 +25,55 @@ export const NavLink = ({
       onClick={onClick}
       stylingProps={{
         css: css({
-          fontSize: 2,
+          fontSize: [2.25, 2.25, 2],
           textAlign: ['left', 'left', 'center'],
           color:
             router?.asPath === href
-              ? colorChange
-                ? 'white'
-                : 'black'
-              : colorChange
-              ? 'white'
-              : 'grey500',
+              ? [
+                  'primary500',
+                  'primary500',
+                  colorChange ? 'white' : 'primary500',
+                ]
+              : ['black', 'black', colorChange ? 'white' : 'grey500'],
           a: {
             display: 'flex',
             flexDirection: ['row', 'row', 'column'],
             alignItems: 'center',
-            borderBottomStyle: 'solid',
-            borderBottomWidth: '1px',
-            borderBottomColor:
-              router?.asPath === href
-                ? colorChange
-                  ? 'white'
-                  : 'black'
-                : 'transparent',
+            position: 'relative',
+
+            '&::before': {
+              content: "''",
+              position: 'absolute',
+              left: '50%',
+              bottom: '-4px',
+              width: router?.asPath === href ? '100%' : '0',
+              height: '2px',
+              borderRadius: '1px',
+              transition:
+                'width 0.18s ease-in-out, background-color 0.18s ease-in-out',
+              bg: [
+                router?.asPath === href ? 'primary500' : 'transparent',
+                router?.asPath === href ? 'primary500' : 'transparent',
+                router?.asPath === href
+                  ? colorChange
+                    ? 'white'
+                    : 'primary500'
+                  : 'transparent',
+              ],
+              transform: 'translateX(-50%)',
+            },
           },
           '&:hover': {
-            color: colorChange ? 'primary200' : 'black',
+            color: ['black', 'black', colorChange ? 'primary200' : 'black'],
+
+            '& a::before': {
+              width: '100%',
+              bg: [
+                'primary500',
+                'primary500',
+                colorChange ? 'white' : 'primary500',
+              ],
+            },
           },
           ...props,
         }),
