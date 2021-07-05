@@ -10,7 +10,7 @@ interface ContentButtonProps extends SystemProps {
 export const ContentButton = ({ content, background }: ContentButtonProps) => {
   return (
     <Stack alignItems="center" space={2}>
-      {/* {content?.[0]?.link_url && (
+      {content?.[0]?.link_url && (
         <Button
           variant={background === 'gradient' ? 'secondary' : 'primary'}
           to={getLinkProps(content?.[0]?.link_url)}
@@ -25,7 +25,7 @@ export const ContentButton = ({ content, background }: ContentButtonProps) => {
         >
           {content?.[1]?.link_label}
         </Button>
-      )} */}
+      )}
     </Stack>
   );
 };

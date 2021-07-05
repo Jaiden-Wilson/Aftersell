@@ -4,6 +4,10 @@ export const getLinkProps = (link: any) => {
   }
 
   if (link?.linktype === 'story') {
+    if (link?.story?.url === '/') {
+      return link?.story?.url;
+    }
+
     return `/${link?.story?.url}`;
   }
 
