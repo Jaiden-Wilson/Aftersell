@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Flex, Box, Stack } from '@storyofams/react-ui';
+import { css, Flex, Box, Stack } from '@storyofams/react-ui';
 
-import css from '@styled-system/css';
 import { getLinkProps } from '~lib';
 import { Logo } from '~components/common/Icon/library';
 import { Button } from '../Button';
@@ -96,20 +95,24 @@ export const Navigation = ({ content, navBackground }: NavigationProps) => {
         </Stack>
         {(content?.button_1_label || content?.button_2_label) && (
           <Stack alignItems="center" space={2}>
-            <Button
-              variant={
-                navBackground && !isScrolled ? 'secondary-outline' : 'outline'
-              }
-              to={getLinkProps(content?.button_1_url)}
-            >
-              {content?.button_1_label}
-            </Button>
-            <Button
-              variant={navBackground && !isScrolled ? 'secondary' : 'primary'}
-              to={getLinkProps(content?.button_2_url)}
-            >
-              {content?.button_2_label}
-            </Button>
+            {content?.button_1_label && (
+              <Button
+                variant={
+                  navBackground && !isScrolled ? 'secondary-outline' : 'outline'
+                }
+                to={getLinkProps(content?.button_1_url)}
+              >
+                {content?.button_1_label}
+              </Button>
+            )}
+            {content?.button_2_label && (
+              <Button
+                variant={navBackground && !isScrolled ? 'secondary' : 'primary'}
+                to={getLinkProps(content?.button_2_url)}
+              >
+                {content?.button_2_label}
+              </Button>
+            )}
           </Stack>
         )}
       </Flex>
