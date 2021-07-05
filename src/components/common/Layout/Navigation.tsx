@@ -135,7 +135,7 @@ export const Navigation = ({ content, navBackground }: NavigationProps) => {
             px={[2, 2, 0]}
             pt={[4, 4, 0]}
             boxShadow={['xs', 'xs', 'none']}
-            transition="transform 0.18s ease-in-out, box-shadow 0.18s ease-in-out, background-color 0.18s ease-in-out"
+            transition="transform 0.18s ease-in-out"
           >
             <NavLink
               href="/"

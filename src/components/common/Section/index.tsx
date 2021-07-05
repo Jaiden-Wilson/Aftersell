@@ -1,5 +1,6 @@
 import SbEditable from 'storyblok-react';
 
+import { Header } from './Header';
 import { HeaderSimple } from './HeaderSimple';
 import { SectionDynamic } from './SectionDynamic';
 
@@ -20,6 +21,9 @@ export const Section: React.FC<SectionProps> = ({
   switch (sectionType) {
     case 'header_simple':
       section = <HeaderSimple {...shared} />;
+      break;
+    case 'header':
+      section = <Header {...shared} />;
       break;
     case 'section':
       section = <SectionDynamic {...shared} />;

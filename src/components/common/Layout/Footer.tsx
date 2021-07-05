@@ -25,7 +25,7 @@ export const Links = ({ content }) => {
   });
 
   return (
-    <Stack flexDirection="column" space={3} maxWidth="168px" pl={[0, 4]} pb={4}>
+    <Stack flexDirection="column" space={3} maxWidth="176px" pl={[0, 4]} pb={4}>
       <Heading variant="h6" as="h6" fontSize={2}>
         {content?.title}
       </Heading>
