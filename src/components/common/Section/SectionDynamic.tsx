@@ -11,6 +11,7 @@ import {
   Video,
   RichText,
   Slider,
+  ContentImageDual,
 } from '../Blocks';
 import { Divider } from '../Divider';
 import { Container } from './Container';
@@ -59,6 +60,9 @@ const Item = ({
       break;
     case 'image_slider':
       item = <Slider content={content?.images} />;
+      break;
+    case 'image_dual':
+      item = <ContentImageDual content={content} />;
       break;
     case 'button':
       item = (
