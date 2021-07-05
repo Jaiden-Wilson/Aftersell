@@ -52,12 +52,12 @@ export const Footer: FC<FooterProps> = ({ content }) => {
         px={[2, 6]}
       >
         <Flex
-          flexDirection={['column', 'row']}
+          flexDirection={'row'}
           alignItems="center"
           justifyContent="space-between"
           width="100%"
         >
-          <Link href="/" stylingProps={{ color: 'grey600' }}>
+          <Link href="/" stylingProps={{ color: 'grey600', display: 'flex' }}>
             <a>
               <Shape
                 width={['86px', '172px']}
@@ -72,6 +72,8 @@ export const Footer: FC<FooterProps> = ({ content }) => {
                 <Button
                   variant="outline"
                   to={getLinkProps(content?.button_1_url)}
+                  px={[2, 2, 4]}
+                  py={[1, 1, 1.5]}
                 >
                   {content?.button_1_label}
                 </Button>
@@ -80,6 +82,8 @@ export const Footer: FC<FooterProps> = ({ content }) => {
                 <Button
                   variant="primary"
                   to={getLinkProps(content?.button_2_url)}
+                  px={[2, 2, 4]}
+                  py={[1, 1, 1.5]}
                 >
                   {content?.button_2_label}
                 </Button>
