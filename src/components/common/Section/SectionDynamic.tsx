@@ -1,4 +1,4 @@
-import { Stack, Box, css, SystemProps } from '@storyofams/react-ui';
+import { Stack, css, SystemProps } from '@storyofams/react-ui';
 import SbEditable from 'storyblok-react';
 
 import { ContentImage } from '~components';
@@ -10,6 +10,7 @@ import {
   Title,
   Video,
   RichText,
+  Slider,
 } from '../Blocks';
 import { Divider } from '../Divider';
 import { Container } from './Container';
@@ -45,7 +46,7 @@ const Item = ({
 
   switch (sectionType) {
     case 'image':
-      item = <ContentImage height={[200, 430]} content={content?.image} />;
+      item = <ContentImage content={content?.image} />;
       break;
     case 'video':
       item = <Video src={content?.url} />;
@@ -55,6 +56,9 @@ const Item = ({
       break;
     case 'divider':
       item = <Divider />;
+      break;
+    case 'image_slider':
+      item = <Slider content={content?.images} />;
       break;
     case 'button':
       item = (

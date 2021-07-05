@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { DialogOverlay, DialogContent } from '@reach/dialog';
-import { Icon } from '@storyofams/react-ui';
+import { Box, Icon } from '@storyofams/react-ui';
 import Vimeo from '@u-wave/react-vimeo';
 import styled from 'styled-components';
 
@@ -198,60 +198,62 @@ export const Video = ({ src }) => {
   const [isOpen, setOpen] = useState(false);
 
   return (
-    <VideoWrapper>
-      {!isOpen && (
-        <Vimeo
-          video={src}
-          responsive
-          autoplay
-          controls={false}
-          background
-          muted
-          loop
-          autopause={false}
-          showTitle={false}
-          showByline={false}
-          showPortrait={false}
-        />
-      )}
+    <Box width="100%" maxWidth="960px" mx="auto">
+      <VideoWrapper>
+        {!isOpen && (
+          <Vimeo
+            video={src}
+            responsive
+            autoplay
+            controls={false}
+            background
+            muted
+            loop
+            autopause={false}
+            showTitle={false}
+            showByline={false}
+            showPortrait={false}
+          />
+        )}
 
-      <PlayButtonOuter
-        onClick={() => {
-          setOpen(true);
-        }}
-        aria-label="Play showreel"
-      >
-        <PlayButton>
-          <Icon icon={<Play />} color="white" fontSize="36px" />
-        </PlayButton>
-      </PlayButtonOuter>
-
-      {isOpen && (
-        <LightboxOverlay
-          isOpen
-          onDismiss={() => {
-            setOpen(false);
+        <PlayButtonOuter
+          onClick={() => {
+            setOpen(true);
           }}
+          aria-label="Play showreel"
         >
-          <span
-            className="close"
-            onClick={() => {
+          <PlayButton>
+            <Icon icon={<Play />} color="white" fontSize="36px" />
+          </PlayButton>
+        </PlayButtonOuter>
+
+        {isOpen && (
+          <LightboxOverlay
+            isOpen
+            onDismiss={() => {
               setOpen(false);
             }}
-          />
-
-          <LightboxContent>
-            <Vimeo
-              video={src}
-              autoplay
-              controls
-              responsive
-              color="6138FE"
-              onEnd={() => setOpen(false)}
+          >
+            <span
+              className="close"
+              onClick={() => {
+                setOpen(false);
+              }}
             />
-          </LightboxContent>
-        </LightboxOverlay>
-      )}
-    </VideoWrapper>
+
+            <LightboxContent>
+              <Vimeo
+                video={src}
+                autoplay
+                controls
+                responsive
+                color="6138FE"
+                onEnd={() => setOpen(false)}
+              />
+            </LightboxContent>
+          </LightboxOverlay>
+        )}
+      </VideoWrapper>
+    </Box>
   );
 };

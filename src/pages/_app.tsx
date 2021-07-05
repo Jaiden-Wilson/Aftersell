@@ -8,6 +8,7 @@ import { initSentry } from '~lib';
 import CSSreset from '~styles/CSSreset';
 
 import '../../public/static/fonts/stylesheet.css';
+import 'swiper/swiper.min.css';
 
 if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
   initSentry();
