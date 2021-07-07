@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { DialogOverlay, DialogContent } from '@reach/dialog';
 import { Box, Icon } from '@storyofams/react-ui';
 import Vimeo from '@u-wave/react-vimeo';
+import { Parallax } from 'react-scroll-parallax';
 import styled from 'styled-components';
 
 import '@reach/dialog/styles.css';
@@ -199,61 +200,71 @@ export const Video = ({ src }) => {
 
   return (
     <Box width="100%" maxWidth="960px" mx="auto">
-      <VideoWrapper>
-        {!isOpen && (
-          <Vimeo
-            video={src}
-            responsive
-            autoplay
-            controls={false}
-            background
-            muted
-            loop
-            autopause={false}
-            showTitle={false}
-            showByline={false}
-            showPortrait={false}
-          />
-        )}
+      <Parallax
+        y={['-8px', '8px']}
+        styleOuter={{
+          width: '100%',
+        }}
+        styleInner={{
+          width: '100%',
+        }}
+      >
+        <VideoWrapper>
+          {!isOpen && (
+            <Vimeo
+              video={src}
+              responsive
+              autoplay
+              controls={false}
+              background
+              muted
+              loop
+              autopause={false}
+              showTitle={false}
+              showByline={false}
+              showPortrait={false}
+            />
+          )}
 
-        <PlayButtonOuter
-          onClick={() => {
-            setOpen(true);
-          }}
-          aria-label="Play showreel"
-        >
-          <PlayButton>
-            <Icon icon={<Play />} color="white" fontSize="36px" />
-          </PlayButton>
-        </PlayButtonOuter>
-
-        {isOpen && (
-          <LightboxOverlay
-            isOpen
-            onDismiss={() => {
-              setOpen(false);
+          <PlayButtonOuter
+            onClick={() => {
+              setOpen(true);
             }}
+            aria-label="Play showreel"
           >
-            <span
-              className="close"
-              onClick={() => {
+            <PlayButton>
+              <Icon icon={<Play />} color="white" fontSize="36px" />
+            </PlayButton>
+          </PlayButtonOuter>
+
+          {isOpen && (
+            <LightboxOverlay
+              isOpen
+              onDismiss={() => {
                 setOpen(false);
               }}
-            />
-
-            <LightboxContent>
-              <Vimeo
-                video={src}
-                autoplay
-                controls
-                responsive
-                color="6138FE"
-                onEnd={() => setOpen(false)}
+            >
+              <span
+                className="close"
+                onClick={() => {
+                  setOpen(false);
+                }}
               />
-            </LightboxContent>
-          </LightboxOverlay>
-        )}
-      </VideoWrapper>
+
+              <LightboxContent>
+                <Vimeo
+                  video={src}
+                  autoplay
+                  controls
+                  responsive
+                  color="6138FE"
+                  onEnd={() => setOpen(false)}
+                />
+              </LightboxContent>
+            </LightboxOverlay>
+          )}
+        </VideoWrapper>
+      </Parallax>
     </Box>
   );
 };

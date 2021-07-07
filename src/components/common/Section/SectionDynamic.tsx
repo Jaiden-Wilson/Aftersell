@@ -1,4 +1,5 @@
 import { Stack, css, SystemProps } from '@storyofams/react-ui';
+import { Fade } from 'react-awesome-reveal';
 import SbEditable from 'storyblok-react';
 
 import { ContentImage } from '~components';
@@ -128,28 +129,46 @@ export const SectionDynamic = ({
       {...props}
     >
       <Stack
-        flexDirection={content?.text_align === 'left' ? 'row' : 'column'}
+        flexDirection={
+          content?.text_align === 'left' ? ['column', 'row'] : 'column'
+        }
         alignItems={content?.text_align === 'left' ? 'space-between' : 'center'}
         space={[3, 5]}
         width="100%"
       >
         {!!content?.title && (
-          <Title
-            width={
-              content?.text_align === 'left' &&
-              !!content?.description?.content?.[0].content
-                ? ['100%', '40%']
-                : 'auto'
-            }
-            text={content?.title}
-            h1={first}
-          />
+          <Fade
+            delay={content?.background === 'color' ? 480 : 0}
+            duration={640}
+            fraction={0.3}
+            direction="up"
+            triggerOnce
+          >
+            <Title
+              width={
+                content?.text_align === 'left' &&
+                !!content?.description?.content?.[0].content
+                  ? ['100%', '40%']
+                  : 'auto'
+              }
+              text={content?.title}
+              h1={first}
+            />
+          </Fade>
         )}
         {!!content?.description?.content?.[0].content && (
-          <RichText
-            width={content?.text_align === 'left' ? ['100%', '60%'] : 'auto'}
-            text={content?.description}
-          />
+          <Fade
+            delay={content?.background === 'color' ? 480 : 0}
+            duration={640}
+            fraction={0.3}
+            direction="up"
+            triggerOnce
+          >
+            <RichText
+              width={content?.text_align === 'left' ? ['100%', '60%'] : 'auto'}
+              text={content?.description}
+            />
+          </Fade>
         )}
       </Stack>
       {content?.content?.map((section, i) => (
