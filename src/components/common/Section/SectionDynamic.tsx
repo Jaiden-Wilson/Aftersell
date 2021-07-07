@@ -1,4 +1,5 @@
 import { Stack, css, SystemProps } from '@storyofams/react-ui';
+import dynamic from 'next/dynamic';
 import SbEditable from 'storyblok-react';
 
 import { ContentImage } from '~components';
@@ -10,10 +11,10 @@ import {
   Title,
   Video,
   RichText,
-  Slider,
   ContentImageDual,
   QuestionList,
 } from '../Blocks';
+import type { Slider as SliderType } from '../Blocks/Slider';
 import { Divider } from '../Divider';
 import { Container } from './Container';
 
@@ -37,6 +38,10 @@ export interface SectionProps {
   background?: 'none' | 'color' | 'gradient';
   text_align?: 'center' | 'left';
 }
+
+const Slider = dynamic(() =>
+  import('../Blocks/Slider').then((mod) => mod.Slider),
+) as typeof SliderType;
 
 const Item = ({
   content,

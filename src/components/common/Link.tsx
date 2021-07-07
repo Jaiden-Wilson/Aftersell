@@ -1,6 +1,6 @@
 import { createElement, cloneElement } from 'react';
 import { Box } from '@storyofams/react-ui';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import styled from 'styled-components';
 
@@ -13,7 +13,7 @@ interface LinkProps extends NextLinkProps {
   stylingProps?: any;
 }
 
-const Wrapper = styled(motion.div)`
+const Wrapper = styled(m.div)`
   position: relative;
   display: inline-flex;
 `;

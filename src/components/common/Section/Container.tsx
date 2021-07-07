@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { css, Box, Stack, SystemProps } from '@storyofams/react-ui';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 import { useCursor } from '../Cursor';
 
@@ -22,7 +22,7 @@ export const ContainerWrapper = ({
 
   if (background === 'gradient') {
     return (
-      <motion.div
+      <m.div
         onHoverStart={() => {
           cursorBackground();
         }}
@@ -31,7 +31,7 @@ export const ContainerWrapper = ({
         }}
       >
         {children}
-      </motion.div>
+      </m.div>
     );
   }
 

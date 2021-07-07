@@ -76,13 +76,84 @@ export default class MyDocument extends Document {
           <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
           <link rel="dns-prefetch" href="https://www.google-analytics.com" />
 
-          <script
-            id="_etLoader"
-            type="text/javascript"
-            data-block-cookies="true"
-            data-respect-dnt="true"
-            data-secure-code="i9sBKg"
-            src="//static.etracker.com/code/e.js"
+          <link
+            rel="preload"
+            href="/static/fonts/Aeonik-Black.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin=""
+          />
+          <link
+            rel="preload"
+            href="/static/fonts/Aeonik-Regular.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin=""
+          />
+          <link
+            rel="preload"
+            href="/static/fonts/Aeonik-Medium.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin=""
+          />
+          <link
+            rel="preload"
+            href="/static/fonts/Aeonik-Bold.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin=""
+          />
+
+          <style
+            dangerouslySetInnerHTML={{
+              __html: `
+            @font-face {
+              font-family: 'Aeonik';
+              src: url('/static/fonts/Aeonik-Black.woff2') format('woff2'),
+                  url('/static/fonts/Aeonik-Black.woff') format('woff');
+              font-weight: 900;
+              font-style: normal;
+              font-display: swap;
+            }
+
+            @font-face {
+                font-family: 'Aeonik';
+                src: url('/static/fonts/Aeonik-Regular.woff2') format('woff2'),
+                    url('/static/fonts/Aeonik-Regular.woff') format('woff');
+                font-weight: normal;
+                font-style: normal;
+                font-display: swap;
+            }
+
+            @font-face {
+                font-family: 'Aeonik';
+                src: url('/static/fonts/Aeonik-Light.woff2') format('woff2'),
+                    url('/static/fonts/Aeonik-Light.woff') format('woff');
+                font-weight: 300;
+                font-style: normal;
+                font-display: swap;
+            }
+
+            @font-face {
+                font-family: 'Aeonik';
+                src: url('/static/fonts/Aeonik-Medium.woff2') format('woff2'),
+                    url('/static/fonts/Aeonik-Medium.woff') format('woff');
+                font-weight: 500;
+                font-style: normal;
+                font-display: swap;
+            }
+
+            @font-face {
+                font-family: 'Aeonik';
+                src: url('/static/fonts/Aeonik-Bold.woff2') format('woff2'),
+                    url('/static/fonts/Aeonik-Bold.woff') format('woff');
+                font-weight: bold;
+                font-style: normal;
+                font-display: swap;
+            }
+          `,
+            }}
           />
         </Head>
         <body>
