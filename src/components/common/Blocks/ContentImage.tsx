@@ -25,6 +25,7 @@ export const ContentImage = ({ content, ...props }) => {
         src={content?.filename}
         fluid={1400}
         fit="contain"
+        showPlaceholder={false}
       />
     </Box>
   );
