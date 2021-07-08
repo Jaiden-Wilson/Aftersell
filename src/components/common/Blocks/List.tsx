@@ -8,8 +8,8 @@ import {
   css,
 } from '@storyofams/react-ui';
 import { Fade } from 'react-awesome-reveal';
-import { Heading } from '~components';
 
+import { Heading } from '~components';
 import {
   Arrows,
   Conversion,
@@ -107,7 +107,7 @@ export const List = ({ content }: ListProps) => {
       rowGap={[2, 6]}
       columnGap={2}
       css={css({
-        '>div': {
+        '> div > div': {
           justifyContent: content?.length > 3 ? 'flex-start' : 'center',
           textAlign: content?.length > 3 ? 'left' : 'center',
         },
@@ -117,9 +117,13 @@ export const List = ({ content }: ListProps) => {
         duration={640}
         fraction={0.3}
         cascade={content?.length < 4 ? true : false}
+        damping={0.2}
         direction="up"
         triggerOnce
-        style={{ width: '100%' }}
+        style={{
+          width: '100%',
+          display: 'flex',
+        }}
       >
         {content?.map(({ icon, title, description, _uid }) => (
           <Stack key={_uid} flexDirection="column" space={2} maxWidth="400px">

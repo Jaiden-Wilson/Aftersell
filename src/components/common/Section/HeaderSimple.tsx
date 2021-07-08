@@ -30,7 +30,7 @@ export const HeaderSimple = ({
       mb={content?.overlap_next_section && ['-96px', '-210px']}
       {...props}
     >
-      <Fade cascade duration={640} direction="up" triggerOnce>
+      <Fade cascade damping={0.2} duration={640} direction="up" triggerOnce>
         {!!content?.title && <Title text={content?.title} h1={first} />}
         {!!content?.description?.content?.[0].content && (
           <RichText text={content?.description} />

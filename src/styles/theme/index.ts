@@ -47,7 +47,7 @@ const theme = {
   lineHeights: {
     normal: 1,
     medium: 1.2,
-    high: 1.5,
+    high: 1.4,
   },
   space: {
     ...space,

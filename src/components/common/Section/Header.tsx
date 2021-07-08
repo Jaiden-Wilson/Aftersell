@@ -1,6 +1,6 @@
 import { css, Box, Stack, SystemProps } from '@storyofams/react-ui';
 import { Image as ToolkitImage } from '@storyofams/storyblok-toolkit';
-import { Fade, Zoom } from 'react-awesome-reveal';
+import { Fade } from 'react-awesome-reveal';
 import { Parallax } from 'react-scroll-parallax';
 
 import { getLinkProps } from '~lib';
@@ -86,7 +86,7 @@ export const Header = ({ content, first, ...props }: HeaderProps) => {
         flexDirection="column"
         space={[2, 3]}
       >
-        <Fade cascade duration={640} direction="up" triggerOnce>
+        <Fade cascade damping={0.2} duration={640} direction="up" triggerOnce>
           {!!content?.title && <Title text={content?.title} h1={first} />}
           {!!content?.description?.content?.[0].content && (
             <RichText text={content?.description} />
@@ -165,8 +165,8 @@ export const Header = ({ content, first, ...props }: HeaderProps) => {
             />
           </Parallax>
         </Box>
-        <Zoom
-          duration={240}
+        <Fade
+          duration={480}
           delay={560}
           triggerOnce
           style={{
@@ -223,9 +223,9 @@ export const Header = ({ content, first, ...props }: HeaderProps) => {
               />
             </Box>
           </Parallax>
-        </Zoom>
-        <Zoom
-          duration={240}
+        </Fade>
+        <Fade
+          duration={480}
           delay={640}
           triggerOnce
           style={{
@@ -280,7 +280,7 @@ export const Header = ({ content, first, ...props }: HeaderProps) => {
               />
             </Box>
           </Parallax>
-        </Zoom>
+        </Fade>
       </Box>
     </Container>
   );

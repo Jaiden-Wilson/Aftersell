@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Heading, Flex, Text, SystemProps, css } from '@storyofams/react-ui';
+import { Flex, Text, SystemProps, css } from '@storyofams/react-ui';
 import {
   render,
   MARK_BOLD,
@@ -8,6 +8,7 @@ import {
   NODE_HEADING,
   NODE_IMAGE,
 } from 'storyblok-rich-text-react-renderer';
+import { Heading } from '../Heading';
 import { ContentImage } from '.';
 
 interface RichTextProps extends SystemProps {
@@ -53,8 +54,9 @@ export const RichText: FC<RichTextProps> = ({
       nodeResolvers: {
         [NODE_HEADING]: (children, { level }) => (
           <Heading
-            lineHeight="heading"
+            lineHeight="medium"
             as={`h${level}` as any}
+            variant={`h${level}` as any}
             pb={[2, 3]}
             maxWidth="800px"
           >

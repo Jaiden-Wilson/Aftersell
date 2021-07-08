@@ -74,7 +74,12 @@ export const Navigation = ({ content, navBackground }: NavigationProps) => {
         }
         transition="box-shadow 0.18s ease-in-out, background-color 0.18s ease-in-out"
       >
-        <Flex py={[1.5, 1.5, 3]} px={[2, 2, 12]} alignItems="center">
+        <Flex
+          py={[1.5, 1.5, !isScrolled ? 3 : 1.5]}
+          px={[2, 2, 12]}
+          transition="padding-top 0.18s ease-in-out, padding-top 0.18s"
+          alignItems="center"
+        >
           <Hamburger
             isOpen={mobileMenuOpen}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -112,6 +117,7 @@ export const Navigation = ({ content, navBackground }: NavigationProps) => {
                   },
                 })}
               />
+              <div className="hidden">Perfect Product Finder</div>
             </a>
           </Link>
           <Stack

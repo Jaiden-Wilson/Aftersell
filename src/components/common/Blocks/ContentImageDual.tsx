@@ -70,7 +70,7 @@ export const ContentImageDual = ({ content, ...props }) => {
       </Parallax>
       <Parallax
         y={['0px', '24px']}
-        x={['-24px', '0px']}
+        x={['0px', '24px']}
         styleOuter={{
           position: 'absolute',
           left: 0,

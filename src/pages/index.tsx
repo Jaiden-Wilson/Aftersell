@@ -21,6 +21,7 @@ export const getStaticProps: GetStaticProps = enhancedStaticProps(
     try {
       story = (await sdk.pageItem({ slug: 'home' })).PageItem;
     } catch (e) {
+      console.log(e);
       notFound = true;
     }
 

@@ -232,7 +232,7 @@ const CSSreset = createGlobalStyle(
     }
     html {
       font-family: ${theme.fonts.body};
-      line-height: 1.5;
+      line-height: 1.4;
       -webkit-font-smoothing: antialiased;
       -webkit-text-size-adjust: 100%;
       text-rendering: optimizelegibility;
@@ -291,7 +291,6 @@ const CSSreset = createGlobalStyle(
     embed,
     object {
       display: block;
-      vertical-align: middle;
     }
     img,
     video {

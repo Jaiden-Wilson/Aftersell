@@ -14,6 +14,13 @@ export const enhancedStaticProps: typeof staticPropsWithSdk = (
         .NavigationItem;
     } catch (e) {}
 
+    if (
+      typeof window !== 'undefined' &&
+      typeof window.IntersectionObserver === 'undefined'
+    ) {
+      await import('intersection-observer');
+    }
+
     const staticProps = await getStaticProps(context);
 
     return {

@@ -9,10 +9,7 @@ function Play() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path
-        d="M0.33374 48.0005V0.000488281L32.3337 24.0005L0.33374 48.0005Z"
-        fill="white"
-      />
+      <path d="M.334 48V0l32 24-32 24z" fill="#fff" />
     </svg>
   );
 }

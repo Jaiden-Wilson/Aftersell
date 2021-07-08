@@ -1,5 +1,6 @@
 import { Icon, Text, Box, Stack, SystemProps } from '@storyofams/react-ui';
 import { Fade } from 'react-awesome-reveal';
+
 import { Heading } from '~components';
 import { Tick } from '~components/common/Icon/library';
 
@@ -22,9 +23,15 @@ export const Pricing = ({ content, ...props }: PricingProps) => {
           duration={640}
           fraction={0.3}
           cascade
+          damping={0.2}
           direction="up"
           triggerOnce
-          style={{ width: '100%' }}
+          style={{
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
         >
           {content?.map(({ content, uuid }) => (
             <Stack
