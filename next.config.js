@@ -122,12 +122,11 @@ module.exports = withBundleAnalyzer(
       return config;
     },
     basePath,
-    async redirects() {
+    rewrites() {
       return [
         {
           source: '/sitemap.xml',
           destination: '/api/sitemap',
-          permanent: true,
         },
       ];
     },

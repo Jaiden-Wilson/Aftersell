@@ -4,14 +4,12 @@ import App from 'next/app';
 
 import { Providers } from '~components';
 import { seo } from '~config';
-import { initSentry } from '~lib';
 import CSSreset from '~styles/CSSreset';
 
-import '../../public/static/fonts/stylesheet.css';
 import 'swiper/swiper.min.css';
 
 if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
-  initSentry();
+  import('~lib/sentry').then((m) => m.initSentry());
 }
 
 class MyApp extends App {
