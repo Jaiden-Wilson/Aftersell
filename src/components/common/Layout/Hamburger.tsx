@@ -22,6 +22,7 @@ export const Hamburger: FC<HamburgerProps> = ({
       height="40px"
       onClick={onClick}
       as="button"
+      aria-label="Toggle menu"
       css={css({
         span: {
           position: 'relative',

@@ -301,7 +301,6 @@ export type PriceComponent = {
   list?: Maybe<Scalars['BlockScalar']>;
   name?: Maybe<Scalars['String']>;
   price?: Maybe<Scalars['String']>;
-  url?: Maybe<Link>;
 };
 
 export type PriceFilterQuery = {
@@ -709,7 +708,11 @@ export type PageItemsQuery = { __typename?: 'QueryType' } & {
   PageItems?: Maybe<
     { __typename?: 'PageItems' } & {
       items?: Maybe<
-        Array<Maybe<{ __typename?: 'PageItem' } & Pick<PageItem, 'slug'>>>
+        Array<
+          Maybe<
+            { __typename?: 'PageItem' } & Pick<PageItem, 'slug' | 'full_slug'>
+          >
+        >
       >;
     }
   >;
@@ -794,6 +797,7 @@ export const PageItemsDocument = gql`
     PageItems(per_page: 100) {
       items {
         slug
+        full_slug
       }
     }
   }

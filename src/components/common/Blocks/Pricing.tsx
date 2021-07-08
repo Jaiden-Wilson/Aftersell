@@ -1,6 +1,6 @@
 import { Icon, Text, Box, Stack, SystemProps } from '@storyofams/react-ui';
 import { Fade } from 'react-awesome-reveal';
-import { flex } from 'styled-system';
+
 import { Heading } from '~components';
 import { Tick } from '~components/common/Icon/library';
 

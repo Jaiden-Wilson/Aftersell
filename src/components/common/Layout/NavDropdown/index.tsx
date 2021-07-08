@@ -1,14 +1,29 @@
-import React, { useState } from 'react';
-import { Menu, MenuList, MenuButton, MenuItem } from '@reach/menu-button';
+import { useState } from 'react';
 import { css, Box, Flex, Icon, Text } from '@storyofams/react-ui';
 import '@reach/menu-button/styles.css';
+import withLoadingProps from 'next-dynamic-loading-props';
+import dynamic from 'next/dynamic';
+import { useWindowSize } from 'react-use';
 import styled from 'styled-components';
-
 import { getLinkProps } from '~lib';
 import { ChevronDown } from '~components/common/Icon/library';
 
-import { Link } from '../Link';
-import { NavLink } from './NavLink';
+import { NavLink } from '../NavLink';
+import type { DesktopDropdown as DesktopDropdownType } from './DesktopDropdown';
+
+const DesktopDropdown = withLoadingProps((useLoadingProps) =>
+  dynamic(
+    () => import('./DesktopDropdown').then((mod) => mod.DesktopDropdown),
+    {
+      ssr: false,
+      loading: () => {
+        // eslint-disable-next-line
+        const { buttonContent } = useLoadingProps();
+        return <StyledMenuButton>{buttonContent}</StyledMenuButton>;
+      },
+    },
+  ),
+) as typeof DesktopDropdownType;
 
 const StyledMenuButton = styled.button`
   && {
@@ -33,41 +48,6 @@ const StyledMenuButton = styled.button`
   }
 `;
 
-const StyledMenuList = styled.div`
-  && {
-    margin-top: 12px;
-    padding: 0;
-    background: ${(p) => p.theme.colors.primary100};
-    border: none;
-    box-sizing: border-box;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04),
-      0px 2px 6px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
-    border-radius: 8px;
-    overflow: hidden;
-
-    div {
-      width: 100%;
-    }
-
-    a {
-      width: 100%;
-      padding: 8px 16px;
-      font-size: 16px;
-      line-height: 130%;
-      color: ${(p) => p.theme.colors.grey500};
-      text-decoration: none;
-      transition: background-color 0.18s ease-in-out;
-
-      &[data-selected],
-      &:hover,
-      &:focus {
-        background-color: ${(p) => p.theme.colors.grey100};
-        color: ${(p) => p.theme.colors.black};
-      }
-    }
-  }
-`;
-
 interface NavDropdownProps {
   content?: any;
   colorChange?: boolean;
@@ -78,7 +58,9 @@ export const NavDropdown = ({
   colorChange,
   ...props
 }: NavDropdownProps) => {
+  const { width } = useWindowSize();
   const [isOpen, setIsOpen] = useState(false);
+
   const buttonContent = (
     <Flex
       color={colorChange ? 'white' : 'grey500'}
@@ -131,36 +113,17 @@ export const NavDropdown = ({
 
   return (
     <>
-      <Box
-        display={['none', 'none', 'block']}
-        css={css({
-          "button[aria-expanded='true'] > div": {
-            color: colorChange ? 'white' : 'black',
-
-            '&::before': {
-              width: '100%',
-              bg: [colorChange ? 'white' : 'primary500'],
-            },
-
-            '.chevron-down': {
-              transform: 'rotate(-180deg)',
-            },
-          },
-        })}
-      >
-        <Menu {...props}>
-          <MenuButton as={StyledMenuButton}>{buttonContent}</MenuButton>
-          <MenuList as={StyledMenuList}>
-            {content?.list.map(({ link_url, link_label, _uid }) => (
-              <Link key={_uid} href={getLinkProps(link_url)}>
-                <MenuItem as="a" onSelect={() => {}}>
-                  {link_label}
-                </MenuItem>
-              </Link>
-            ))}
-          </MenuList>
-        </Menu>
+      <Box display={['none', 'none', 'block']}>
+        {width >= 992 && (
+          <DesktopDropdown
+            buttonContent={buttonContent}
+            content={content}
+            colorChange={colorChange}
+            {...props}
+          />
+        )}
       </Box>
+
       <Box as={'ul'} display={['block', 'block', 'none']} width="100%">
         <Flex
           as="button"
@@ -181,8 +144,8 @@ export const NavDropdown = ({
           />
         </Flex>
         <Box display={isOpen ? 'block' : 'none'}>
-          {content?.list.map(({ link_url, link_label, _uid }, i) => (
-            <Box mt={2} ml={2}>
+          {content?.list.map(({ link_url, link_label, _uid }) => (
+            <Box mt={2} ml={2} key={_uid}>
               <NavLink
                 key={_uid}
                 href={getLinkProps(link_url)}

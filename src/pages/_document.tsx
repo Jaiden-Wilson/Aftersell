@@ -104,6 +104,13 @@ export default class MyDocument extends Document {
             type="font/woff2"
             crossOrigin=""
           />
+          <link
+            rel="preload"
+            href="/static/fonts/Aeonik-Light.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin=""
+          />
 
           <style
             dangerouslySetInnerHTML={{

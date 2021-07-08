@@ -10,18 +10,8 @@ function Search() {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z"
+        d="M11 19a8 8 0 100-16 8 8 0 000 16zM21 21l-4.35-4.35"
         stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M20.9999 21L16.6499 16.65"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
       />
     </svg>
   );

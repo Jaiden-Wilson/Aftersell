@@ -1,3 +1,4 @@
+export * from './createIntersectionObserver';
 export * from './enhancedStaticProps';
 export * from './getLinkProps';
 export * from './graphqlClient';
