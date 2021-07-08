@@ -7,7 +7,9 @@ import {
   SystemProps,
   css,
 } from '@storyofams/react-ui';
+import { Fade } from 'react-awesome-reveal';
 import { Heading } from '~components';
+
 import {
   Arrows,
   Conversion,
@@ -105,39 +107,52 @@ export const List = ({ content }: ListProps) => {
       rowGap={[2, 6]}
       columnGap={2}
       css={css({
-        '>div': {
+        '> div > div': {
           justifyContent: content?.length > 3 ? 'flex-start' : 'center',
           textAlign: content?.length > 3 ? 'left' : 'center',
         },
       })}
     >
-      {content?.map(({ icon, title, description, _uid }) => (
-        <Stack key={_uid} flexDirection="column" space={2} maxWidth="400px">
-          <Flex
-            alignItems={content?.length > 3 ? 'flex-start' : 'center'}
-            flexDirection={content?.length > 3 ? 'row' : 'column'}
-          >
-            {icon && (
-              <Icon
-                type={icon}
-                fontSize={3}
-                color="primary500"
-                mr={content?.length > 3 && 1.5}
-                mb={content?.length < 4 && [2, 3]}
-                mt="-1px"
-              />
-            )}
-            <Heading
-              as="h5"
-              variant="h5"
-              fontSize={content?.length > 3 ? [2, 2.5] : [2, 3]}
+      <Fade
+        duration={640}
+        fraction={0.3}
+        cascade={content?.length < 4 ? true : false}
+        damping={0.2}
+        direction="up"
+        triggerOnce
+        style={{
+          width: '100%',
+          display: 'flex',
+        }}
+      >
+        {content?.map(({ icon, title, description, _uid }) => (
+          <Stack key={_uid} flexDirection="column" space={2} maxWidth="400px">
+            <Flex
+              alignItems={content?.length > 3 ? 'flex-start' : 'center'}
+              flexDirection={content?.length > 3 ? 'row' : 'column'}
             >
-              {title}
-            </Heading>
-          </Flex>
-          <Text as="p">{description}</Text>
-        </Stack>
-      ))}
+              {icon && (
+                <Icon
+                  type={icon}
+                  fontSize={3}
+                  color="primary500"
+                  mr={content?.length > 3 && 1.5}
+                  mb={content?.length < 4 && [2, 3]}
+                  mt="-1px"
+                />
+              )}
+              <Heading
+                as="h5"
+                variant="h5"
+                fontSize={content?.length > 3 ? [2, 2.5] : [2, 3]}
+              >
+                {title}
+              </Heading>
+            </Flex>
+            <Text as="p">{description}</Text>
+          </Stack>
+        ))}
+      </Fade>
     </Grid>
   );
 };

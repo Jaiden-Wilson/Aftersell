@@ -1,6 +1,8 @@
 import { ReactNode } from 'react';
 import { css, Box, Stack, SystemProps } from '@storyofams/react-ui';
 import { m } from 'framer-motion';
+import { Fade } from 'react-awesome-reveal';
+import { Parallax } from 'react-scroll-parallax';
 
 import { useCursor } from '../Cursor';
 
@@ -61,21 +63,52 @@ export const Container = ({
             color: background === 'gradient' ? 'white' : 'black',
           },
         })}
-        overflow="hidden"
         textAlign="center"
+        overflow={background === 'color' ? 'visible' : 'hidden'}
         {...props}
       >
         {background === 'color' && (
-          <Box
-            position="absolute"
-            borderRadius={[0, 'lg']}
-            bg="primary100"
-            top={[4, 10]}
-            left={[0, 6]}
-            bottom={[4, 10]}
-            right={[0, 6]}
-            className="background"
-          />
+          <Fade
+            duration={1200}
+            fraction={0.3}
+            triggerOnce
+            style={{
+              position: 'absolute',
+              left: 0,
+              top: 0,
+              height: '100%',
+              width: '100%',
+            }}
+          >
+            <Parallax
+              y={['-40px', '40px']}
+              styleOuter={{
+                position: 'absolute',
+                left: 0,
+                top: 0,
+                height: '100%',
+                width: '100%',
+              }}
+              styleInner={{
+                position: 'absolute',
+                left: 0,
+                top: 0,
+                height: '100%',
+                width: '100%',
+              }}
+            >
+              <Box
+                position="absolute"
+                borderRadius={[0, 'lg']}
+                bg="primary100"
+                top={[4, 5]}
+                left={[0, 6]}
+                bottom={[4, 5]}
+                right={[0, 6]}
+                className="background"
+              />
+            </Parallax>
+          </Fade>
         )}
         <Stack
           space={space}
@@ -93,20 +126,40 @@ export const Container = ({
         >
           {children}
           {background === 'gradient' && (
-            <Box
-              position="absolute"
-              borderRadius="full"
-              bottom={[0, '50%']}
-              left="50%"
-              width={['100%', 'calc(100% - 96px)']}
-              mt="0 !important"
-              pt={['100%', 'calc(100% - 96px)']}
-              transform="translate(-50%, 50%)"
-              zIndex="hide"
-              css={css({
-                background: 'linear-gradient(180deg, #6138FE 0%, #F087B3 100%)',
-              })}
-            />
+            <Parallax
+              y={['80px', '-80px']}
+              styleOuter={{
+                position: 'absolute',
+                left: 0,
+                top: 0,
+                height: '100%',
+                width: '100%',
+                zIndex: -1,
+              }}
+              styleInner={{
+                position: 'absolute',
+                left: 0,
+                top: 0,
+                height: '100%',
+                width: '100%',
+              }}
+            >
+              <Box
+                position="absolute"
+                borderRadius="full"
+                bottom={[0, '50%']}
+                left="50%"
+                width={['100%', 'calc(100% - 96px)']}
+                mt="0 !important"
+                pt={['100%', 'calc(100% - 96px)']}
+                transform="translate(-50%, 50%)"
+                zIndex="hide"
+                css={css({
+                  background:
+                    'linear-gradient(180deg, #6138FE 0%, #F087B3 100%)',
+                })}
+              />
+            </Parallax>
           )}
         </Stack>
       </Box>

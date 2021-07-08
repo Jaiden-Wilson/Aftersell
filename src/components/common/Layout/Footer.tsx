@@ -2,7 +2,12 @@ import { FC } from 'react';
 import { Box, Text, Stack, Flex, css } from '@storyofams/react-ui';
 
 import { getLinkProps } from '~lib';
-import { Logo, ShopifyPlus, StoryOfAms } from '~components/common/Icon/library';
+import {
+  Logo,
+  Shopify,
+  ShopifyPlus,
+  StoryOfAms,
+} from '~components/common/Icon/library';
 
 import { Button } from '../Button';
 import { Divider } from '../Divider';
@@ -98,13 +103,22 @@ export const Footer: FC<FooterProps> = ({ content }) => {
               {content?.description}
             </Text>
             {content?.shopify_plus_logo && (
-              <Shape
-                mt={[2, 4]}
-                color="grey500"
-                width={'150px'}
-                height={'31px'}
-                icon={<ShopifyPlus />}
-              />
+              <>
+                <Shape
+                  mt={[2, 4]}
+                  color="grey500"
+                  width={'110px'}
+                  height={'31px'}
+                  icon={<Shopify />}
+                />
+                <Shape
+                  mt={[2, 2]}
+                  color="grey500"
+                  width={'150px'}
+                  height={'31px'}
+                  icon={<ShopifyPlus />}
+                />
+              </>
             )}
           </Box>
           <Flex
@@ -125,7 +139,9 @@ export const Footer: FC<FooterProps> = ({ content }) => {
           alignItems="center"
           justifyContent="center"
         >
-          <Shape width="76px" height="48px" icon={<StoryOfAms />} />
+          <Link href="https://storyofams.com/">
+            <Shape as="a" width="76px" height="48px" icon={<StoryOfAms />} />
+          </Link>
           <Text lineHeight="1.2" mt={1.5} color="grey500" fontSize={1.5}>
             Copyright © {new Date().getFullYear()} Story of AMS
           </Text>

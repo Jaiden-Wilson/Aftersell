@@ -1,4 +1,6 @@
 import { Icon, Text, Box, Stack, SystemProps } from '@storyofams/react-ui';
+import { Fade } from 'react-awesome-reveal';
+import { flex } from 'styled-system';
 import { Heading } from '~components';
 import { Tick } from '~components/common/Icon/library';
 
@@ -15,46 +17,62 @@ export const Pricing = ({ content, ...props }: PricingProps) => {
         alignItems={['center', 'center', 'flex-start']}
         flexDirection={['column', 'column', 'row']}
         space={3}
+        width="100%"
       >
-        {content?.map(({ content, uuid }) => (
-          <Stack
-            space={2}
-            boxShadow="md"
-            bg="white"
-            p={4}
-            width={['100%', '100%', '33.33%']}
-            textAlign="left"
-            borderRadius="md"
-            flexDirection="column"
-            key={uuid}
-            maxWidth="400px"
-          >
-            <Heading as="h4" variant="h5" lineHeight="normal">
-              {content?.name}
-            </Heading>
-            <Heading
-              as="h5"
-              variant="h3"
-              fontWeight="medium"
-              lineHeight="normal"
+        <Fade
+          duration={640}
+          fraction={0.3}
+          cascade
+          damping={0.2}
+          direction="up"
+          triggerOnce
+          style={{
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          {content?.map(({ content, uuid }) => (
+            <Stack
+              space={2}
+              boxShadow="md"
+              bg="white"
+              p={4}
+              width="100%"
+              textAlign="left"
+              borderRadius="md"
+              flexDirection="column"
+              key={uuid}
+              maxWidth="400px"
             >
-              {content?.price}$ / month
-            </Heading>
-            <Divider />
-            {content?.list?.map(({ text, _uid }) => (
-              <Text display="flex" as="p" key={`${_uid}-list-item`}>
-                <Icon
-                  as="span"
-                  icon={<Tick />}
-                  color="white"
-                  fontSize={3}
-                  mr={1.5}
-                />
-                {text}
-              </Text>
-            ))}
-          </Stack>
-        ))}
+              <Heading as="h4" variant="h5" lineHeight="normal">
+                {content?.name}
+              </Heading>
+              <Heading
+                as="h5"
+                variant="h3"
+                fontWeight="medium"
+                lineHeight="normal"
+              >
+                {content?.price}$ / month
+              </Heading>
+              <Divider />
+              {content?.list?.map(({ text, _uid }) => (
+                <Text display="flex" as="p" key={`${_uid}-list-item`}>
+                  <Icon
+                    as="span"
+                    icon={<Tick />}
+                    color="white"
+                    fontSize={3}
+                    mr={1.5}
+                  />
+                  {text}
+                </Text>
+              ))}
+            </Stack>
+          ))}
+        </Fade>
       </Stack>
     </Box>
   );

@@ -7,7 +7,7 @@ export const headingVariants = {
     fontSize: ['36px', 9],
   },
   h2: {
-    fontSize: ['36px', 7],
+    fontSize: ['28px', 7],
   },
   h3: {
     fontSize: [3, 4],

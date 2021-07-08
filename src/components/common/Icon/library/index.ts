@@ -14,6 +14,7 @@ import { default as Money } from './Money';
 import { default as Play } from './Play';
 import { default as Returns } from './Returns';
 import { default as Search } from './Search';
+import { default as Shopify } from './Shopify';
 import { default as ShopifyPlus } from './ShopifyPlus';
 import { default as StoryOfAms } from './StoryOfAms';
 import { default as Tick } from './Tick';
@@ -35,6 +36,7 @@ export {
   Play,
   Returns,
   Search,
+  Shopify,
   ShopifyPlus,
   StoryOfAms,
   Tick,
