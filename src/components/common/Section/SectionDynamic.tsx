@@ -1,4 +1,4 @@
-import { Stack, css, SystemProps } from '@storyofams/react-ui';
+import { Box, Stack, css, SystemProps } from '@storyofams/react-ui';
 import { Fade } from 'react-awesome-reveal';
 import SbEditable from 'storyblok-react';
 
@@ -137,38 +137,46 @@ export const SectionDynamic = ({
         width="100%"
       >
         {!!content?.title && (
-          <Fade
-            delay={content?.background === 'color' ? 480 : 0}
-            duration={640}
-            fraction={0.3}
-            direction="up"
-            triggerOnce
+          <Box
+            width={
+              content?.text_align === 'left' &&
+              !!content?.description?.content?.[0].content
+                ? ['100%', '40%']
+                : 'auto'
+            }
           >
-            <Title
-              width={
-                content?.text_align === 'left' &&
-                !!content?.description?.content?.[0].content
-                  ? ['100%', '40%']
-                  : 'auto'
-              }
-              text={content?.title}
-              h1={first}
-            />
-          </Fade>
+            <Fade
+              delay={content?.background === 'color' ? 480 : 0}
+              duration={640}
+              fraction={0.3}
+              direction="up"
+              triggerOnce
+              style={{ width: '100%' }}
+            >
+              <Title text={content?.title} h1={first} />
+            </Fade>
+          </Box>
         )}
         {!!content?.description?.content?.[0].content && (
-          <Fade
-            delay={content?.background === 'color' ? 480 : 0}
-            duration={640}
-            fraction={0.3}
-            direction="up"
-            triggerOnce
+          <Box
+            width={
+              content?.text_align === 'left' &&
+              !!content?.description?.content?.[0].content
+                ? ['100%', '60%']
+                : 'auto'
+            }
           >
-            <RichText
-              width={content?.text_align === 'left' ? ['100%', '60%'] : 'auto'}
-              text={content?.description}
-            />
-          </Fade>
+            <Fade
+              delay={content?.background === 'color' ? 480 : 0}
+              duration={640}
+              fraction={0.3}
+              direction="up"
+              triggerOnce
+              style={{ width: '100%' }}
+            >
+              <RichText text={content?.description} />
+            </Fade>
+          </Box>
         )}
       </Stack>
       {content?.content?.map((section, i) => (
