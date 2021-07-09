@@ -2,6 +2,7 @@ query pageItems {
   PageItems(per_page: 100) {
     items {
       slug
+      full_slug
     }
   }
 }

@@ -73,6 +73,8 @@ export const Footer: FC<FooterProps> = ({ content }) => {
                 height={['24px', '48px']}
                 icon={<Logo />}
               />
+
+              <div className="hidden">Perfect Product Finder</div>
             </a>
           </Link>
           {(content?.button_1_label || content?.button_2_label) && (
@@ -134,7 +136,7 @@ export const Footer: FC<FooterProps> = ({ content }) => {
           >
             {content?.links &&
               content?.links?.map((list) => (
-                <Links key={list?._uid} content={list} />
+                <Links content={list} key={list._uid} />
               ))}
           </Flex>
         </Flex>
@@ -146,7 +148,10 @@ export const Footer: FC<FooterProps> = ({ content }) => {
           justifyContent="center"
         >
           <Link href="https://storyofams.com/">
-            <Shape as="a" width="76px" height="48px" icon={<StoryOfAms />} />
+            <a>
+              <Shape width="76px" height="48px" icon={<StoryOfAms />} />
+              <div className="hidden">Open storyofams.com</div>
+            </a>
           </Link>
           <Text lineHeight="1.2" mt={1.5} color="grey500" fontSize={1.5}>
             Copyright © {new Date().getFullYear()} Story of AMS

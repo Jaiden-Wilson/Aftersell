@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { css, Box, Stack, SystemProps } from '@storyofams/react-ui';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Fade } from 'react-awesome-reveal';
 import { Parallax } from 'react-scroll-parallax';
 
@@ -24,7 +24,7 @@ export const ContainerWrapper = ({
 
   if (background === 'gradient') {
     return (
-      <motion.div
+      <m.div
         onHoverStart={() => {
           cursorBackground();
         }}
@@ -33,7 +33,7 @@ export const ContainerWrapper = ({
         }}
       >
         {children}
-      </motion.div>
+      </m.div>
     );
   }
 

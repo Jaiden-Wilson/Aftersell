@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { css, Flex, Box, Stack } from '@storyofams/react-ui';
-import { m } from 'framer-motion';
 
 import { getLinkProps } from '~lib';
 import { Logo } from '~components/common/Icon/library';
@@ -118,6 +117,7 @@ export const Navigation = ({ content, navBackground }: NavigationProps) => {
                   },
                 })}
               />
+              <div className="hidden">Perfect Product Finder</div>
             </a>
           </Link>
           <Stack

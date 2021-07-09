@@ -1,6 +1,5 @@
 import { Icon, Box } from '@storyofams/react-ui';
 import styled from 'styled-components';
-import '@reach/dialog/styles.css';
 
 const ShapeWrapper = styled(Box)`
   div {

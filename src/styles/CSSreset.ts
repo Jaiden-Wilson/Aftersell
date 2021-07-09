@@ -291,7 +291,6 @@ const CSSreset = createGlobalStyle(
     embed,
     object {
       display: block;
-      vertical-align: middle;
     }
     img,
     video {

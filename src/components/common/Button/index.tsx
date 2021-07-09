@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { Button as UIButton, SystemProps, system } from '@storyofams/react-ui';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 import styled from 'styled-components';
 import { variant, ResponsiveValue } from 'styled-system';
@@ -60,7 +60,7 @@ type ButtonProps = {
   input?: boolean;
 } & SystemProps;
 
-const Wrapper = styled(motion.div)`
+const Wrapper = styled(m.div)`
   position: relative;
   display: inline-flex;
 `;

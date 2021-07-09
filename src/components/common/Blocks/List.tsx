@@ -8,8 +8,8 @@ import {
   css,
 } from '@storyofams/react-ui';
 import { Fade } from 'react-awesome-reveal';
-import { Heading } from '~components';
 
+import { Heading } from '~components';
 import {
   Arrows,
   Conversion,
