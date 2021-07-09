@@ -1,5 +1,6 @@
 import { useState, FC } from 'react';
 import { Box, Text } from '@storyofams/react-ui';
+import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
 import { Button } from '~/components';
@@ -70,38 +71,30 @@ const StyledTextarea = styled.textarea`
 `;
 
 export const ContactForm: FC<{}> = () => {
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [url, setUrl] = useState('');
-  const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isSubmitting },
+  } = useForm();
 
+  const onSubmit = async (values) => {
     setError('');
     setSuccess('');
 
     try {
       const res = await fetch('/api/postmark', {
         method: 'post',
-        body: JSON.stringify({
-          name,
-          url,
-          email,
-          message,
-        }),
+        body: JSON.stringify(values),
         headers: { 'Content-Type': 'application/json' },
       });
 
       if (res.status === 204) {
         setSuccess('Your message has been sent!');
-        setName('');
-        setUrl('');
-        setEmail('');
-        setMessage('');
+        reset();
       } else {
         const data = await res.json();
         setError(data.message);
@@ -122,13 +115,7 @@ export const ContactForm: FC<{}> = () => {
       mx="auto"
     >
       <StyledForm>
-        <form
-          action-xhr="/api/mailchimp"
-          method="post"
-          target="_top"
-          encType="application/x-www-form-urlencoded"
-          onSubmit={onSubmit}
-        >
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Box position="absolute" left="-5000px" aria-hidden="true">
             <input
               type="text"
@@ -145,7 +132,6 @@ export const ContactForm: FC<{}> = () => {
             textAlign="left"
           >
             <Box flex="1">
-              <StyledInput type="hidden" name="WHITEPAPERFORM" value={1} />
               <Text
                 as="label"
                 htmlFor="name"
@@ -158,14 +144,11 @@ export const ContactForm: FC<{}> = () => {
               </Text>
               <StyledInput
                 type="text"
-                name="name"
                 id="name"
                 required
                 aria-label="Your name"
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-                value={name}
+                defaultValue=""
+                {...register('name', { required: true })}
                 autoFocus
               />
               <Text
@@ -180,14 +163,11 @@ export const ContactForm: FC<{}> = () => {
               </Text>
               <StyledInput
                 type="email"
-                name="email"
                 id="email"
                 aria-label="Your email"
                 required
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-                value={email}
+                {...register('email', { required: true })}
+                defaultValue=""
               />
               <Text
                 as="label"
@@ -201,15 +181,11 @@ export const ContactForm: FC<{}> = () => {
               </Text>
               <StyledInput
                 type="text"
-                name="url"
                 id="url"
                 required
                 aria-label="Your webshop URL"
-                onChange={(e) => {
-                  setUrl(e.target.value);
-                }}
-                value={url}
-                autoFocus
+                {...register('url', { required: true })}
+                defaultValue=""
               />
               <Text
                 as="label"
@@ -222,15 +198,12 @@ export const ContactForm: FC<{}> = () => {
                 Message
               </Text>
               <StyledTextarea
-                name="message"
                 id="message"
                 aria-label="Your message"
                 rows={4}
                 required
-                onChange={(e) => {
-                  setMessage(e.target.value);
-                }}
-                value={message}
+                {...register('message', { required: true })}
+                defaultValue=""
               />
             </Box>
           </Box>
@@ -241,6 +214,7 @@ export const ContactForm: FC<{}> = () => {
             mt={1}
             input
             boxShadow="none"
+            isLoading={isSubmitting}
           />
 
           <Text
