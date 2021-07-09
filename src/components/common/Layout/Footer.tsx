@@ -47,7 +47,11 @@ export const Links = ({ content }) => {
 
 export const Footer: FC<FooterProps> = ({ content }) => {
   return (
-    <Box bg="white" boxShadow="0px 0px 100px rgba(0, 0, 0, 0.15)">
+    <Box
+      zIndex="docked"
+      bg="white"
+      boxShadow="0px 0px 100px rgba(0, 0, 0, 0.15)"
+    >
       <Box
         width="100%"
         maxWidth="maxWidth"
@@ -129,7 +133,9 @@ export const Footer: FC<FooterProps> = ({ content }) => {
             justifyContent="space-between"
           >
             {content?.links &&
-              content?.links?.map((list) => <Links content={list} />)}
+              content?.links?.map((list) => (
+                <Links key={list?._uid} content={list} />
+              ))}
           </Flex>
         </Flex>
         <Divider mt={[0, 4]} mb={4} />

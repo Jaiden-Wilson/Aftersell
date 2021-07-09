@@ -29,7 +29,7 @@ export const RichText: FC<RichTextProps> = ({
 }) => (
   <Flex
     flexDirection="column"
-    css={css({ '> div:last-child': { pb: 0 }, '.small': { fontSize: 2 } })}
+    css={css({ '> *:last-child': { pb: 0 }, '.small': { fontSize: 2 } })}
     {...props}
   >
     {render(text, {

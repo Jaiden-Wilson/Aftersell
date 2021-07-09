@@ -38,13 +38,13 @@ export const Slider = ({ content, ...props }: SliderProps) => {
           disableOnInteraction: false,
         }}
       >
-        {content?.map(({ image }) => {
+        {content?.map(({ image, _uid }) => {
           const imageProps = getImageProps(image?.filename, {
             fluid: 640,
           });
 
           return (
-            <SwiperSlide>
+            <SwiperSlide key={_uid}>
               <Box
                 css={css({
                   '.storyblok-image-wrapper': {

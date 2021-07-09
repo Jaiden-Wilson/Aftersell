@@ -65,6 +65,7 @@ export const Container = ({
         })}
         textAlign="center"
         overflow={background === 'color' ? 'visible' : 'hidden'}
+        zIndex="docked"
         {...props}
       >
         {background === 'color' && (
@@ -106,6 +107,7 @@ export const Container = ({
                 bottom={[4, 5]}
                 right={[0, 6]}
                 className="background"
+                boxShadow="md"
               />
             </Parallax>
           </Fade>
