@@ -46,7 +46,7 @@ production:
       vercel --token=$NOW_DEPLOY_TOKEN $NOW_BUILD_PARAMS --prod
   environment:
     name: production
-    url: https://ppf.storyofams.com
+    url: https://productfinder.app
   only:
     - master
 
