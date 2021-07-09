@@ -1,3 +1,4 @@
+export * from './ContactForm';
 export * from './ContentButton';
 export * from './ContentImage';
 export * from './ContentImageDual';

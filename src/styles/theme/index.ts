@@ -14,6 +14,12 @@ const theme = {
     grey500: '#76777C',
     grey600: '#65666B',
     black: '#18191F',
+    warning50: '#FFF0BD',
+    warning: '#F0BB00',
+    success50: '#DBFFE3',
+    success: '#0C9151',
+    error50: '#FFD1D1',
+    error: '#CA1818',
   },
   fontWeights: {
     thin: 300,
