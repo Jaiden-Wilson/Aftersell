@@ -8,12 +8,14 @@ export interface SectionProps {
   content: any;
   first: boolean;
   sectionType: string;
+  noBgAnimation?: boolean;
 }
 
 export const Section: React.FC<SectionProps> = ({
   content,
   first,
   sectionType,
+  noBgAnimation,
 }) => {
   let section = null;
   const shared = { content, first };
@@ -26,7 +28,7 @@ export const Section: React.FC<SectionProps> = ({
       section = <Header {...shared} />;
       break;
     case 'section':
-      section = <SectionDynamic {...shared} />;
+      section = <SectionDynamic noBgAnimation={noBgAnimation} {...shared} />;
   }
 
   return (

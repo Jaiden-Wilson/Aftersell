@@ -38,6 +38,7 @@ export const DynamicPage = ({
             content={section}
             first={!!(i === 0)}
             key={`section-${i}`}
+            noBgAnimation={story?.content?.body[0]?.overlap_next_section}
           />
         ))}
       </Layout>

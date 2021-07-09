@@ -30,6 +30,7 @@ type SectionDynamicProps = {
     remove_rounded_border?: 'disabled' | 'top' | 'bottom';
     text_align?: 'center' | 'left';
   };
+  noBgAnimation?: boolean;
 } & SystemProps;
 
 export interface SectionProps {
@@ -100,6 +101,7 @@ const Item = ({
 export const SectionDynamic = ({
   content,
   first,
+  noBgAnimation,
   ...props
 }: SectionDynamicProps) => {
   return (
@@ -134,6 +136,7 @@ export const SectionDynamic = ({
             content?.remove_rounded_border === 'bottom' ? 0 : [0, 'lg'],
         },
       })}
+      noBgAnimation={noBgAnimation}
       {...props}
     >
       {(!!content?.title || !!content?.description?.content?.[0].content) && (
