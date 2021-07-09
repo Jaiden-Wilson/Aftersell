@@ -301,7 +301,6 @@ export type PriceComponent = {
   list?: Maybe<Scalars['BlockScalar']>;
   name?: Maybe<Scalars['String']>;
   price?: Maybe<Scalars['String']>;
-  url?: Maybe<Link>;
 };
 
 export type PriceFilterQuery = {
@@ -631,10 +630,18 @@ export type FooterItemQuery = { __typename?: 'QueryType' } & {
             | 'shopify_plus_logo'
           > & {
               button_1_url?: Maybe<
-                { __typename?: 'Link' } & Pick<Link, 'cachedUrl'>
+                { __typename?: 'Link' } & Pick<Link, 'url'> & {
+                    story?: Maybe<
+                      { __typename?: 'Story' } & Pick<Story, 'fullSlug'>
+                    >;
+                  }
               >;
               button_2_url?: Maybe<
-                { __typename?: 'Link' } & Pick<Link, 'cachedUrl'>
+                { __typename?: 'Link' } & Pick<Link, 'url'> & {
+                    story?: Maybe<
+                      { __typename?: 'Story' } & Pick<Story, 'fullSlug'>
+                    >;
+                  }
               >;
             }
         >;
@@ -659,10 +666,18 @@ export type NavigationItemQuery = { __typename?: 'QueryType' } & {
             | '_editable'
           > & {
               button_1_url?: Maybe<
-                { __typename?: 'Link' } & Pick<Link, 'cachedUrl'>
+                { __typename?: 'Link' } & Pick<Link, 'url' | 'linktype'> & {
+                    story?: Maybe<
+                      { __typename?: 'Story' } & Pick<Story, 'fullSlug'>
+                    >;
+                  }
               >;
               button_2_url?: Maybe<
-                { __typename?: 'Link' } & Pick<Link, 'cachedUrl'>
+                { __typename?: 'Link' } & Pick<Link, 'url' | 'linktype'> & {
+                    story?: Maybe<
+                      { __typename?: 'Story' } & Pick<Story, 'fullSlug'>
+                    >;
+                  }
               >;
             }
         >;
@@ -693,7 +708,11 @@ export type PageItemsQuery = { __typename?: 'QueryType' } & {
   PageItems?: Maybe<
     { __typename?: 'PageItems' } & {
       items?: Maybe<
-        Array<Maybe<{ __typename?: 'PageItem' } & Pick<PageItem, 'slug'>>>
+        Array<
+          Maybe<
+            { __typename?: 'PageItem' } & Pick<PageItem, 'slug' | 'full_slug'>
+          >
+        >
       >;
     }
   >;
@@ -701,18 +720,24 @@ export type PageItemsQuery = { __typename?: 'QueryType' } & {
 
 export const FooterItemDocument = gql`
   query footerItem($slug: ID!) {
-    FooterItem(id: $slug) {
+    FooterItem(id: $slug, resolve_links: "url") {
       uuid
       content {
         _editable
         _uid
         button_1_label
         button_1_url {
-          cachedUrl
+          story {
+            fullSlug
+          }
+          url
         }
         button_2_label
         button_2_url {
-          cachedUrl
+          story {
+            fullSlug
+          }
+          url
         }
         component
         description
@@ -724,16 +749,24 @@ export const FooterItemDocument = gql`
 `;
 export const NavigationItemDocument = gql`
   query navigationItem($slug: ID!) {
-    NavigationItem(id: $slug) {
+    NavigationItem(id: $slug, resolve_links: "url") {
       uuid
       content {
         button_1_label
         button_1_url {
-          cachedUrl
+          story {
+            fullSlug
+          }
+          url
+          linktype
         }
         button_2_label
         button_2_url {
-          cachedUrl
+          story {
+            fullSlug
+          }
+          url
+          linktype
         }
         links
         component
@@ -744,7 +777,11 @@ export const NavigationItemDocument = gql`
 `;
 export const PageItemDocument = gql`
   query pageItem($slug: ID!) {
-    PageItem(id: $slug) {
+    PageItem(
+      id: $slug
+      resolve_relations: "price_selector.price"
+      resolve_links: "url"
+    ) {
       content {
         seo
         body
@@ -760,6 +797,7 @@ export const PageItemsDocument = gql`
     PageItems(per_page: 100) {
       items {
         slug
+        full_slug
       }
     }
   }

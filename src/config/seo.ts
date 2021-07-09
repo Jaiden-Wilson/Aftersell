@@ -3,7 +3,7 @@ const siteTitle = 'Perfect Product Finder';
 const defaultSeo = {
   openGraph: {
     type: 'website',
-    locale: 'en_IE',
+    locale: 'en_US',
     url: '/',
     site_name: siteTitle,
   },

@@ -5,12 +5,12 @@ import React, {
   RefObject,
   ReactNode,
 } from 'react';
-import { motion, useAnimation, useMotionValue, useSpring } from 'framer-motion';
+import { m, useAnimation, useMotionValue, useSpring } from 'framer-motion';
 import styled from 'styled-components';
 
 export * from './useCursor';
 
-const StyledCursor = styled(motion.div)`
+const StyledCursor = styled(m.div)`
   position: fixed;
   left: 0;
   top: 0;

@@ -24,18 +24,20 @@ export const DynamicPage = ({
           'Use the Perfect Product Finder to...'
         }
       />
-      <Layout footer={footer} navigation={navigation}>
+      <Layout
+        footer={footer}
+        navigation={{
+          ...navigation,
+          navBackground:
+            story?.content?.body?.[0]?.component === 'header_simple',
+        }}
+      >
         {story?.content?.body.map((section, i) => (
           <Section
             sectionType={section.component}
             content={section}
             first={!!(i === 0)}
             key={`section-${i}`}
-            extraPadding={
-              story?.content?.body?.[i + 1]?.component === 'content section' &&
-              story?.content?.body?.[i + 1]?.body?.[0]?.component ===
-                'gallery' && [100, 136]
-            }
           />
         ))}
       </Layout>

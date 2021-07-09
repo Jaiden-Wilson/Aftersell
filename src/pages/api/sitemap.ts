@@ -4,27 +4,69 @@ import {
   Header,
   SetHeader,
 } from '@storyofams/next-api-decorators';
+import { flatten } from 'lodash';
 import { SitemapStream } from 'sitemap';
 
-// Also make sure to implement the change in next.config.js for the sitemap redirect.
+import { sdk } from '~lib/graphqlClient';
+
+const hardcodedPaths = [];
 
 export class Sitemap {
-  private async fetchMySitemapData() {
-    const res = (await fetch('http://localhost:3000/api/test').then((res) =>
-      res.json(),
-    )) as any[];
-    return res.map((item) => ({
-      lastmod: new Date(item.publishedAt).toISOString(),
-      img: item.imageSrc,
-      url: item.href,
+  private localizeLink(url) {
+    let link = url;
+
+    if (url === '/home') {
+      link = '/';
+    }
+
+    if (link.endsWith('/')) {
+      link = link.slice(0, -1);
+    }
+
+    return link;
+  }
+
+  private localizeLinks(links) {
+    return flatten(
+      links
+        .map(({ url, translated_slugs, translated, ...rest }) => {
+          if (translated === false) {
+            return null;
+          }
+
+          return {
+            url: this.localizeLink(url),
+            ...rest,
+          };
+        })
+        .filter((u) => !!u),
+    );
+  }
+
+  private formatStorylokItems(data) {
+    return data?.items?.map(({ published_at, full_slug }) => ({
+      url: `/${full_slug}`,
+      ...(published_at
+        ? { lastmod: new Date(published_at).toISOString() }
+        : {}),
     }));
+  }
+
+  private async fetchStoryblokData() {
+    const pages = (await sdk.pageItems()).PageItems;
+
+    return [...this.formatStorylokItems(pages)];
   }
 
   @Get()
   @SetHeader('Content-Type', 'text/xml')
   @SetHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate')
   public async sitemap(@Header('host') host: string) {
-    const data = await this.fetchMySitemapData();
+    const data = this.localizeLinks([
+      ...hardcodedPaths.map((url) => ({ url })),
+      ...(await this.fetchStoryblokData()),
+    ]);
+
     const smStream = new SitemapStream({
       hostname: 'https://' + host,
     });

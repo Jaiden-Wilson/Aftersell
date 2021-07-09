@@ -1,5 +1,5 @@
 query pageItem($slug: ID!) {
-  PageItem(id: $slug) {
+  PageItem(id: $slug, resolve_relations: "price_selector.price", resolve_links: "url") {
     content {
       seo
       body

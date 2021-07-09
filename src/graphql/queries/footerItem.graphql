@@ -1,16 +1,22 @@
 query footerItem($slug: ID!) {
-  FooterItem(id: $slug) {
+  FooterItem(id: $slug, resolve_links: "url") {
     uuid
     content {
       _editable
       _uid
       button_1_label
       button_1_url {
-        cachedUrl
+        story {
+          fullSlug
+        }
+        url
       }
       button_2_label
       button_2_url {
-        cachedUrl
+        story {
+          fullSlug
+        }
+        url
       }
       component
       description

@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
-import { Button as UIButton, SystemProps } from '@storyofams/react-ui';
-import { motion } from 'framer-motion';
+import { Button as UIButton, SystemProps, system } from '@storyofams/react-ui';
+import { m } from 'framer-motion';
 
 import styled from 'styled-components';
 import { variant, ResponsiveValue } from 'styled-system';
@@ -10,27 +10,45 @@ import { Link } from '../Link';
 const variants = {
   primary: {
     bg: 'primary500',
+    borderColor: 'primary500',
     color: 'white',
 
-    '&:hover, &:focus': {},
+    '&:hover, &:focus': {
+      bg: 'black',
+      borderColor: 'black',
+      color: 'white',
+    },
   },
   outline: {
-    bg: 'primary500',
-    color: 'white',
+    borderColor: 'primary500',
+    color: 'primary500',
 
-    '&:hover, &:focus': {},
+    '&:hover, &:focus': {
+      borderColor: 'black',
+      bg: 'black',
+      color: 'white',
+    },
   },
   secondary: {
-    bg: 'primary500',
-    color: 'white',
+    bg: 'white',
+    borderColor: 'white',
+    color: 'primary500',
 
-    '&:hover, &:focus': {},
+    '&:hover, &:focus': {
+      bg: 'black',
+      borderColor: 'black',
+      color: 'white',
+    },
   },
   'secondary-outline': {
-    bg: 'primary500',
+    borderColor: 'white',
     color: 'white',
 
-    '&:hover, &:focus': {},
+    '&:hover, &:focus': {
+      bg: 'black',
+      borderColor: 'black',
+      color: 'white',
+    },
   },
 };
 
@@ -41,7 +59,7 @@ type ButtonProps = {
   children?: ReactNode;
 } & SystemProps;
 
-const Wrapper = styled(motion.div)`
+const Wrapper = styled(m.div)`
   position: relative;
   display: inline-flex;
 `;
@@ -49,15 +67,21 @@ const Wrapper = styled(motion.div)`
 const StyledButton = styled(UIButton)<ButtonProps>`
   background: none;
   position: relative;
-  padding: ${(p) => p.theme.space[2]}px ${(p) => p.theme.space[4]}px;
+  padding: ${(p) => p.theme.space[1.5]}px ${(p) => p.theme.space[4]}px;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: ${(p) => p.theme.radii.sm};
   line-height: normal;
   font-weight: bold;
-  font-size: ${(p) => p.theme.fontSizes[2]};
+  font-size: ${(p) => p.theme.fontSizes[2]}px;
   letter-spacing: -0.04em;
   cursor: pointer;
   z-index: ${(p) => p.theme.zIndices.docked};
+  transition: border 0.18s ease-in-out, color 0.18s ease-in-out,
+    background-color 0.18s ease-in-out;
 
   ${variant({ variants })}
+  ${system}
 `;
 
 export const Button = ({

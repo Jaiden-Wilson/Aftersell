@@ -3,6 +3,7 @@ import { createGlobalStyle, css } from 'styled-components';
 const themeStyles = ({ theme }) => css`
   html {
     font-size: ${theme.fontSizes.root}px;
+    letter-spacing: -0.04em;
     font-weight: ${theme.fontWeights.regular};
 
     /* outline only when the user is using tab */
@@ -30,6 +31,10 @@ const themeStyles = ({ theme }) => css`
     padding: 0;
     overflow: hidden;
     position: absolute;
+  }
+
+  [data-reach-menu] {
+    z-index: ${(p) => p.theme.zIndices.banner};
   }
 `;
 
@@ -227,7 +232,7 @@ const CSSreset = createGlobalStyle(
     }
     html {
       font-family: ${theme.fonts.body};
-      line-height: 1.5;
+      line-height: 1.4;
       -webkit-font-smoothing: antialiased;
       -webkit-text-size-adjust: 100%;
       text-rendering: optimizelegibility;
@@ -256,6 +261,7 @@ const CSSreset = createGlobalStyle(
     h6 {
       font-family: ${theme.fonts.heading};
       font-weight: 900;
+      letter-spacing: -0.04em;
     }
     a {
       color: inherit;
@@ -285,7 +291,6 @@ const CSSreset = createGlobalStyle(
     embed,
     object {
       display: block;
-      vertical-align: middle;
     }
     img,
     video {

@@ -10,20 +10,21 @@ const theme = {
     transparent: 'rgba(255, 255, 255, 0);',
     white: '#ffffff',
     grey100: '#FEFEFE',
+    grey300: '#CACBD2',
     grey500: '#76777C',
     grey600: '#65666B',
     black: '#18191F',
   },
   fontWeights: {
-    thin: 250,
-    regular: 400,
-    medium: 600,
-    bold: 700,
+    thin: 300,
+    regular: 'normal',
+    medium: 500,
+    bold: 'bold',
     extraBold: 900,
   },
   fonts: {
-    heading: `'Nuvo pro', serif`,
-    body: `'Bitter', serif`,
+    heading: `'Aeonik', serif`,
+    body: `'Aeonik', serif`,
   },
   fontSizes: {
     1.25: space['1.25'],
@@ -38,7 +39,7 @@ const theme = {
     6: space['6'],
     7: space['7'],
     8: space['8'],
-    10: space['9'],
+    9: space['9'],
     20: space['20'],
     root: space['2'],
     heading: space['7'],
@@ -46,13 +47,13 @@ const theme = {
   lineHeights: {
     normal: 1,
     medium: 1.2,
-    high: 1.5,
+    high: 1.4,
   },
   space: {
     ...space,
   },
   sizes: {
-    maxWidth: 1200,
+    maxWidth: 1296,
   },
   breakpoints: ['768px', '992px', '1024px', '1280px'] as Breakpoints,
   zIndices: {
