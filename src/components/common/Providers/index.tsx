@@ -11,14 +11,14 @@ const loadFeatures = () =>
 
 export const Providers: FC = ({ children }) => {
   return (
-    <ThemeProvider theme={theme}>
-      <StoryProvider>
-        <LazyMotion features={loadFeatures}>
-          <CursorProvider>
-            <ParallaxProvider>{children}</ParallaxProvider>
-          </CursorProvider>
-        </LazyMotion>
-      </StoryProvider>
-    </ThemeProvider>
+    <ParallaxProvider>
+      <ThemeProvider theme={theme}>
+        <StoryProvider>
+          <LazyMotion features={loadFeatures}>
+            <CursorProvider>{children}</CursorProvider>
+          </LazyMotion>
+        </StoryProvider>
+      </ThemeProvider>
+    </ParallaxProvider>
   );
 };

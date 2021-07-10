@@ -11,6 +11,7 @@ type ContainerProps = {
   childProps?: any;
   space?: number | number[];
   background?: 'none' | 'color' | 'gradient';
+  noBgAnimation?: boolean;
 } & SystemProps;
 
 export const ContainerWrapper = ({
@@ -45,6 +46,7 @@ export const Container = ({
   children,
   childProps,
   background,
+  noBgAnimation,
   ...props
 }: ContainerProps) => {
   return (
@@ -65,50 +67,86 @@ export const Container = ({
         })}
         textAlign="center"
         overflow={background === 'color' ? 'visible' : 'hidden'}
+        zIndex="docked"
         {...props}
       >
         {background === 'color' && (
-          <Fade
-            duration={1200}
-            fraction={0.3}
-            triggerOnce
-            style={{
-              position: 'absolute',
-              left: 0,
-              top: 0,
-              height: '100%',
-              width: '100%',
-            }}
-          >
-            <Parallax
-              y={['-40px', '40px']}
-              styleOuter={{
-                position: 'absolute',
-                left: 0,
-                top: 0,
-                height: '100%',
-                width: '100%',
-              }}
-              styleInner={{
-                position: 'absolute',
-                left: 0,
-                top: 0,
-                height: '100%',
-                width: '100%',
-              }}
-            >
-              <Box
-                position="absolute"
-                borderRadius={[0, 'lg']}
-                bg="primary100"
-                top={[4, 5]}
-                left={[0, 6]}
-                bottom={[4, 5]}
-                right={[0, 6]}
-                className="background"
-              />
-            </Parallax>
-          </Fade>
+          <>
+            {noBgAnimation ? (
+              <Parallax
+                y={['-40px', '40px']}
+                styleOuter={{
+                  position: 'absolute',
+                  left: 0,
+                  top: 0,
+                  height: '100%',
+                  width: '100%',
+                }}
+                styleInner={{
+                  position: 'absolute',
+                  left: 0,
+                  top: 0,
+                  height: '100%',
+                  width: '100%',
+                }}
+              >
+                <Box
+                  position="absolute"
+                  borderRadius={[0, 'lg']}
+                  bg="primary100"
+                  top={[4, 5]}
+                  left={[0, 6]}
+                  bottom={[4, 5]}
+                  right={[0, 6]}
+                  className="background"
+                  boxShadow="md"
+                />
+              </Parallax>
+            ) : (
+              <Fade
+                duration={1200}
+                fraction={0.3}
+                triggerOnce
+                style={{
+                  position: 'absolute',
+                  left: 0,
+                  top: 0,
+                  height: '100%',
+                  width: '100%',
+                }}
+              >
+                <Parallax
+                  y={['-40px', '40px']}
+                  styleOuter={{
+                    position: 'absolute',
+                    left: 0,
+                    top: 0,
+                    height: '100%',
+                    width: '100%',
+                  }}
+                  styleInner={{
+                    position: 'absolute',
+                    left: 0,
+                    top: 0,
+                    height: '100%',
+                    width: '100%',
+                  }}
+                >
+                  <Box
+                    position="absolute"
+                    borderRadius={[0, 'lg']}
+                    bg="primary100"
+                    top={[4, 5]}
+                    left={[0, 6]}
+                    bottom={[4, 5]}
+                    right={[0, 6]}
+                    className="background"
+                    boxShadow="md"
+                  />
+                </Parallax>
+              </Fade>
+            )}
+          </>
         )}
         <Stack
           space={space}

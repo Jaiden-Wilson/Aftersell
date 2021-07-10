@@ -47,7 +47,11 @@ export const Links = ({ content }) => {
 
 export const Footer: FC<FooterProps> = ({ content }) => {
   return (
-    <Box bg="white" boxShadow="0px 0px 100px rgba(0, 0, 0, 0.15)">
+    <Box
+      zIndex="docked"
+      bg="white"
+      boxShadow="0px 0px 100px rgba(0, 0, 0, 0.15)"
+    >
       <Box
         width="100%"
         maxWidth="maxWidth"

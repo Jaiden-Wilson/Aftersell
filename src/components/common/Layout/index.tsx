@@ -21,7 +21,7 @@ export const Layout: FC<LayoutProps> = ({
         content={navigation?.content}
         navBackground={navigation?.navBackground}
       />
-      {children}
+      <Box overflowY="hidden">{children}</Box>
       <Footer content={footer?.content} />
     </Box>
   );

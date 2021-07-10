@@ -144,13 +144,9 @@ export const NavDropdown = ({
           />
         </Flex>
         <Box display={isOpen ? 'block' : 'none'}>
-          {content?.list.map(({ link_url, link_label, _uid }) => (
+          {content?.list.map(({ link_url, link_label, _uid }, i) => (
             <Box mt={2} ml={2} key={_uid}>
-              <NavLink
-                key={_uid}
-                href={getLinkProps(link_url)}
-                text={link_label}
-              />
+              <NavLink href={getLinkProps(link_url)} text={link_label} />
             </Box>
           ))}
         </Box>

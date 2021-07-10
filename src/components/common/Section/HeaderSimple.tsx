@@ -27,7 +27,7 @@ export const HeaderSimple = ({
         pt: [4, 10],
         pb: [4, 10],
       }}
-      mb={content?.overlap_next_section && ['-96px', '-210px']}
+      mb={content?.overlap_next_section && ['-64px', '-160px']}
       {...props}
     >
       <Fade cascade damping={0.2} duration={640} direction="up" triggerOnce>
