@@ -9,3 +9,4 @@ export * from './common/Section';
 export * from './common/Section/Container';
 export * from './common/DynamicPage';
 export * from './common/Link';
+export * from './common/Seo';
