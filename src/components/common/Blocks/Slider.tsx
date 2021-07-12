@@ -38,36 +38,37 @@ export const Slider = ({ content, ...props }: SliderProps) => {
           disableOnInteraction: false,
         }}
       >
-        {content?.map(({ image }, idx) => {
-          const imageProps = getImageProps(image?.filename, {
-            fluid: 640,
-          });
+        {content?.[0]?.image &&
+          content?.map(({ image }, idx) => {
+            const imageProps = getImageProps(image?.filename, {
+              fluid: 640,
+            });
 
-          return (
-            <SwiperSlide key={image?._uid || idx}>
-              <Box
-                css={css({
-                  '.storyblok-image-wrapper': {
-                    height: [160, 320],
-                    width: [
-                      (160 / imageProps?.height) * imageProps?.width,
-                      (320 / imageProps?.height) * imageProps?.width,
-                    ],
-                  },
-                })}
-              >
-                <ToolkitImage
-                  alt={image?.alt || ''}
-                  src={image?.filename}
-                  fluid={640}
-                  fit="contain"
-                  key={image?._uid}
-                  showPlaceholder={false}
-                />
-              </Box>
-            </SwiperSlide>
-          );
-        })}
+            return (
+              <SwiperSlide key={image?._uid || idx}>
+                <Box
+                  css={css({
+                    '.storyblok-image-wrapper': {
+                      height: [160, 320],
+                      width: [
+                        (160 / imageProps?.height) * imageProps?.width,
+                        (320 / imageProps?.height) * imageProps?.width,
+                      ],
+                    },
+                  })}
+                >
+                  <ToolkitImage
+                    alt={image?.alt || ''}
+                    src={image?.filename}
+                    fluid={640}
+                    fit="contain"
+                    key={image?._uid}
+                    showPlaceholder={false}
+                  />
+                </Box>
+              </SwiperSlide>
+            );
+          })}
       </Swiper>
     </Box>
   );

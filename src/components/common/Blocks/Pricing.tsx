@@ -33,7 +33,7 @@ export const Pricing = ({ content, ...props }: PricingProps) => {
             justifyContent: 'center',
           }}
         >
-          {content?.map(({ content, uuid }) => (
+          {content?.map(({ content: itemContent, uuid }) => (
             <Stack
               space={2}
               boxShadow="md"
@@ -47,7 +47,7 @@ export const Pricing = ({ content, ...props }: PricingProps) => {
               maxWidth="400px"
             >
               <Heading as="h4" variant="h5" lineHeight="normal">
-                {content?.name}
+                {itemContent?.name}
               </Heading>
               <Heading
                 as="h5"
@@ -55,10 +55,10 @@ export const Pricing = ({ content, ...props }: PricingProps) => {
                 fontWeight="medium"
                 lineHeight="normal"
               >
-                {content?.price}$ / month
+                {itemContent?.price}$ / month
               </Heading>
               <Divider />
-              {content?.list?.map(({ text, _uid }) => (
+              {itemContent?.list?.map(({ text, _uid }) => (
                 <Text display="flex" as="p" key={`${_uid}-list-item`}>
                   <Icon
                     as="span"
