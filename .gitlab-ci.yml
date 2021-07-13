@@ -30,10 +30,10 @@ staging:
     - echo "Deploying app to [staging] environment"
     - VERCEL_ORG_ID=$VERCEL_ORG_ID
       VERCEL_PROJECT_ID=$STG_VERCEL_PROJECT_ID
-      vercel --token=$NOW_DEPLOY_TOKEN $NOW_BUILD_PARAMS --prod
+      vercel --token=$NOW_DEPLOY_TOKEN $NOW_BUILD_PARAMS --prod --build-env REACT_APP_COMMIT_SHA=$CI_COMMIT_SHORT_SHA
   environment:
     name: production
-    url: https://ppf.storyofams.dev
+    url: https://staging.productfinder.app
   only:
     - staging
 
@@ -43,7 +43,7 @@ production:
     - echo "Deploying app to [production] environment"
     - VERCEL_ORG_ID=$VERCEL_ORG_ID
       VERCEL_PROJECT_ID=$PROD_VERCEL_PROJECT_ID
-      vercel --token=$NOW_DEPLOY_TOKEN $NOW_BUILD_PARAMS --prod
+      vercel --token=$NOW_DEPLOY_TOKEN $NOW_BUILD_PARAMS --prod --build-env REACT_APP_COMMIT_SHA=$CI_COMMIT_SHORT_SHA
   environment:
     name: production
     url: https://productfinder.app
@@ -56,7 +56,7 @@ runLighthouse:
   script:
     - |
       npx @lhci/cli autorun \
-        --collect.url=https://ppf.storyofams.dev \
+        --collect.url=https://staging.productfinder.app \
         --collect.settings.chromeFlags="--no-sandbox" \
         --collect.settings.throttling.cpuSlowdownMultiplier=2.5 \
         --collect.settings.extraHeaders="{\"Cookie\": \"next-password-protect=$NEXT_PASSWORD_JWT\"}" \
