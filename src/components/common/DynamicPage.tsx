@@ -32,7 +32,7 @@ export const DynamicPage = ({
       >
         {story?.content?.body.map((section, i) => (
           <Section
-            sectionType={section.component}
+            sectionType={section?.component}
             content={section}
             first={!!(i === 0)}
             key={`section-${i}`}

@@ -213,14 +213,16 @@ export const Header = ({ content, first, ...props }: HeaderProps) => {
                 },
               })}
             >
-              <ToolkitImage
-                alt={content?.image_1?.alt || ''}
-                src={content?.image_1?.filename}
-                fluid={700}
-                width="100%"
-                fit="contain"
-                showPlaceholder={false}
-              />
+              {content?.image_1?.filename && (
+                <ToolkitImage
+                  alt={content?.image_1?.alt || ''}
+                  src={content?.image_1?.filename}
+                  fluid={700}
+                  width="100%"
+                  fit="contain"
+                  showPlaceholder={false}
+                />
+              )}
             </Box>
           </Parallax>
         </Fade>
@@ -270,14 +272,16 @@ export const Header = ({ content, first, ...props }: HeaderProps) => {
                 },
               })}
             >
-              <ToolkitImage
-                alt={content?.image_2?.alt || ''}
-                src={content?.image_2?.filename}
-                fluid={700}
-                width="100%"
-                fit="contain"
-                showPlaceholder={false}
-              />
+              {content?.image_2?.filename && (
+                <ToolkitImage
+                  alt={content?.image_2?.alt || ''}
+                  src={content?.image_2?.filename}
+                  fluid={700}
+                  width="100%"
+                  fit="contain"
+                  showPlaceholder={false}
+                />
+              )}
             </Box>
           </Parallax>
         </Fade>
