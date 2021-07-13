@@ -26,5 +26,11 @@ class MyApp extends App {
 }
 
 export default process.env.PASSWORD_PROTECT
-  ? withPasswordProtect(MyApp)
+  ? withPasswordProtect(MyApp, {
+      loginComponentProps: {
+        buttonBackgroundColor: '#6138FE',
+        buttonColor: '#F2FDFB',
+        logo: '/favicons/android-chrome-512x512.png',
+      },
+    })
   : MyApp;
