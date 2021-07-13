@@ -1,0 +1,20 @@
+#import "../fragments/image.graphql"
+
+query blogPostItems {
+  BlogpostItems(per_page: 100) {
+    items {
+      content {
+        title
+        thumbnail {
+          ...ImageFragment
+        }
+        read_duration
+        seo
+        _uid
+        _editable
+      }
+      slug
+      uuid
+    }
+  }
+}

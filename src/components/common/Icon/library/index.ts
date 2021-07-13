@@ -1,3 +1,4 @@
+import { default as Arrow } from './Arrow';
 import { default as Arrows } from './Arrows';
 import { default as Background } from './Background';
 import { default as Cart } from './Cart';
@@ -20,6 +21,7 @@ import { default as StoryOfAms } from './StoryOfAms';
 import { default as Tick } from './Tick';
 
 export {
+  Arrow,
   Arrows,
   Background,
   Cart,

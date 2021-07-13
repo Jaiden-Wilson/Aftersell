@@ -30,6 +30,7 @@ type SectionDynamicProps = {
     remove_rounded_border?: 'disabled' | 'top' | 'bottom';
     text_align?: 'center' | 'left';
   };
+  blogPost?: boolean;
   noBgAnimation?: boolean;
 } & SystemProps;
 
@@ -102,6 +103,7 @@ export const SectionDynamic = ({
   content,
   first,
   noBgAnimation,
+  blogPost,
   ...props
 }: SectionDynamicProps) => {
   return (
@@ -111,7 +113,8 @@ export const SectionDynamic = ({
       pt={content?.remove_padding === 'top' ? 0 : first ? [10, 20] : [4, 10]}
       pb={content?.remove_padding === 'bottom' ? 0 : [4, 10]}
       childProps={{
-        alignItems: content?.text_align === 'left' ? 'flex-start' : 'center',
+        alignItems:
+          content?.text_align === 'left' && !blogPost ? 'flex-start' : 'center',
         pt:
           content?.remove_padding === 'top' || content?.background !== 'color'
             ? 0

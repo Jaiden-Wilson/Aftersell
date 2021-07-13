@@ -5,6 +5,7 @@ query pageItem($slug: ID!) {
       body
       component
       _editable
+      _uid
     }
     uuid
   }

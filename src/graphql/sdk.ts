@@ -33,6 +33,125 @@ export type Alternate = {
   slug: Scalars['String'];
 };
 
+export type Asset = {
+  __typename?: 'Asset';
+  alt?: Maybe<Scalars['String']>;
+  copyright?: Maybe<Scalars['String']>;
+  filename: Scalars['String'];
+  focus?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+};
+
+export type BlogoverviewComponent = {
+  __typename?: 'BlogoverviewComponent';
+  _editable?: Maybe<Scalars['String']>;
+  _uid?: Maybe<Scalars['String']>;
+  component?: Maybe<Scalars['String']>;
+  featured_post?: Maybe<Story>;
+  newsletter_subtitle?: Maybe<Scalars['String']>;
+  newsletter_title?: Maybe<Scalars['String']>;
+  seo?: Maybe<Scalars['JsonScalar']>;
+  subtitle?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+};
+
+export type BlogoverviewComponentFeatured_PostArgs = {
+  fields?: Maybe<Array<Maybe<Scalars['String']>>>;
+  language?: Maybe<Scalars['String']>;
+  resolve_relations?: Maybe<Scalars['String']>;
+};
+
+export type BlogoverviewFilterQuery = {
+  title?: Maybe<FilterQueryOperations>;
+  subtitle?: Maybe<FilterQueryOperations>;
+  featured_post?: Maybe<FilterQueryOperations>;
+  newsletter_title?: Maybe<FilterQueryOperations>;
+  newsletter_subtitle?: Maybe<FilterQueryOperations>;
+};
+
+export type BlogoverviewItem = {
+  __typename?: 'BlogoverviewItem';
+  alternates?: Maybe<Array<Maybe<Alternate>>>;
+  content?: Maybe<BlogoverviewComponent>;
+  created_at?: Maybe<Scalars['String']>;
+  default_full_slug?: Maybe<Scalars['String']>;
+  first_published_at?: Maybe<Scalars['String']>;
+  full_slug?: Maybe<Scalars['String']>;
+  group_id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  is_startpage?: Maybe<Scalars['Boolean']>;
+  lang?: Maybe<Scalars['String']>;
+  meta_data?: Maybe<Scalars['JsonScalar']>;
+  name?: Maybe<Scalars['String']>;
+  parent_id?: Maybe<Scalars['Int']>;
+  path?: Maybe<Scalars['String']>;
+  position?: Maybe<Scalars['Int']>;
+  published_at?: Maybe<Scalars['String']>;
+  release_id?: Maybe<Scalars['Int']>;
+  slug?: Maybe<Scalars['String']>;
+  sort_by_date?: Maybe<Scalars['String']>;
+  tag_list?: Maybe<Array<Maybe<Scalars['String']>>>;
+  translated_slugs?: Maybe<Array<Maybe<TranslatedSlug>>>;
+  uuid?: Maybe<Scalars['String']>;
+};
+
+export type BlogoverviewItems = {
+  __typename?: 'BlogoverviewItems';
+  items?: Maybe<Array<Maybe<BlogoverviewItem>>>;
+  total?: Maybe<Scalars['Int']>;
+};
+
+export type BlogpostComponent = {
+  __typename?: 'BlogpostComponent';
+  _editable?: Maybe<Scalars['String']>;
+  _uid?: Maybe<Scalars['String']>;
+  body?: Maybe<Scalars['BlockScalar']>;
+  component?: Maybe<Scalars['String']>;
+  read_duration?: Maybe<Scalars['String']>;
+  seo?: Maybe<Scalars['JsonScalar']>;
+  thumbnail?: Maybe<Asset>;
+  title?: Maybe<Scalars['String']>;
+};
+
+export type BlogpostFilterQuery = {
+  title?: Maybe<FilterQueryOperations>;
+  read_duration?: Maybe<FilterQueryOperations>;
+};
+
+export type BlogpostItem = {
+  __typename?: 'BlogpostItem';
+  alternates?: Maybe<Array<Maybe<Alternate>>>;
+  content?: Maybe<BlogpostComponent>;
+  created_at?: Maybe<Scalars['String']>;
+  default_full_slug?: Maybe<Scalars['String']>;
+  first_published_at?: Maybe<Scalars['String']>;
+  full_slug?: Maybe<Scalars['String']>;
+  group_id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  is_startpage?: Maybe<Scalars['Boolean']>;
+  lang?: Maybe<Scalars['String']>;
+  meta_data?: Maybe<Scalars['JsonScalar']>;
+  name?: Maybe<Scalars['String']>;
+  parent_id?: Maybe<Scalars['Int']>;
+  path?: Maybe<Scalars['String']>;
+  position?: Maybe<Scalars['Int']>;
+  published_at?: Maybe<Scalars['String']>;
+  release_id?: Maybe<Scalars['Int']>;
+  slug?: Maybe<Scalars['String']>;
+  sort_by_date?: Maybe<Scalars['String']>;
+  tag_list?: Maybe<Array<Maybe<Scalars['String']>>>;
+  translated_slugs?: Maybe<Array<Maybe<TranslatedSlug>>>;
+  uuid?: Maybe<Scalars['String']>;
+};
+
+export type BlogpostItems = {
+  __typename?: 'BlogpostItems';
+  items?: Maybe<Array<Maybe<BlogpostItem>>>;
+  total?: Maybe<Scalars['Int']>;
+};
+
 export type ContentItem = {
   __typename?: 'ContentItem';
   alternates?: Maybe<Array<Maybe<Alternate>>>;
@@ -342,6 +461,10 @@ export type PriceItems = {
 
 export type QueryType = {
   __typename?: 'QueryType';
+  BlogoverviewItem?: Maybe<BlogoverviewItem>;
+  BlogoverviewItems?: Maybe<BlogoverviewItems>;
+  BlogpostItem?: Maybe<BlogpostItem>;
+  BlogpostItems?: Maybe<BlogpostItems>;
   ContentNode?: Maybe<ContentItem>;
   ContentNodes?: Maybe<ContentItems>;
   DatasourceEntries?: Maybe<DatasourceEntries>;
@@ -357,6 +480,78 @@ export type QueryType = {
   PriceItems?: Maybe<PriceItems>;
   Space?: Maybe<Space>;
   Tags?: Maybe<Tags>;
+};
+
+export type QueryTypeBlogoverviewItemArgs = {
+  id: Scalars['ID'];
+  find_by?: Maybe<Scalars['String']>;
+  from_release?: Maybe<Scalars['Int']>;
+  resolve_links?: Maybe<Scalars['String']>;
+  resolve_relations?: Maybe<Scalars['String']>;
+  language?: Maybe<Scalars['String']>;
+};
+
+export type QueryTypeBlogoverviewItemsArgs = {
+  first_published_at_gt?: Maybe<Scalars['String']>;
+  first_published_at_lt?: Maybe<Scalars['String']>;
+  published_at_gt?: Maybe<Scalars['String']>;
+  published_at_lt?: Maybe<Scalars['String']>;
+  starts_with?: Maybe<Scalars['String']>;
+  by_slugs?: Maybe<Scalars['String']>;
+  excluding_slugs?: Maybe<Scalars['String']>;
+  fallback_lang?: Maybe<Scalars['String']>;
+  by_uuids?: Maybe<Scalars['String']>;
+  by_uuids_ordered?: Maybe<Scalars['String']>;
+  excluding_ids?: Maybe<Scalars['String']>;
+  excluding_fields?: Maybe<Scalars['String']>;
+  resolve_links?: Maybe<Scalars['String']>;
+  resolve_relations?: Maybe<Scalars['String']>;
+  from_release?: Maybe<Scalars['String']>;
+  sort_by?: Maybe<Scalars['String']>;
+  search_term?: Maybe<Scalars['String']>;
+  is_startpage?: Maybe<Scalars['String']>;
+  language?: Maybe<Scalars['String']>;
+  with_tag?: Maybe<Scalars['String']>;
+  page?: Maybe<Scalars['Int']>;
+  per_page?: Maybe<Scalars['Int']>;
+  filter_query?: Maybe<Scalars['JsonScalar']>;
+  filter_query_v2?: Maybe<BlogoverviewFilterQuery>;
+};
+
+export type QueryTypeBlogpostItemArgs = {
+  id: Scalars['ID'];
+  find_by?: Maybe<Scalars['String']>;
+  from_release?: Maybe<Scalars['Int']>;
+  resolve_links?: Maybe<Scalars['String']>;
+  resolve_relations?: Maybe<Scalars['String']>;
+  language?: Maybe<Scalars['String']>;
+};
+
+export type QueryTypeBlogpostItemsArgs = {
+  first_published_at_gt?: Maybe<Scalars['String']>;
+  first_published_at_lt?: Maybe<Scalars['String']>;
+  published_at_gt?: Maybe<Scalars['String']>;
+  published_at_lt?: Maybe<Scalars['String']>;
+  starts_with?: Maybe<Scalars['String']>;
+  by_slugs?: Maybe<Scalars['String']>;
+  excluding_slugs?: Maybe<Scalars['String']>;
+  fallback_lang?: Maybe<Scalars['String']>;
+  by_uuids?: Maybe<Scalars['String']>;
+  by_uuids_ordered?: Maybe<Scalars['String']>;
+  excluding_ids?: Maybe<Scalars['String']>;
+  excluding_fields?: Maybe<Scalars['String']>;
+  resolve_links?: Maybe<Scalars['String']>;
+  resolve_relations?: Maybe<Scalars['String']>;
+  from_release?: Maybe<Scalars['String']>;
+  sort_by?: Maybe<Scalars['String']>;
+  search_term?: Maybe<Scalars['String']>;
+  is_startpage?: Maybe<Scalars['String']>;
+  language?: Maybe<Scalars['String']>;
+  with_tag?: Maybe<Scalars['String']>;
+  page?: Maybe<Scalars['Int']>;
+  per_page?: Maybe<Scalars['Int']>;
+  filter_query?: Maybe<Scalars['JsonScalar']>;
+  filter_query_v2?: Maybe<BlogpostFilterQuery>;
 };
 
 export type QueryTypeContentNodeArgs = {
@@ -610,6 +805,84 @@ export type TranslatedSlug = {
   path?: Maybe<Scalars['String']>;
 };
 
+export type ImageFragmentFragment = { __typename?: 'Asset' } & Pick<
+  Asset,
+  'alt' | 'filename'
+>;
+
+export type BlogOverviewItemQueryVariables = Exact<{
+  slug: Scalars['ID'];
+}>;
+
+export type BlogOverviewItemQuery = { __typename?: 'QueryType' } & {
+  BlogoverviewItem?: Maybe<
+    { __typename?: 'BlogoverviewItem' } & Pick<BlogoverviewItem, 'uuid'> & {
+        content?: Maybe<
+          { __typename?: 'BlogoverviewComponent' } & Pick<
+            BlogoverviewComponent,
+            | '_editable'
+            | '_uid'
+            | 'newsletter_subtitle'
+            | 'newsletter_title'
+            | 'subtitle'
+            | 'title'
+          > & {
+              featured_post?: Maybe<
+                { __typename?: 'Story' } & Pick<Story, 'content'>
+              >;
+            }
+        >;
+      }
+  >;
+};
+
+export type BlogPostItemQueryVariables = Exact<{
+  slug: Scalars['ID'];
+}>;
+
+export type BlogPostItemQuery = { __typename?: 'QueryType' } & {
+  BlogpostItem?: Maybe<
+    { __typename?: 'BlogpostItem' } & Pick<BlogpostItem, 'uuid'> & {
+        content?: Maybe<
+          { __typename?: 'BlogpostComponent' } & Pick<
+            BlogpostComponent,
+            'seo' | 'body' | '_uid' | '_editable'
+          >
+        >;
+      }
+  >;
+};
+
+export type BlogPostItemsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type BlogPostItemsQuery = { __typename?: 'QueryType' } & {
+  BlogpostItems?: Maybe<
+    { __typename?: 'BlogpostItems' } & {
+      items?: Maybe<
+        Array<
+          Maybe<
+            { __typename?: 'BlogpostItem' } & Pick<
+              BlogpostItem,
+              'slug' | 'uuid'
+            > & {
+                content?: Maybe<
+                  { __typename?: 'BlogpostComponent' } & Pick<
+                    BlogpostComponent,
+                    'title' | 'read_duration' | 'seo' | '_uid' | '_editable'
+                  > & {
+                      thumbnail?: Maybe<
+                        { __typename?: 'Asset' } & ImageFragmentFragment
+                      >;
+                    }
+                >;
+              }
+          >
+        >
+      >;
+    }
+  >;
+};
+
 export type FooterItemQueryVariables = Exact<{
   slug: Scalars['ID'];
 }>;
@@ -664,6 +937,7 @@ export type NavigationItemQuery = { __typename?: 'QueryType' } & {
             | 'links'
             | 'component'
             | '_editable'
+            | '_uid'
           > & {
               button_1_url?: Maybe<
                 { __typename?: 'Link' } & Pick<Link, 'url' | 'linktype'> & {
@@ -695,7 +969,7 @@ export type PageItemQuery = { __typename?: 'QueryType' } & {
         content?: Maybe<
           { __typename?: 'PageComponent' } & Pick<
             PageComponent,
-            'seo' | 'body' | 'component' | '_editable'
+            'seo' | 'body' | 'component' | '_editable' | '_uid'
           >
         >;
       }
@@ -718,6 +992,68 @@ export type PageItemsQuery = { __typename?: 'QueryType' } & {
   >;
 };
 
+export const ImageFragmentFragmentDoc = gql`
+  fragment ImageFragment on Asset {
+    alt
+    filename
+  }
+`;
+export const BlogOverviewItemDocument = gql`
+  query blogOverviewItem($slug: ID!) {
+    BlogoverviewItem(id: $slug, resolve_links: "url") {
+      content {
+        _editable
+        _uid
+        featured_post {
+          content
+        }
+        newsletter_subtitle
+        newsletter_title
+        subtitle
+        title
+      }
+      uuid
+    }
+  }
+`;
+export const BlogPostItemDocument = gql`
+  query blogPostItem($slug: ID!) {
+    BlogpostItem(
+      id: $slug
+      resolve_relations: "price_selector.price"
+      resolve_links: "url"
+    ) {
+      content {
+        seo
+        body
+        _uid
+        _editable
+      }
+      uuid
+    }
+  }
+`;
+export const BlogPostItemsDocument = gql`
+  query blogPostItems {
+    BlogpostItems(per_page: 100) {
+      items {
+        content {
+          title
+          thumbnail {
+            ...ImageFragment
+          }
+          read_duration
+          seo
+          _uid
+          _editable
+        }
+        slug
+        uuid
+      }
+    }
+  }
+  ${ImageFragmentFragmentDoc}
+`;
 export const FooterItemDocument = gql`
   query footerItem($slug: ID!) {
     FooterItem(id: $slug, resolve_links: "url") {
@@ -771,6 +1107,7 @@ export const NavigationItemDocument = gql`
         links
         component
         _editable
+        _uid
       }
     }
   }
@@ -787,6 +1124,7 @@ export const PageItemDocument = gql`
         body
         component
         _editable
+        _uid
       }
       uuid
     }
@@ -811,6 +1149,42 @@ export function getSdk(
   withWrapper: SdkFunctionWrapper = defaultWrapper,
 ) {
   return {
+    blogOverviewItem(
+      variables: BlogOverviewItemQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers'],
+    ): Promise<BlogOverviewItemQuery> {
+      return withWrapper(() =>
+        client.request<BlogOverviewItemQuery>(
+          BlogOverviewItemDocument,
+          variables,
+          requestHeaders,
+        ),
+      );
+    },
+    blogPostItem(
+      variables: BlogPostItemQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers'],
+    ): Promise<BlogPostItemQuery> {
+      return withWrapper(() =>
+        client.request<BlogPostItemQuery>(
+          BlogPostItemDocument,
+          variables,
+          requestHeaders,
+        ),
+      );
+    },
+    blogPostItems(
+      variables?: BlogPostItemsQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers'],
+    ): Promise<BlogPostItemsQuery> {
+      return withWrapper(() =>
+        client.request<BlogPostItemsQuery>(
+          BlogPostItemsDocument,
+          variables,
+          requestHeaders,
+        ),
+      );
+    },
     footerItem(
       variables: FooterItemQueryVariables,
       requestHeaders?: Dom.RequestInit['headers'],
