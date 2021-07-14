@@ -71,7 +71,10 @@ export const HeaderSimple = ({
       )}
       {!!content?.description?.content?.[0].content && (
         <Fade delay={128} duration={640} direction="up" triggerOnce>
-          <RichText text={content?.description} />
+          <RichText
+            textProps={{ fontSize: [3, 4], maxWidth: '800px' }}
+            text={content?.description}
+          />
         </Fade>
       )}
     </Container>

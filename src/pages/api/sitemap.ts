@@ -9,7 +9,7 @@ import { SitemapStream } from 'sitemap';
 
 import { sdk } from '~lib/graphqlClient';
 
-const hardcodedPaths = [];
+const hardcodedPaths = ['/blog'];
 
 export class Sitemap {
   private localizeLink(url) {
@@ -44,7 +44,7 @@ export class Sitemap {
   }
 
   private formatStorylokItems(data) {
-    return data?.items?.map(({ published_at, full_slug }) => ({
+    return data?.map(({ published_at, full_slug }) => ({
       url: `/${full_slug}`,
       ...(published_at
         ? { lastmod: new Date(published_at).toISOString() }
@@ -53,9 +53,10 @@ export class Sitemap {
   }
 
   private async fetchStoryblokData() {
-    const pages = (await sdk.pageItems()).PageItems;
+    const pages = (await sdk.pageItems()).PageItems?.items;
+    const blogs = (await sdk.blogPostItems()).BlogpostItems?.items;
 
-    return [...this.formatStorylokItems(pages)];
+    return this.formatStorylokItems([...pages, ...blogs]);
   }
 
   @Get()

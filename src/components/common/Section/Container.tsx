@@ -99,7 +99,7 @@ export const Container = ({
                   bottom={[4, 5]}
                   right={[0, 6]}
                   className="background"
-                  boxShadow="md"
+                  boxShadow="sm"
                 />
               </Parallax>
             ) : (

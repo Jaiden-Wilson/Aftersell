@@ -14,6 +14,7 @@ import {
   QuestionList,
   ContactForm,
   ContentImage,
+  Newsletter,
 } from '../Blocks';
 import type { Slider as SliderType } from '../Blocks/Slider';
 import { Divider } from '../Divider';
@@ -32,6 +33,7 @@ type SectionDynamicProps = {
   };
   blogPost?: boolean;
   noBgAnimation?: boolean;
+  last?: boolean;
 } & SystemProps;
 
 export interface SectionProps {
@@ -56,7 +58,27 @@ const Item = ({
 
   switch (sectionType) {
     case 'image':
-      item = <ContentImage content={content?.image} />;
+      item = (
+        <ContentImage
+          content={{
+            ...content?.image,
+            rounded_corners: content?.rounded_corners,
+          }}
+        />
+      );
+      break;
+    case 'image_dual':
+      item = <ContentImageDual content={content} />;
+      break;
+    case 'image_slider':
+      item = (
+        <Slider
+          content={{
+            images: content?.images,
+            rounded_corners: content?.rounded_corners,
+          }}
+        />
+      );
       break;
     case 'video':
       item = <Video src={content?.url} />;
@@ -70,12 +92,6 @@ const Item = ({
     case 'question_list':
       item = <QuestionList content={content?.list} />;
       break;
-    case 'image_slider':
-      item = <Slider content={content?.images} />;
-      break;
-    case 'image_dual':
-      item = <ContentImageDual content={content} />;
-      break;
     case 'button':
       item = (
         <ContentButton background={background} content={content?.button} />
@@ -86,6 +102,9 @@ const Item = ({
       break;
     case 'contact_form':
       item = <ContactForm />;
+      break;
+    case 'newsletter_component':
+      item = <Newsletter content={content?.newsletter?.content} />;
       break;
     case 'title':
       item = <Title text={content?.text} />;
@@ -107,6 +126,7 @@ export const SectionDynamic = ({
   first,
   noBgAnimation,
   blogPost,
+  last,
   ...props
 }: SectionDynamicProps) => {
   return (
@@ -143,6 +163,7 @@ export const SectionDynamic = ({
         },
       })}
       noBgAnimation={noBgAnimation}
+      mb={last && content?.background === 'none' && [4, 10]}
       {...props}
     >
       {(!!content?.title || !!content?.description?.content?.[0].content) && (
