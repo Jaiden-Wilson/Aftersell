@@ -21,6 +21,7 @@ query navigationItem($slug: ID!) {
       links
       component
       _editable
+      _uid
     }
   }
 }

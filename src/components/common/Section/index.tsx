@@ -9,6 +9,7 @@ export interface SectionProps {
   first: boolean;
   sectionType: string;
   noBgAnimation?: boolean;
+  blogPost?: boolean;
 }
 
 export const Section: React.FC<SectionProps> = ({
@@ -16,9 +17,10 @@ export const Section: React.FC<SectionProps> = ({
   first,
   sectionType,
   noBgAnimation,
+  blogPost,
 }) => {
   let section = null;
-  const shared = { content, first };
+  const shared = { content, first, blogPost };
 
   switch (sectionType) {
     case 'header_simple':
