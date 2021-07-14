@@ -5,6 +5,9 @@ query blogOverviewItem($slug: ID!) {
       _uid
       featured_post {
         content
+        firstPublishedAt
+        slug
+        id
       }
       newsletter_subtitle
       newsletter_title

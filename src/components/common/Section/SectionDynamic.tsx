@@ -87,6 +87,9 @@ const Item = ({
     case 'contact_form':
       item = <ContactForm />;
       break;
+    case 'title':
+      item = <Title text={content?.text} />;
+      break;
     case 'text':
       item = (
         <RichText

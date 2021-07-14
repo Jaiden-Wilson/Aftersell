@@ -1,7 +1,11 @@
 #import "../fragments/image.graphql"
 
-query blogPostItems {
-  BlogpostItems(per_page: 100) {
+query blogPostItems($filterId: String) {
+  BlogpostItems(
+    per_page: 100, 
+    sort_by: "first_published_at:desc", 
+    excluding_ids: $filterId
+    ) {
     items {
       content {
         title
@@ -15,6 +19,7 @@ query blogPostItems {
       }
       slug
       uuid
+      first_published_at
     }
   }
 }
