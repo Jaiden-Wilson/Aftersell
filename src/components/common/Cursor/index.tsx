@@ -17,7 +17,7 @@ const StyledCursor = styled(m.div)`
   width: 6px;
   height: 6px;
   opacity: 0;
-  border-radius: 50%;
+  border-radius: 18%;
   z-index: 999999999;
   pointer-events: none;
 
@@ -104,12 +104,17 @@ export const CursorProvider = ({ children }: ProviderProps) => {
     scale.set(1);
 
     if (backgroundReset) {
-      animation.start({ backgroundColor: '#6138FE' });
+      animation.start({
+        background: 'linear-gradient(180deg, #6138fe 0%, #f087b3 100%)',
+      });
     }
   };
 
   const background = () => {
-    animation.start({ backgroundColor: '#ffffff' });
+    animation.start({
+      background:
+        'linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.6) 100%)',
+    });
   };
 
   return (
@@ -120,7 +125,9 @@ export const CursorProvider = ({ children }: ProviderProps) => {
 
       <StyledCursor
         ref={cursorRef}
-        initial={{ backgroundColor: '#6138FE' }}
+        initial={{
+          background: 'linear-gradient(180deg, #6138fe 0%, #f087b3 100%)',
+        }}
         animate={animation}
         style={{
           opacity: opacitySpring,
