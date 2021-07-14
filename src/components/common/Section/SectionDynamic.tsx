@@ -58,7 +58,27 @@ const Item = ({
 
   switch (sectionType) {
     case 'image':
-      item = <ContentImage content={content?.image} />;
+      item = (
+        <ContentImage
+          content={{
+            ...content?.image,
+            rounded_corners: content?.rounded_corners,
+          }}
+        />
+      );
+      break;
+    case 'image_dual':
+      item = <ContentImageDual content={content} />;
+      break;
+    case 'image_slider':
+      item = (
+        <Slider
+          content={{
+            images: content?.images,
+            rounded_corners: content?.rounded_corners,
+          }}
+        />
+      );
       break;
     case 'video':
       item = <Video src={content?.url} />;
@@ -71,12 +91,6 @@ const Item = ({
       break;
     case 'question_list':
       item = <QuestionList content={content?.list} />;
-      break;
-    case 'image_slider':
-      item = <Slider content={content?.images} />;
-      break;
-    case 'image_dual':
-      item = <ContentImageDual content={content} />;
       break;
     case 'button':
       item = (

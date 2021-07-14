@@ -9,6 +9,8 @@ export const ContentImage = ({ content, ...props }) => {
       width="100%"
       maxWidth="960px"
       mx="auto"
+      boxShadow={content?.rounded_corners ? 'xs' : 'none'}
+      borderRadius={content?.rounded_corners ? 'md' : 'none'}
       css={css({
         '> div': {
           width: '100%',
@@ -16,6 +18,7 @@ export const ContentImage = ({ content, ...props }) => {
         img: {
           width: '100%',
           maxWidth: '100%',
+          borderRadius: content?.rounded_corners ? 'md' : 'none',
         },
       })}
       {...props}
