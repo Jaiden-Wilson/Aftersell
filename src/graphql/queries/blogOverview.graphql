@@ -9,8 +9,9 @@ query blogOverviewItem($slug: ID!) {
         slug
         id
       }
-      newsletter_subtitle
-      newsletter_title
+      newsletter {
+        content
+      }
       subtitle
       title
     }

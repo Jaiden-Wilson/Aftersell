@@ -15,16 +15,14 @@ interface RichTextProps extends SystemProps {
   text: any;
   markResolvers?: any;
   nodeResolvers?: any;
-  titleColor?: string;
-  paragraphColor?: string;
-  boldColor?: string;
-  linkColor?: string;
+  textProps?: any;
 }
 
 export const RichText: FC<RichTextProps> = ({
   markResolvers = {},
   nodeResolvers = {},
   text,
+  textProps,
   ...props
 }) => (
   <Flex
@@ -64,7 +62,13 @@ export const RichText: FC<RichTextProps> = ({
           </Heading>
         ),
         [NODE_PARAGRAPH]: (children) => (
-          <Text maxWidth="560px" fontSize={[2, 2.5]} lineHeight="high" pb={2}>
+          <Text
+            maxWidth="560px"
+            fontSize={[2, 2.5]}
+            lineHeight="high"
+            pb={2}
+            {...textProps}
+          >
             {children}
           </Text>
         ),

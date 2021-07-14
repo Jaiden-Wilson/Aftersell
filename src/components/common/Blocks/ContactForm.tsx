@@ -1,74 +1,8 @@
 import { useState, FC } from 'react';
 import { Box, Text } from '@storyofams/react-ui';
 import { useForm } from 'react-hook-form';
-import styled from 'styled-components';
 
-import { Button } from '~/components';
-
-const StyledForm = styled.div`
-  [submit-error] {
-    color: ${(p) => p.theme.colors.error};
-  }
-
-  [submit-success] {
-    color: ${(p) => p.theme.colors.success};
-  }
-`;
-
-const StyledInput = styled.input`
-  background-color: ${(p) => p.theme.colors.white};
-  height: 48px;
-  width: 100%;
-  font-size: 18px;
-  line-height: 150%;
-  color: ${(p) => p.theme.colors.black};
-  border: 1px solid ${(p) => p.theme.colors.grey300};
-  padding: 10px 24px;
-  border-radius: 8px;
-  appearance: none;
-  margin-top: 8px;
-  margin-bottom: 24px;
-  transition: border 0.18s ease-in-out;
-
-  ::placeholder {
-    color: ${(p) => p.theme.colors.grey500};
-  }
-
-  &:hover {
-    border: 1px solid ${(p) => p.theme.colors.grey500};
-  }
-
-  &:focus {
-    border: 1px solid ${(p) => p.theme.colors.primary500};
-  }
-`;
-
-const StyledTextarea = styled.textarea`
-  background-color: ${(p) => p.theme.colors.white};
-  width: 100%;
-  font-size: 18px;
-  line-height: 150%;
-  color: ${(p) => p.theme.colors.black};
-  border: 1px solid ${(p) => p.theme.colors.grey300};
-  padding: 10px 24px;
-  border-radius: 8px;
-  appearance: none;
-  margin-top: 8px;
-  margin-bottom: 24px;
-  transition: border 0.18s ease-in-out;
-
-  ::placeholder {
-    color: ${(p) => p.theme.colors.grey500};
-  }
-
-  &:hover {
-    border: 1px solid ${(p) => p.theme.colors.grey500};
-  }
-
-  &:focus {
-    border: 1px solid ${(p) => p.theme.colors.primary500};
-  }
-`;
+import { Button, Form, Input, Textarea } from '~/components';
 
 export const ContactForm: FC<{}> = () => {
   const [error, setError] = useState('');
@@ -114,7 +48,7 @@ export const ContactForm: FC<{}> = () => {
       maxWidth="640px"
       mx="auto"
     >
-      <StyledForm>
+      <Form space={0}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Box position="absolute" left="-5000px" aria-hidden="true">
             <input
@@ -142,7 +76,7 @@ export const ContactForm: FC<{}> = () => {
               >
                 Full name
               </Text>
-              <StyledInput
+              <Input
                 type="text"
                 id="name"
                 required
@@ -161,7 +95,7 @@ export const ContactForm: FC<{}> = () => {
               >
                 Email
               </Text>
-              <StyledInput
+              <Input
                 type="email"
                 id="email"
                 aria-label="Your email"
@@ -179,7 +113,7 @@ export const ContactForm: FC<{}> = () => {
               >
                 Webshop URL
               </Text>
-              <StyledInput
+              <Input
                 type="text"
                 id="url"
                 required
@@ -197,7 +131,7 @@ export const ContactForm: FC<{}> = () => {
               >
                 Message
               </Text>
-              <StyledTextarea
+              <Textarea
                 id="message"
                 aria-label="Your message"
                 rows={4}
@@ -211,6 +145,7 @@ export const ContactForm: FC<{}> = () => {
           <Button
             variant="primary"
             aria-label="Submit"
+            value="Submit"
             mt={1}
             input
             boxShadow="none"
@@ -228,7 +163,7 @@ export const ContactForm: FC<{}> = () => {
             <span submit-error="">{error}</span>
           </Text>
         </form>
-      </StyledForm>
+      </Form>
     </Box>
   );
 };

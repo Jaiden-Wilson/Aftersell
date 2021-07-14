@@ -58,6 +58,7 @@ type ButtonProps = {
   variant?: ResponsiveValue<keyof typeof variants>;
   children?: ReactNode;
   input?: boolean;
+  value?: string;
 } & SystemProps;
 
 const Wrapper = styled(m.div)`
@@ -90,6 +91,7 @@ export const Button = ({
   variant = 'primary',
   to,
   input,
+  value,
   ...props
 }: ButtonProps) => {
   const { zoom, reset } = useCursor();
@@ -118,7 +120,7 @@ export const Button = ({
         {...props}
         type={input && 'submit'}
         as={input ? 'input' : 'button'}
-        value={input && 'Submit'}
+        value={value}
       >
         {children}
       </StyledButton>

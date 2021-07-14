@@ -8,7 +8,14 @@ import { format } from 'date-fns';
 import { GetStaticProps } from 'next';
 import NextLink from 'next/link';
 
-import { Seo, Layout, HeaderSimple, Container, Heading } from '~components';
+import {
+  Seo,
+  Layout,
+  HeaderSimple,
+  Container,
+  Heading,
+  Newsletter,
+} from '~components';
 import { enhancedStaticProps } from '~lib';
 
 import {
@@ -45,6 +52,7 @@ const Blog = ({ blogItems, story, footer, navigation }: BlogProps) => {
             content={{
               title: story?.content?.title,
               description: story?.content?.subtitle,
+              overlap_next_section: true,
             }}
           />
         )}
@@ -61,6 +69,7 @@ const Blog = ({ blogItems, story, footer, navigation }: BlogProps) => {
                 flexDirection={['column', 'column', 'row']}
                 minHeight={[0, 0, '424px']}
                 as="a"
+                bg="white"
               >
                 <Box
                   width={['100%', '100%', '50%']}
@@ -110,10 +119,13 @@ const Blog = ({ blogItems, story, footer, navigation }: BlogProps) => {
                   )}
                   <Flex flex="1" />
                   <Text>
-                    {format(
-                      new Date(story?.content?.featured_post?.firstPublishedAt),
-                      'dd MMM',
-                    )}
+                    {story?.content?.featured_post?.firstPublishedAt &&
+                      format(
+                        new Date(
+                          story?.content?.featured_post?.firstPublishedAt,
+                        ),
+                        'dd MMM',
+                      )}
                     {story?.content?.featured_post?.content?.read_duration &&
                       ` • ${story?.content?.featured_post?.content?.read_duration} min read`}
                   </Text>
@@ -122,7 +134,13 @@ const Blog = ({ blogItems, story, footer, navigation }: BlogProps) => {
             </NextLink>
           )}
           {!!blogItems?.items && (
-            <Grid width="100%" rowSize={[1, 2]} rowGap={3} columnGap={3}>
+            <Grid
+              width="100%"
+              rowSize={[1, 2]}
+              rowGap={3}
+              columnGap={3}
+              mb={!!!story?.content?.newsletter?.content && [4, 10]}
+            >
               {blogItems?.items?.map(
                 ({ content, slug, first_published_at }) => (
                   <Box>
@@ -133,6 +151,7 @@ const Blog = ({ blogItems, story, footer, navigation }: BlogProps) => {
                         width="100%"
                         flexDirection="column"
                         as="a"
+                        bg="white"
                       >
                         <Box
                           width="100%"
@@ -169,7 +188,8 @@ const Blog = ({ blogItems, story, footer, navigation }: BlogProps) => {
                             {content?.title}
                           </Heading>
                           <Text>
-                            {format(new Date(first_published_at), 'dd MMM')}
+                            {first_published_at &&
+                              format(new Date(first_published_at), 'dd MMM')}
                             {content?.read_duration &&
                               ` • ${content?.read_duration} min read`}
                           </Text>
@@ -182,6 +202,11 @@ const Blog = ({ blogItems, story, footer, navigation }: BlogProps) => {
             </Grid>
           )}
         </Container>
+        {!!story?.content?.newsletter?.content && (
+          <Container mb={[4, 10]}>
+            <Newsletter content={story?.content?.newsletter?.content} />
+          </Container>
+        )}
       </Layout>
     </>
   );
@@ -210,6 +235,7 @@ export const getStaticProps: GetStaticProps = enhancedStaticProps(
         ).BlogpostItems;
       } catch (e) {
         notFound = true;
+        console.log(e);
       }
     } else {
       try {
@@ -220,6 +246,7 @@ export const getStaticProps: GetStaticProps = enhancedStaticProps(
         ).BlogpostItems;
       } catch (e) {
         notFound = true;
+        console.log(e);
       }
     }
 

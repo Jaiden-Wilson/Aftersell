@@ -3,6 +3,7 @@ export * from './common/Button';
 export * from './common/Cursor';
 export * from './common/Heading';
 export * from './common/Image';
+export * from './common/Input';
 export * from './common/Layout';
 export * from './common/Providers';
 export * from './common/Section';

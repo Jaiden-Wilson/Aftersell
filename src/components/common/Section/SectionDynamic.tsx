@@ -14,6 +14,7 @@ import {
   QuestionList,
   ContactForm,
   ContentImage,
+  Newsletter,
 } from '../Blocks';
 import type { Slider as SliderType } from '../Blocks/Slider';
 import { Divider } from '../Divider';
@@ -32,6 +33,7 @@ type SectionDynamicProps = {
   };
   blogPost?: boolean;
   noBgAnimation?: boolean;
+  last?: boolean;
 } & SystemProps;
 
 export interface SectionProps {
@@ -87,6 +89,9 @@ const Item = ({
     case 'contact_form':
       item = <ContactForm />;
       break;
+    case 'newsletter_component':
+      item = <Newsletter content={content?.newsletter?.content} />;
+      break;
     case 'title':
       item = <Title text={content?.text} />;
       break;
@@ -107,6 +112,7 @@ export const SectionDynamic = ({
   first,
   noBgAnimation,
   blogPost,
+  last,
   ...props
 }: SectionDynamicProps) => {
   return (
@@ -143,6 +149,7 @@ export const SectionDynamic = ({
         },
       })}
       noBgAnimation={noBgAnimation}
+      mb={last && content?.background === 'none' && [4, 10]}
       {...props}
     >
       {(!!content?.title || !!content?.description?.content?.[0].content) && (

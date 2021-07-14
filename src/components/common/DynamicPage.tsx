@@ -38,7 +38,8 @@ export const DynamicPage = ({
             <Section
               sectionType={section?.component}
               content={section}
-              first={!!(i === 0)}
+              first={i === 0}
+              last={story?.content?.body?.length - 1 === i}
               key={`section-${i}`}
               noBgAnimation={story?.content?.body[0]?.overlap_next_section}
               blogPost={blogPost}

@@ -50,8 +50,7 @@ export type BlogoverviewComponent = {
   _uid?: Maybe<Scalars['String']>;
   component?: Maybe<Scalars['String']>;
   featured_post?: Maybe<Story>;
-  newsletter_subtitle?: Maybe<Scalars['String']>;
-  newsletter_title?: Maybe<Scalars['String']>;
+  newsletter?: Maybe<Story>;
   seo?: Maybe<Scalars['JsonScalar']>;
   subtitle?: Maybe<Scalars['JsonScalar']>;
   title?: Maybe<Scalars['String']>;
@@ -63,11 +62,16 @@ export type BlogoverviewComponentFeatured_PostArgs = {
   resolve_relations?: Maybe<Scalars['String']>;
 };
 
+export type BlogoverviewComponentNewsletterArgs = {
+  fields?: Maybe<Array<Maybe<Scalars['String']>>>;
+  language?: Maybe<Scalars['String']>;
+  resolve_relations?: Maybe<Scalars['String']>;
+};
+
 export type BlogoverviewFilterQuery = {
   title?: Maybe<FilterQueryOperations>;
   featured_post?: Maybe<FilterQueryOperations>;
-  newsletter_title?: Maybe<FilterQueryOperations>;
-  newsletter_subtitle?: Maybe<FilterQueryOperations>;
+  newsletter?: Maybe<FilterQueryOperations>;
 };
 
 export type BlogoverviewItem = {
@@ -907,18 +911,16 @@ export type BlogOverviewItemQuery = { __typename?: 'QueryType' } & {
         content?: Maybe<
           { __typename?: 'BlogoverviewComponent' } & Pick<
             BlogoverviewComponent,
-            | '_editable'
-            | '_uid'
-            | 'newsletter_subtitle'
-            | 'newsletter_title'
-            | 'subtitle'
-            | 'title'
+            '_editable' | '_uid' | 'subtitle' | 'title'
           > & {
               featured_post?: Maybe<
                 { __typename?: 'Story' } & Pick<
                   Story,
                   'content' | 'firstPublishedAt' | 'slug' | 'id'
                 >
+              >;
+              newsletter?: Maybe<
+                { __typename?: 'Story' } & Pick<Story, 'content'>
               >;
             }
         >;
@@ -1102,8 +1104,9 @@ export const BlogOverviewItemDocument = gql`
           slug
           id
         }
-        newsletter_subtitle
-        newsletter_title
+        newsletter {
+          content
+        }
         subtitle
         title
       }
@@ -1115,7 +1118,7 @@ export const BlogPostItemDocument = gql`
   query blogPostItem($slug: ID!) {
     BlogpostItem(
       id: $slug
-      resolve_relations: "price_selector.price"
+      resolve_relations: "price_selector.price,newsletter_component.newsletter"
       resolve_links: "url"
     ) {
       content {
@@ -1216,7 +1219,7 @@ export const PageItemDocument = gql`
   query pageItem($slug: ID!) {
     PageItem(
       id: $slug
-      resolve_relations: "price_selector.price"
+      resolve_relations: "price_selector.price,newsletter_component.newsletter"
       resolve_links: "url"
     ) {
       content {
