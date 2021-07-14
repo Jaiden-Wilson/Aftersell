@@ -957,7 +957,7 @@ export type BlogPostItemsQuery = { __typename?: 'QueryType' } & {
           Maybe<
             { __typename?: 'BlogpostItem' } & Pick<
               BlogpostItem,
-              'slug' | 'uuid' | 'first_published_at'
+              'slug' | 'full_slug' | 'uuid' | 'first_published_at'
             > & {
                 content?: Maybe<
                   { __typename?: 'BlogpostComponent' } & Pick<
@@ -1150,6 +1150,7 @@ export const BlogPostItemsDocument = gql`
           _editable
         }
         slug
+        full_slug
         uuid
         first_published_at
       }
