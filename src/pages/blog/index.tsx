@@ -1,10 +1,20 @@
-import { Box, Text, Stack, Flex, css, Grid } from '@storyofams/react-ui';
+import { ReactNode } from 'react';
+import {
+  SystemProps,
+  Box,
+  Text,
+  Stack,
+  Flex,
+  css,
+  Grid,
+} from '@storyofams/react-ui';
 import {
   Image as ToolkitImage,
   withStory,
   WithStoryProps,
 } from '@storyofams/storyblok-toolkit';
 import { format } from 'date-fns';
+import { m } from 'framer-motion';
 import { GetStaticProps } from 'next';
 import NextLink from 'next/link';
 
@@ -30,8 +40,25 @@ export interface BlogProps extends WithStoryProps {
   blogItems?: BlogpostItems;
 }
 
+const MotionBox = m(Flex);
+
+export const ScaleOnHover = ({ children }: { children: ReactNode }) => (
+  <MotionBox
+    width="100%"
+    height="100%"
+    variants={{
+      initial: {
+        scale: 1,
+      },
+      hover: { scale: 1.06 },
+    }}
+    transition={{ ease: [0.25, 1, 0.5, 1], duration: 0.56 }}
+  >
+    {children}
+  </MotionBox>
+);
+
 const Blog = ({ blogItems, story, footer, navigation }: BlogProps) => {
-  console.log(blogItems);
   return (
     <>
       <Seo
@@ -56,27 +83,32 @@ const Blog = ({ blogItems, story, footer, navigation }: BlogProps) => {
             }}
           />
         )}
-        <Container>
+        <Container mb={[4, 10]}>
           {!!story?.content?.featured_post && (
             <NextLink
               href={`/blog/${story?.content?.featured_post?.slug}`}
               passHref
             >
-              <Flex
+              <MotionBox
                 borderRadius="md"
                 boxShadow="sm"
                 width="100%"
                 flexDirection={['column', 'column', 'row']}
                 minHeight={[0, 0, '424px']}
-                as="a"
                 bg="white"
+                overflow="hidden"
+                whileHover="hover"
+                // @ts-ignore
+                as="a"
               >
                 <Box
                   width={['100%', '100%', '50%']}
                   height={['280px', '280px', 'auto']}
+                  overflow="hidden"
                   css={css({
-                    '> div': {
+                    '> div, > div > div': {
                       height: '100%',
+                      width: '100%',
                     },
                     img: {
                       borderTopLeftRadius: ['none', 'none', 'sm'],
@@ -88,19 +120,21 @@ const Blog = ({ blogItems, story, footer, navigation }: BlogProps) => {
                     },
                   })}
                 >
-                  <ToolkitImage
-                    alt={
-                      story?.content?.featured_post?.content?.thumbnail?.alt ||
-                      ''
-                    }
-                    src={
-                      story?.content?.featured_post?.content?.thumbnail
-                        ?.filename
-                    }
-                    fluid={720}
-                    fit="cover"
-                    showPlaceholder={false}
-                  />
+                  <ScaleOnHover>
+                    <ToolkitImage
+                      alt={
+                        story?.content?.featured_post?.content?.thumbnail
+                          ?.alt || ''
+                      }
+                      src={
+                        story?.content?.featured_post?.content?.thumbnail
+                          ?.filename
+                      }
+                      fluid={800}
+                      fit="cover"
+                      showPlaceholder={false}
+                    />
+                  </ScaleOnHover>
                 </Box>
                 <Stack
                   textAlign="left"
@@ -130,8 +164,11 @@ const Blog = ({ blogItems, story, footer, navigation }: BlogProps) => {
                       ` • ${story?.content?.featured_post?.content?.read_duration} min read`}
                   </Text>
                 </Stack>
-              </Flex>
+              </MotionBox>
             </NextLink>
+          )}
+          {!!story?.content?.newsletter?.content && (
+            <Newsletter content={story?.content?.newsletter?.content} />
           )}
           {!!blogItems?.items && (
             <Grid
@@ -142,23 +179,29 @@ const Blog = ({ blogItems, story, footer, navigation }: BlogProps) => {
               mb={!!!story?.content?.newsletter?.content && [4, 10]}
             >
               {blogItems?.items?.map(
-                ({ content, slug, first_published_at }) => (
-                  <Box>
+                ({ content, slug, first_published_at, uuid }) => (
+                  <Box key={uuid}>
                     <NextLink href={`/blog/${slug}`} passHref>
-                      <Flex
+                      <MotionBox
                         borderRadius="md"
                         boxShadow="sm"
                         width="100%"
                         flexDirection="column"
-                        as="a"
                         bg="white"
+                        overflow="hidden"
+                        transition="transform 0.18s ease-in-out"
+                        whileHover="hover"
+                        // @ts-ignore
+                        as="a"
                       >
                         <Box
                           width="100%"
                           height="280px"
+                          overflow="hidden"
                           css={css({
-                            '> div': {
+                            '> div, > div > div': {
                               height: '100%',
+                              width: '100%',
                             },
                             img: {
                               borderTopLeftRadius: 'sm',
@@ -169,13 +212,15 @@ const Blog = ({ blogItems, story, footer, navigation }: BlogProps) => {
                             },
                           })}
                         >
-                          <ToolkitImage
-                            alt={content?.thumbnail?.alt || ''}
-                            src={content?.thumbnail?.filename}
-                            fluid={720}
-                            fit="cover"
-                            showPlaceholder={false}
-                          />
+                          <ScaleOnHover>
+                            <ToolkitImage
+                              alt={content?.thumbnail?.alt || ''}
+                              src={content?.thumbnail?.filename}
+                              fluid={800}
+                              fit="cover"
+                              showPlaceholder={false}
+                            />
+                          </ScaleOnHover>
                         </Box>
                         <Stack
                           textAlign="left"
@@ -194,7 +239,7 @@ const Blog = ({ blogItems, story, footer, navigation }: BlogProps) => {
                               ` • ${content?.read_duration} min read`}
                           </Text>
                         </Stack>
-                      </Flex>
+                      </MotionBox>
                     </NextLink>
                   </Box>
                 ),
@@ -202,11 +247,6 @@ const Blog = ({ blogItems, story, footer, navigation }: BlogProps) => {
             </Grid>
           )}
         </Container>
-        {!!story?.content?.newsletter?.content && (
-          <Container mb={[4, 10]}>
-            <Newsletter content={story?.content?.newsletter?.content} />
-          </Container>
-        )}
       </Layout>
     </>
   );
@@ -235,7 +275,6 @@ export const getStaticProps: GetStaticProps = enhancedStaticProps(
         ).BlogpostItems;
       } catch (e) {
         notFound = true;
-        console.log(e);
       }
     } else {
       try {
@@ -246,7 +285,6 @@ export const getStaticProps: GetStaticProps = enhancedStaticProps(
         ).BlogpostItems;
       } catch (e) {
         notFound = true;
-        console.log(e);
       }
     }
 
