@@ -10,6 +10,51 @@ const SentryWebpackPlugin = require('@sentry/webpack-plugin');
 const withSourceMaps = require('@zeit/next-source-maps');
 const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
 
+// https://securityheaders.com
+// const ContentSecurityPolicy = `
+//   default-src 'self';
+//   script-src 'self' 'unsafe-eval' 'unsafe-inline' *.youtube.com *.twitter.com cdn.usefathom.com;
+//   child-src *.youtube.com *.google.com *.twitter.com;
+//   style-src 'self' 'unsafe-inline' *.googleapis.com;
+//   img-src * blob: data:;
+//   media-src 'none';
+//   connect-src *;
+//   font-src 'self';
+// `;
+
+const securityHeaders = [
+  // https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
+  // {
+  //   key: 'Content-Security-Policy',
+  //   value: ContentSecurityPolicy.replace(/\n/g, '')
+  // },
+  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
+  {
+    key: 'Referrer-Policy',
+    value: 'no-referrer',
+  },
+  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
+  {
+    key: 'X-Frame-Options',
+    value: 'DENY',
+  },
+  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options
+  {
+    key: 'X-Content-Type-Options',
+    value: 'nosniff',
+  },
+  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
+  {
+    key: 'Strict-Transport-Security',
+    value: 'max-age=31536000; includeSubDomains; preload',
+  },
+  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy
+  // {
+  //   key: 'Permissions-Policy',
+  //   value: 'camera=(), microphone=(), geolocation=()'
+  // }
+];
+
 // Use the SentryWebpack plugin to upload the source maps during build step
 const {
   NEXT_PUBLIC_SENTRY_DSN: SENTRY_DSN,
@@ -39,6 +84,7 @@ module.exports = withBundleAnalyzer(
     future: {
       webpack5: true,
     },
+    poweredByHeader: false,
     webpack(config, options) {
       config.resolve.plugins = [
         new TsconfigPathsPlugin({ extensions: config.resolve.extensions }),
@@ -122,6 +168,18 @@ module.exports = withBundleAnalyzer(
       return config;
     },
     basePath,
+    headers() {
+      return [
+        {
+          source: '/',
+          headers: securityHeaders,
+        },
+        {
+          source: '/:path*',
+          headers: securityHeaders,
+        },
+      ];
+    },
     rewrites() {
       return [
         {
