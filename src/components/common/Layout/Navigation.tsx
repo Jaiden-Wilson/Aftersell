@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { css, Flex, Box, Stack } from '@storyofams/react-ui';
+import { useWindowSize } from 'react-use';
 
 import { getLinkProps } from '~lib';
 import { Logo } from '~components/common/Icon/library';
@@ -18,6 +19,7 @@ interface NavigationProps {
 export const Navigation = ({ content, navBackground }: NavigationProps) => {
   const [isScrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { width: windowWidth } = useWindowSize();
 
   const onScroll = () => {
     if (window.scrollY > 0) {
@@ -90,7 +92,14 @@ export const Navigation = ({ content, navBackground }: NavigationProps) => {
               <Shape
                 width={['86px', '86px', '172px']}
                 height={['24px', '24px', '48px']}
-                icon={<Logo />}
+                icon={
+                  <Logo
+                    color={
+                      !(navBackground && !isScrolled) ||
+                      (mobileMenuOpen && windowWidth < 992)
+                    }
+                  />
+                }
                 color={
                   navBackground && !isScrolled
                     ? mobileMenuOpen
