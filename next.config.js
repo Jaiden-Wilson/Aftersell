@@ -11,32 +11,29 @@ const withSourceMaps = require('@zeit/next-source-maps');
 const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
 
 // https://securityheaders.com
-// const ContentSecurityPolicy = `
-//   default-src 'self';
-//   script-src 'self' 'unsafe-eval' 'unsafe-inline' *.youtube.com *.twitter.com cdn.usefathom.com;
-//   child-src *.youtube.com *.google.com *.twitter.com;
-//   style-src 'self' 'unsafe-inline' *.googleapis.com;
-//   img-src * blob: data:;
-//   media-src 'none';
-//   connect-src *;
-//   font-src 'self';
-// `;
+const ContentSecurityPolicy = `
+  default-src 'self';
+  script-src 'self' 'unsafe-eval' 'unsafe-inline';
+  child-src *.vimeocdn.com;
+  style-src 'self' 'unsafe-inline';
+  img-src * blob: data:;
+  media-src 'none';
+  connect-src *;
+  font-src 'self';
+  frame-ancestors https://app.storyblok.com;
+  report-uri https://e0f3fef2039604aac077a3f51397a5f2.report-uri.com/r/d/csp/reportOnly;
+`;
 
 const securityHeaders = [
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
-  // {
-  //   key: 'Content-Security-Policy',
-  //   value: ContentSecurityPolicy.replace(/\n/g, '')
-  // },
+  {
+    key: 'Content-Security-Policy',
+    value: ContentSecurityPolicy.replace(/\n/g, ''),
+  },
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
   {
     key: 'Referrer-Policy',
     value: 'no-referrer',
-  },
-  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
-  {
-    key: 'X-Frame-Options',
-    value: 'DENY',
   },
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options
   {
