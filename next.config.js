@@ -12,8 +12,8 @@ const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
 
 // https://securityheaders.com
 const ContentSecurityPolicy = `
-  default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' *.vimeocdn.com;
+  default-src 'none';
+  script-src 'self' 'unsafe-eval' 'unsafe-inline' *.vimeocdn.com https://app.storyblok.com;
   child-src player.vimeo.com;
   style-src 'self' 'unsafe-inline';
   img-src * blob: data:;
