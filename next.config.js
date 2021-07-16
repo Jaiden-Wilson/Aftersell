@@ -13,14 +13,15 @@ const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
 // https://securityheaders.com
 const ContentSecurityPolicy = `
   default-src 'none';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' *.vimeocdn.com https://app.storyblok.com;
+  script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.vimeocdn.com https://app.storyblok.com;
   child-src player.vimeo.com;
-  style-src 'self' 'unsafe-inline';
+  style-src 'self' 'unsafe-inline' https://app.storyblok.com;
   img-src * blob: data:;
   media-src 'none';
   connect-src *;
   font-src 'self' data:;
   frame-ancestors https://app.storyblok.com;
+  prefetch-src 'self';
   report-uri https://e0f3fef2039604aac077a3f51397a5f2.report-uri.com/r/d/csp/reportOnly;
 `;
 
