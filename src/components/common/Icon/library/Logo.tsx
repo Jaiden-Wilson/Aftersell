@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function Logo({ color }: { color: boolean }) {
+function Logo({ color }: { color?: boolean }) {
   return (
     <svg
       width="731"
