@@ -22,6 +22,8 @@ const ContentSecurityPolicy = `
   font-src 'self' data:;
   frame-ancestors https://app.storyblok.com;
   prefetch-src 'self';
+  base-uri 'none';
+  form-action 'self';
   report-uri https://e0f3fef2039604aac077a3f51397a5f2.report-uri.com/r/d/csp/reportOnly;
 `;
 

@@ -95,6 +95,10 @@ export const Icon = ({ type, ...props }) => {
       };
   }
 
+  if (!stickerProps) {
+    return null;
+  }
+
   return <IconComponent {...stickerProps} {...props} />;
 };
 
@@ -131,7 +135,7 @@ export const List = ({ content }: ListProps) => {
               alignItems={content?.length > 3 ? 'flex-start' : 'center'}
               flexDirection={content?.length > 3 ? 'row' : 'column'}
             >
-              {icon && (
+              {!!icon && (
                 <Icon
                   type={icon}
                   fontSize={3}
