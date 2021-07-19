@@ -10,6 +10,56 @@ const SentryWebpackPlugin = require('@sentry/webpack-plugin');
 const withSourceMaps = require('@zeit/next-source-maps');
 const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
 
+// https://securityheaders.com
+const ContentSecurityPolicy = `
+  default-src 'none';
+  script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.vimeocdn.com https://app.storyblok.com;
+  child-src player.vimeo.com;
+  style-src 'self' 'unsafe-inline' https://app.storyblok.com;
+  img-src * blob: data:;
+  media-src 'none';
+  connect-src *;
+  font-src 'self' data:;
+  frame-ancestors https://app.storyblok.com;
+  prefetch-src 'self';
+  base-uri 'none';
+  form-action 'self';
+  report-uri https://e0f3fef2039604aac077a3f51397a5f2.report-uri.com/r/d/csp/reportOnly;
+`;
+
+const securityHeaders = [
+  // https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
+  {
+    key: 'Content-Security-Policy',
+    value: ContentSecurityPolicy.replace(/\n/g, ''),
+  },
+  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
+  {
+    key: 'Referrer-Policy',
+    value: 'no-referrer',
+  },
+  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options
+  {
+    key: 'X-Content-Type-Options',
+    value: 'nosniff',
+  },
+  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
+  {
+    key: 'Strict-Transport-Security',
+    value: 'max-age=31536000; includeSubDomains; preload',
+  },
+  // https://infosec.mozilla.org/guidelines/web_security#x-xss-protection
+  {
+    key: 'X-XSS-Protection',
+    value: '1; mode=block',
+  },
+  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy
+  // {
+  //   key: 'Permissions-Policy',
+  //   value: 'camera=(), microphone=(), geolocation=()'
+  // }
+];
+
 // Use the SentryWebpack plugin to upload the source maps during build step
 const {
   NEXT_PUBLIC_SENTRY_DSN: SENTRY_DSN,
@@ -39,6 +89,7 @@ module.exports = withBundleAnalyzer(
     future: {
       webpack5: true,
     },
+    poweredByHeader: false,
     webpack(config, options) {
       config.resolve.plugins = [
         new TsconfigPathsPlugin({ extensions: config.resolve.extensions }),
@@ -122,6 +173,18 @@ module.exports = withBundleAnalyzer(
       return config;
     },
     basePath,
+    headers() {
+      return [
+        {
+          source: '/',
+          headers: securityHeaders,
+        },
+        {
+          source: '/:path*',
+          headers: securityHeaders,
+        },
+      ];
+    },
     rewrites() {
       return [
         {

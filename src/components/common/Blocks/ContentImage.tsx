@@ -2,7 +2,6 @@ import { Box, css } from '@storyofams/react-ui';
 import { Image as ToolkitImage } from '@storyofams/storyblok-toolkit';
 
 export const ContentImage = ({ content, ...props }) => {
-  console.log(content);
   return (
     <Box
       position="relative"
