@@ -96,7 +96,7 @@ export const NavDropdown = ({
         mr={1}
         fontSize={[2.25, 2.25, 2]}
         lineHeight="150%"
-        letterSpacing="-0.04em"
+        letterSpacing="-0.02em"
       >
         {content?.title}
       </Text>

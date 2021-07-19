@@ -62,6 +62,7 @@ const Item = ({
         <ContentImage
           content={{
             ...content?.image,
+            size: content?.size,
             rounded_corners: content?.rounded_corners,
           }}
         />
@@ -153,13 +154,13 @@ export const SectionDynamic = ({
           top: content?.remove_rounded_border === 'top' ? 0 : [4, 10],
           bottom: content?.remove_rounded_border === 'bottom' ? 0 : [4, 10],
           borderTopLeftRadius:
-            content?.remove_rounded_border === 'top' ? 0 : [0, 'lg'],
+            content?.remove_rounded_border === 'top' ? 0 : [0, 0, 'lg'],
           borderTopRightRadius:
-            content?.remove_rounded_border === 'top' ? 0 : [0, 'lg'],
+            content?.remove_rounded_border === 'top' ? 0 : [0, 0, 'lg'],
           borderBottomLeftRadius:
-            content?.remove_rounded_border === 'bottom' ? 0 : [0, 'lg'],
+            content?.remove_rounded_border === 'bottom' ? 0 : [0, 0, 'lg'],
           borderBottomRightRadius:
-            content?.remove_rounded_border === 'bottom' ? 0 : [0, 'lg'],
+            content?.remove_rounded_border === 'bottom' ? 0 : [0, 0, 'lg'],
         },
       })}
       noBgAnimation={noBgAnimation}

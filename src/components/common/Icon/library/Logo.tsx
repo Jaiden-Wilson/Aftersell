@@ -18,8 +18,8 @@ function Logo({ color }: { color?: boolean }) {
           y2="188"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#6138FE" />
-          <stop offset="1" stop-color="#F087B3" />
+          <stop stopColor="#6138FE" />
+          <stop offset="1" stopColor="#F087B3" />
         </linearGradient>
       </defs>
 
@@ -41,7 +41,7 @@ function Logo({ color }: { color?: boolean }) {
       />
       <path
         stroke={color ? '#CACBD2' : 'currentColor'}
-        stroke-width="7"
+        strokeWidth="7"
         d="M323.83 0v239.87"
       />
     </svg>
