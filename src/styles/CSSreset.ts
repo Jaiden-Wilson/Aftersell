@@ -3,7 +3,7 @@ import { createGlobalStyle, css } from 'styled-components';
 const themeStyles = ({ theme }) => css`
   html {
     font-size: ${theme.fontSizes.root}px;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.02em;
     font-weight: ${theme.fontWeights.regular};
 
     /* outline only when the user is using tab */
@@ -261,7 +261,7 @@ const CSSreset = createGlobalStyle(
     h6 {
       font-family: ${theme.fonts.heading};
       font-weight: 900;
-      letter-spacing: -0.04em;
+      letter-spacing: -0.02em;
     }
     a {
       color: inherit;

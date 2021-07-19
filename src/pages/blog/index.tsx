@@ -227,9 +227,13 @@ const Blog = ({ blogItems, story, footer, navigation }: BlogProps) => {
                           width="100%"
                           flexDirection="column"
                           space={2}
-                          p={[3, 4]}
+                          p={[3, 3, 4]}
                         >
-                          <Heading variant="h3" as="h3">
+                          <Heading
+                            fontSize={[3, 3, '36px']}
+                            variant="h3"
+                            as="h3"
+                          >
                             {content?.title}
                           </Heading>
                           <Text>

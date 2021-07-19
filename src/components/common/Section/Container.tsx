@@ -55,7 +55,7 @@ export const Container = ({
         position="relative"
         pt={background !== 'none' && [4, 10]}
         pb={background !== 'none' && [4, 10]}
-        px={[0, 6]}
+        px={[0, 0, 6]}
         css={css({
           background:
             background === 'gradient' &&
@@ -92,14 +92,14 @@ export const Container = ({
               >
                 <Box
                   position="absolute"
-                  borderRadius={[0, 'lg']}
+                  borderRadius={['none', 'none', 'lg']}
                   bg="primary100"
                   top={[4, 5]}
-                  left={[0, 6]}
+                  left={[0, 0, 6]}
                   bottom={[4, 5]}
-                  right={[0, 6]}
+                  right={[0, 0, 6]}
                   className="background"
-                  boxShadow="sm"
+                  boxShadow={['none', 'none', 'sm']}
                 />
               </Parallax>
             ) : (
@@ -134,14 +134,14 @@ export const Container = ({
                 >
                   <Box
                     position="absolute"
-                    borderRadius={[0, 'lg']}
+                    borderRadius={['none', 'none', 'lg']}
                     bg="primary100"
                     top={[4, 5]}
-                    left={[0, 6]}
+                    left={[0, 0, 6]}
                     bottom={[4, 5]}
-                    right={[0, 6]}
+                    right={[0, 0, 6]}
                     className="background"
-                    boxShadow="md"
+                    boxShadow={['none', 'none', 'sm']}
                   />
                 </Parallax>
               </Fade>
@@ -155,8 +155,8 @@ export const Container = ({
           alignItems="center"
           width="100%"
           maxWidth="maxWidth"
-          pt={background === 'color' && [4, 10]}
-          pb={background === 'color' && [4, 10]}
+          pt={background === 'color' && [4, 4, 10]}
+          pb={background === 'color' && [4, 4, 10]}
           px={[2, 6]}
           margin="0 auto"
           zIndex="docked"

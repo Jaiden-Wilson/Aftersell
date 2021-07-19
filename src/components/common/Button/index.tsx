@@ -76,7 +76,7 @@ const StyledButton = styled(UIButton)<ButtonProps>`
   line-height: normal;
   font-weight: bold;
   font-size: ${(p) => p.theme.fontSizes[2]}px;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
   cursor: pointer;
   z-index: ${(p) => p.theme.zIndices.docked};
   transition: border 0.18s ease-in-out, color 0.18s ease-in-out,

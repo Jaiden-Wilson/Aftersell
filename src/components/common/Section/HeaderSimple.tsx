@@ -31,8 +31,8 @@ export const HeaderSimple = ({
       childProps={{
         pt: [4, blogPost && !content?.overlap_next_section ? 6 : 10],
         pb: [4, blogPost && !content?.overlap_next_section ? 0 : 10],
-        alignItems: blogPost ? 'flex-start' : 'center',
-        textAlign: blogPost ? 'left' : 'center',
+        alignItems: 'center',
+        textAlign: 'center',
       }}
       mb={content?.overlap_next_section && ['-64px', '-160px']}
       space={blogPost ? 2 : [3, 5]}
@@ -72,7 +72,7 @@ export const HeaderSimple = ({
       {!!content?.description?.content?.[0].content && (
         <Fade delay={128} duration={640} direction="up" triggerOnce>
           <RichText
-            textProps={{ fontSize: [3, 4], maxWidth: '800px' }}
+            textProps={{ fontSize: 3, maxWidth: '800px' }}
             text={content?.description}
           />
         </Fade>

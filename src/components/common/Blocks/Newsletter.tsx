@@ -52,7 +52,7 @@ export const Newsletter = ({ content, ...props }: NewsletterProps) => {
         </Heading>
       )}
       {!!content?.subtitle && (
-        <Text fontSize={[3, 4]} maxWidth="800px">
+        <Text fontSize={3} maxWidth="640px">
           {content?.subtitle}
         </Text>
       )}

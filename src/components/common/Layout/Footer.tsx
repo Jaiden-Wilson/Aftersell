@@ -109,22 +109,13 @@ export const Footer: FC<FooterProps> = ({ content }) => {
               {content?.description}
             </Text>
             {content?.shopify_plus_logo && (
-              <>
-                <Shape
-                  mt={[2, 4]}
-                  color="grey500"
-                  width={'110px'}
-                  height={'31px'}
-                  icon={<Shopify />}
-                />
-                <Shape
-                  mt={[2, 2]}
-                  color="grey500"
-                  width={'150px'}
-                  height={'31px'}
-                  icon={<ShopifyPlus />}
-                />
-              </>
+              <Shape
+                mt={[2, 4]}
+                color="grey500"
+                width={'200px'}
+                height={'59px'}
+                icon={<Shopify />}
+              />
             )}
           </Box>
           <Flex
