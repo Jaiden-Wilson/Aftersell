@@ -8,7 +8,6 @@ const defaultSeo = {
     site_name: siteTitle,
   },
   twitter: {
-    handle: '@perfectproductfinder',
     cardType: 'summary_large_image',
   },
   titleTemplate: `%s`,

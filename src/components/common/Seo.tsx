@@ -1,4 +1,5 @@
 import { NextSeo, NextSeoProps } from 'next-seo';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { getDescription } from '~lib';
@@ -78,6 +79,32 @@ export const Seo = ({
         }}
         {...props}
       />
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'http://schema.org',
+              '@id': 'https://productfinder.app/#website',
+              '@type': 'WebSite',
+              url: 'https://productfinder.app/',
+              name: 'Perfect Product Finder',
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'http://schema.org',
+              '@id': 'https://productfinder.app/#webpage',
+              '@type': 'WebPage',
+              url: 'https://productfinder.app/',
+              name: 'Perfect Product Finder',
+            }),
+          }}
+        />
+      </Head>
     </>
   );
 };
