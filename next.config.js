@@ -82,9 +82,7 @@ module.exports = withBundleAnalyzer(
       // outside of Vercel
       NEXT_PUBLIC_COMMIT_SHA: CI_COMMIT_SHA,
       ENVIRONMENT: process.env.ENVIRONMENT,
-      PASSWORD_PROTECT:
-        process.env.ENVIRONMENT === 'staging' ||
-        process.env.ENVIRONMENT === 'production',
+      PASSWORD_PROTECT: process.env.ENVIRONMENT === 'staging',
     },
     future: {
       webpack5: true,
