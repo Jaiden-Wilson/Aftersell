@@ -38,10 +38,15 @@ export const RichText: FC<RichTextProps> = ({
           </Text>
         ),
         [MARK_LINK]: (children, props) => {
-          const { href } = props;
+          const { href, linktype } = props;
+
           return (
             <Text color="primary500" textDecoration="underline" as="span">
-              <a href={href} target="_blank" rel="noopener noreferrer">
+              <a
+                href={`${linktype === 'email' ? 'mailto:' : ''}${href}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {children}
               </a>
             </Text>
