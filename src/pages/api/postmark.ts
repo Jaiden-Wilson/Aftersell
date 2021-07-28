@@ -46,8 +46,8 @@ class Postmark {
 
     try {
       await postmark.sendEmailWithTemplate({
-        From: 'ppf@storyofams.com',
-        To: 'ppf@storyofams.com',
+        From: 'hello@productfinder.app',
+        To: 'hello@productfinder.app',
         TemplateAlias: 'contact-form',
         TemplateModel: templateData,
       });
