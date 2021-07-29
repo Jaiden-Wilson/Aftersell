@@ -46,13 +46,14 @@ class Postmark {
 
     try {
       await postmark.sendEmailWithTemplate({
-        From: 'hello@productfinder.app',
+        From: 'ppf@storyofams.com',
         To: 'hello@productfinder.app',
         TemplateAlias: 'contact-form',
         TemplateModel: templateData,
       });
       return { message: 'Your message has been sent!' };
     } catch (err) {
+      console.log(err);
       throw new HttpException(500, 'Failed to send email.');
     }
   }

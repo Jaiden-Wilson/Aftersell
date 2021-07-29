@@ -26,7 +26,7 @@ export const ContactForm: FC<{}> = () => {
         headers: { 'Content-Type': 'application/json' },
       });
 
-      if (res.status === 204) {
+      if (res.status === 200) {
         setSuccess('Your message has been sent!');
         reset();
       } else {
@@ -145,7 +145,7 @@ export const ContactForm: FC<{}> = () => {
           <Button
             variant="primary"
             aria-label="Submit"
-            value="Submit"
+            value={isSubmitting ? 'Submitting' : 'Submit'}
             mt={1}
             input
             boxShadow="none"
