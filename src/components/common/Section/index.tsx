@@ -1,22 +1,29 @@
+import { SystemProps } from '@storyofams/react-ui';
 import SbEditable from 'storyblok-react';
 
 import { Header } from './Header';
 import { HeaderSimple } from './HeaderSimple';
 import { SectionDynamic } from './SectionDynamic';
 
-export interface SectionProps {
+type SectionProps = {
   content: any;
   first: boolean;
+  last: boolean;
   sectionType: string;
-}
+  noBgAnimation?: boolean;
+  blogPost?: boolean;
+} & SystemProps;
 
-export const Section: React.FC<SectionProps> = ({
+export const Section = ({
   content,
   first,
   sectionType,
-}) => {
+  noBgAnimation,
+  blogPost,
+  last,
+}: SectionProps) => {
   let section = null;
-  const shared = { content, first };
+  const shared = { content, first, blogPost };
 
   switch (sectionType) {
     case 'header_simple':
@@ -26,7 +33,9 @@ export const Section: React.FC<SectionProps> = ({
       section = <Header {...shared} />;
       break;
     case 'section':
-      section = <SectionDynamic {...shared} />;
+      section = (
+        <SectionDynamic last={last} noBgAnimation={noBgAnimation} {...shared} />
+      );
   }
 
   return (

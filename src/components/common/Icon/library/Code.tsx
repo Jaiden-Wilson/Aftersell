@@ -9,7 +9,13 @@ function Code() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" stroke="currentColor" />
+      <path
+        d="M16 18l6-6-6-6M8 6l-6 6 6 6"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
     </svg>
   );
 }

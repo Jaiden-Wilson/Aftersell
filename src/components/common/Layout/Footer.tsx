@@ -2,12 +2,7 @@ import { FC } from 'react';
 import { Box, Text, Stack, Flex, css } from '@storyofams/react-ui';
 
 import { getLinkProps } from '~lib';
-import {
-  Logo,
-  Shopify,
-  ShopifyPlus,
-  StoryOfAms,
-} from '~components/common/Icon/library';
+import { Logo, Shopify, StoryOfAms } from '~components/common/Icon/library';
 
 import { Button } from '../Button';
 import { Divider } from '../Divider';
@@ -47,7 +42,11 @@ export const Links = ({ content }) => {
 
 export const Footer: FC<FooterProps> = ({ content }) => {
   return (
-    <Box bg="white" boxShadow="0px 0px 100px rgba(0, 0, 0, 0.15)">
+    <Box
+      zIndex="docked"
+      bg="white"
+      boxShadow="0px 0px 100px rgba(0, 0, 0, 0.15)"
+    >
       <Box
         width="100%"
         maxWidth="maxWidth"
@@ -105,22 +104,16 @@ export const Footer: FC<FooterProps> = ({ content }) => {
               {content?.description}
             </Text>
             {content?.shopify_plus_logo && (
-              <>
+              <Link href="https://apps.shopify.com/">
                 <Shape
+                  as="a"
                   mt={[2, 4]}
                   color="grey500"
-                  width={'110px'}
-                  height={'31px'}
+                  width={'200px'}
+                  height={'59px'}
                   icon={<Shopify />}
                 />
-                <Shape
-                  mt={[2, 2]}
-                  color="grey500"
-                  width={'150px'}
-                  height={'31px'}
-                  icon={<ShopifyPlus />}
-                />
-              </>
+              </Link>
             )}
           </Box>
           <Flex

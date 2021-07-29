@@ -7,8 +7,10 @@ export const ContentImage = ({ content, ...props }) => {
       position="relative"
       overflow="hidden"
       width="100%"
-      maxWidth="960px"
+      maxWidth={content?.size ? '100%' : '960px'}
       mx="auto"
+      boxShadow={content?.rounded_corners ? 'xs' : 'none'}
+      borderRadius={content?.rounded_corners ? 'md' : 'none'}
       css={css({
         '> div': {
           width: '100%',
@@ -16,6 +18,7 @@ export const ContentImage = ({ content, ...props }) => {
         img: {
           width: '100%',
           maxWidth: '100%',
+          borderRadius: content?.rounded_corners ? 'md' : 'none',
         },
       })}
       {...props}
@@ -23,7 +26,7 @@ export const ContentImage = ({ content, ...props }) => {
       <ToolkitImage
         alt={content?.alt || ''}
         src={content?.filename}
-        fluid={1400}
+        fluid={content?.size ? 1600 : 1200}
         fit="contain"
         showPlaceholder={false}
       />

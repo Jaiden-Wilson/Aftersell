@@ -27,7 +27,7 @@ export const Slider = ({ content, ...props }: SliderProps) => {
       {...props}
     >
       <Swiper
-        spaceBetween={0}
+        spaceBetween={32}
         slidesPerView="auto"
         loop
         centeredSlides
@@ -38,36 +38,42 @@ export const Slider = ({ content, ...props }: SliderProps) => {
           disableOnInteraction: false,
         }}
       >
-        {content?.map(({ image }, idx) => {
-          const imageProps = getImageProps(image?.filename, {
-            fluid: 640,
-          });
+        {content?.images?.[0]?.image &&
+          content?.images?.map(({ image }, idx) => {
+            const imageProps = getImageProps(image?.filename, {
+              fluid: 640,
+            });
 
-          return (
-            <SwiperSlide key={image?._uid || idx}>
-              <Box
-                css={css({
-                  '.storyblok-image-wrapper': {
-                    height: [160, 320],
-                    width: [
-                      (160 / imageProps?.height) * imageProps?.width,
-                      (320 / imageProps?.height) * imageProps?.width,
-                    ],
-                  },
-                })}
-              >
-                <ToolkitImage
-                  alt={image?.alt || ''}
-                  src={image?.filename}
-                  fluid={640}
-                  fit="contain"
-                  key={image?._uid}
-                  showPlaceholder={false}
-                />
-              </Box>
-            </SwiperSlide>
-          );
-        })}
+            return (
+              <SwiperSlide key={image?._uid || idx}>
+                <Box
+                  css={css({
+                    '.storyblok-image-wrapper': {
+                      boxShadow: content?.rounded_corners ? 'xs' : 'none',
+                      borderRadius: content?.rounded_corners ? 'md' : 'none',
+                      height: [160, 320],
+                      width: [
+                        (160 / imageProps?.height) * imageProps?.width,
+                        (320 / imageProps?.height) * imageProps?.width,
+                      ],
+                    },
+                    img: {
+                      borderRadius: content?.rounded_corners ? 'md' : 'none',
+                    },
+                  })}
+                >
+                  <ToolkitImage
+                    alt={image?.alt || ''}
+                    src={image?.filename}
+                    fluid={640}
+                    fit="contain"
+                    key={image?._uid}
+                    showPlaceholder={false}
+                  />
+                </Box>
+              </SwiperSlide>
+            );
+          })}
       </Swiper>
     </Box>
   );

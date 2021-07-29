@@ -197,8 +197,8 @@ export const Header = ({ content, first, ...props }: HeaderProps) => {
             <Box
               position="absolute"
               right={['-48px', '-48px', '-16%']}
-              top={['6%', '6%', '-10%']}
-              width={['60%', '72%', '100%']}
+              top={['-20%', '-12%', '-10%']}
+              width={['100%', '100%', '100%']}
               maxWidth="560px"
               css={css({
                 '> div': {
@@ -213,14 +213,16 @@ export const Header = ({ content, first, ...props }: HeaderProps) => {
                 },
               })}
             >
-              <ToolkitImage
-                alt={content?.image_1?.alt || ''}
-                src={content?.image_1?.filename}
-                fluid={700}
-                width="100%"
-                fit="contain"
-                showPlaceholder={false}
-              />
+              {content?.image_1?.filename && (
+                <ToolkitImage
+                  alt={content?.image_1?.alt || ''}
+                  src={content?.image_1?.filename}
+                  fluid={700}
+                  width="100%"
+                  fit="contain"
+                  showPlaceholder={false}
+                />
+              )}
             </Box>
           </Parallax>
         </Fade>
@@ -257,8 +259,8 @@ export const Header = ({ content, first, ...props }: HeaderProps) => {
             <Box
               position="absolute"
               left={['-48px', '-48px', '-2%']}
-              bottom={[0, 0, '-16%']}
-              width={['60%', '72%', '100%']}
+              bottom={['-6%', '-6%', '-16%']}
+              width={['80%', '80%', '100%']}
               maxWidth="560px"
               css={css({
                 '.storyblok-image-wrapper': {
@@ -270,14 +272,16 @@ export const Header = ({ content, first, ...props }: HeaderProps) => {
                 },
               })}
             >
-              <ToolkitImage
-                alt={content?.image_2?.alt || ''}
-                src={content?.image_2?.filename}
-                fluid={700}
-                width="100%"
-                fit="contain"
-                showPlaceholder={false}
-              />
+              {content?.image_2?.filename && (
+                <ToolkitImage
+                  alt={content?.image_2?.alt || ''}
+                  src={content?.image_2?.filename}
+                  fluid={700}
+                  width="100%"
+                  fit="contain"
+                  showPlaceholder={false}
+                />
+              )}
             </Box>
           </Parallax>
         </Fade>

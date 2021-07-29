@@ -3,8 +3,6 @@ import dynamic from 'next/dynamic';
 import { Fade } from 'react-awesome-reveal';
 import SbEditable from 'storyblok-react';
 
-import { ContentImage } from '~components';
-
 import {
   List,
   ContentButton,
@@ -14,6 +12,9 @@ import {
   RichText,
   ContentImageDual,
   QuestionList,
+  ContactForm,
+  ContentImage,
+  Newsletter,
 } from '../Blocks';
 import type { Slider as SliderType } from '../Blocks/Slider';
 import { Divider } from '../Divider';
@@ -30,6 +31,9 @@ type SectionDynamicProps = {
     remove_rounded_border?: 'disabled' | 'top' | 'bottom';
     text_align?: 'center' | 'left';
   };
+  blogPost?: boolean;
+  noBgAnimation?: boolean;
+  last?: boolean;
 } & SystemProps;
 
 export interface SectionProps {
@@ -54,7 +58,28 @@ const Item = ({
 
   switch (sectionType) {
     case 'image':
-      item = <ContentImage content={content?.image} />;
+      item = (
+        <ContentImage
+          content={{
+            ...content?.image,
+            size: content?.size,
+            rounded_corners: content?.rounded_corners,
+          }}
+        />
+      );
+      break;
+    case 'image_dual':
+      item = <ContentImageDual content={content} />;
+      break;
+    case 'image_slider':
+      item = (
+        <Slider
+          content={{
+            images: content?.images,
+            rounded_corners: content?.rounded_corners,
+          }}
+        />
+      );
       break;
     case 'video':
       item = <Video src={content?.url} />;
@@ -68,12 +93,6 @@ const Item = ({
     case 'question_list':
       item = <QuestionList content={content?.list} />;
       break;
-    case 'image_slider':
-      item = <Slider content={content?.images} />;
-      break;
-    case 'image_dual':
-      item = <ContentImageDual content={content} />;
-      break;
     case 'button':
       item = (
         <ContentButton background={background} content={content?.button} />
@@ -81,6 +100,15 @@ const Item = ({
       break;
     case 'list':
       item = <List content={content?.list} />;
+      break;
+    case 'contact_form':
+      item = <ContactForm />;
+      break;
+    case 'newsletter_component':
+      item = <Newsletter content={content?.newsletter?.content} />;
+      break;
+    case 'title':
+      item = <Title text={content?.text} />;
       break;
     case 'text':
       item = (
@@ -97,6 +125,9 @@ const Item = ({
 export const SectionDynamic = ({
   content,
   first,
+  noBgAnimation,
+  blogPost,
+  last,
   ...props
 }: SectionDynamicProps) => {
   return (
@@ -106,7 +137,8 @@ export const SectionDynamic = ({
       pt={content?.remove_padding === 'top' ? 0 : first ? [10, 20] : [4, 10]}
       pb={content?.remove_padding === 'bottom' ? 0 : [4, 10]}
       childProps={{
-        alignItems: content?.text_align === 'left' ? 'flex-start' : 'center',
+        alignItems:
+          content?.text_align === 'left' && !blogPost ? 'flex-start' : 'center',
         pt:
           content?.remove_padding === 'top' || content?.background !== 'color'
             ? 0
@@ -122,68 +154,74 @@ export const SectionDynamic = ({
           top: content?.remove_rounded_border === 'top' ? 0 : [4, 10],
           bottom: content?.remove_rounded_border === 'bottom' ? 0 : [4, 10],
           borderTopLeftRadius:
-            content?.remove_rounded_border === 'top' ? 0 : [0, 'lg'],
+            content?.remove_rounded_border === 'top' ? 0 : [0, 0, 'lg'],
           borderTopRightRadius:
-            content?.remove_rounded_border === 'top' ? 0 : [0, 'lg'],
+            content?.remove_rounded_border === 'top' ? 0 : [0, 0, 'lg'],
           borderBottomLeftRadius:
-            content?.remove_rounded_border === 'bottom' ? 0 : [0, 'lg'],
+            content?.remove_rounded_border === 'bottom' ? 0 : [0, 0, 'lg'],
           borderBottomRightRadius:
-            content?.remove_rounded_border === 'bottom' ? 0 : [0, 'lg'],
+            content?.remove_rounded_border === 'bottom' ? 0 : [0, 0, 'lg'],
         },
       })}
+      noBgAnimation={noBgAnimation}
+      mb={last && content?.background === 'none' && [4, 10]}
       {...props}
     >
-      <Stack
-        flexDirection={
-          content?.text_align === 'left' ? ['column', 'row'] : 'column'
-        }
-        alignItems={content?.text_align === 'left' ? 'space-between' : 'center'}
-        space={[3, 5]}
-        width="100%"
-      >
-        {!!content?.title && (
-          <Box
-            width={
-              content?.text_align === 'left' &&
-              !!content?.description?.content?.[0].content
-                ? ['100%', '40%']
-                : 'auto'
-            }
-          >
-            <Fade
-              delay={content?.background === 'color' ? 480 : 0}
-              duration={640}
-              fraction={0.3}
-              direction="up"
-              triggerOnce
-              style={{ width: '100%' }}
+      {(!!content?.title || !!content?.description?.content?.[0].content) && (
+        <Stack
+          flexDirection={
+            content?.text_align === 'left' ? ['column', 'row'] : 'column'
+          }
+          alignItems={
+            content?.text_align === 'left' ? 'space-between' : 'center'
+          }
+          space={[3, 5]}
+          width="100%"
+        >
+          {!!content?.title && (
+            <Box
+              width={
+                content?.text_align === 'left' &&
+                !!content?.description?.content?.[0].content
+                  ? ['100%', '40%']
+                  : 'auto'
+              }
             >
-              <Title text={content?.title} h1={first} />
-            </Fade>
-          </Box>
-        )}
-        {!!content?.description?.content?.[0].content && (
-          <Box
-            width={
-              content?.text_align === 'left' &&
-              !!content?.description?.content?.[0].content
-                ? ['100%', '60%']
-                : 'auto'
-            }
-          >
-            <Fade
-              delay={content?.background === 'color' ? 480 : 0}
-              duration={640}
-              fraction={0.3}
-              direction="up"
-              triggerOnce
-              style={{ width: '100%' }}
+              <Fade
+                delay={content?.background === 'color' ? 480 : 0}
+                duration={640}
+                fraction={0.3}
+                direction="up"
+                triggerOnce
+                style={{ width: '100%' }}
+              >
+                <Title text={content?.title} h1={first} />
+              </Fade>
+            </Box>
+          )}
+          {!!content?.description?.content?.[0].content && (
+            <Box
+              width={
+                content?.text_align === 'left' &&
+                !!content?.description?.content?.[0].content
+                  ? ['100%', '60%']
+                  : 'auto'
+              }
             >
-              <RichText text={content?.description} />
-            </Fade>
-          </Box>
-        )}
-      </Stack>
+              <Fade
+                delay={content?.background === 'color' ? 480 : 0}
+                duration={640}
+                fraction={0.3}
+                direction="up"
+                triggerOnce
+                style={{ width: '100%' }}
+              >
+                <RichText text={content?.description} />
+              </Fade>
+            </Box>
+          )}
+        </Stack>
+      )}
       {content?.content?.map((section, i) => (
         <SbEditable content={section} key={`section-${i}`}>
           <>

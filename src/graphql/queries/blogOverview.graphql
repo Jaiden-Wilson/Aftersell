@@ -1,0 +1,20 @@
+query blogOverviewItem($slug: ID!) {
+  BlogoverviewItem(id: $slug,  resolve_links: "url") {
+    content {
+      _editable
+      _uid
+      featured_post {
+        content
+        firstPublishedAt
+        slug
+        id
+      }
+      newsletter {
+        content
+      }
+      subtitle
+      title
+    }
+    uuid
+  }
+}

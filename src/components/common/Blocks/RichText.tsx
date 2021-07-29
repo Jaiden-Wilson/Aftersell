@@ -15,21 +15,19 @@ interface RichTextProps extends SystemProps {
   text: any;
   markResolvers?: any;
   nodeResolvers?: any;
-  titleColor?: string;
-  paragraphColor?: string;
-  boldColor?: string;
-  linkColor?: string;
+  textProps?: any;
 }
 
 export const RichText: FC<RichTextProps> = ({
   markResolvers = {},
   nodeResolvers = {},
   text,
+  textProps,
   ...props
 }) => (
   <Flex
     flexDirection="column"
-    css={css({ '> div:last-child': { pb: 0 }, '.small': { fontSize: 2 } })}
+    css={css({ '> *:last-child': { pb: 0 }, '.small': { fontSize: 2 } })}
     {...props}
   >
     {render(text, {
@@ -40,10 +38,15 @@ export const RichText: FC<RichTextProps> = ({
           </Text>
         ),
         [MARK_LINK]: (children, props) => {
-          const { href } = props;
+          const { href, linktype } = props;
+
           return (
             <Text color="primary500" textDecoration="underline" as="span">
-              <a href={href} target="_blank" rel="noopener noreferrer">
+              <a
+                href={`${linktype === 'email' ? 'mailto:' : ''}${href}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {children}
               </a>
             </Text>
@@ -64,7 +67,13 @@ export const RichText: FC<RichTextProps> = ({
           </Heading>
         ),
         [NODE_PARAGRAPH]: (children) => (
-          <Text maxWidth="560px" fontSize={[2, 2.5]} lineHeight="high" pb={2}>
+          <Text
+            maxWidth="560px"
+            fontSize={[2, 2.5]}
+            lineHeight="high"
+            pb={2}
+            {...textProps}
+          >
             {children}
           </Text>
         ),

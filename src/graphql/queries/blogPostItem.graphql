@@ -1,0 +1,11 @@
+query blogPostItem($slug: ID!) {
+  BlogpostItem(id: $slug, resolve_relations: "price_selector.price,newsletter_component.newsletter", resolve_links: "url") {
+    content {
+      seo
+      body
+      _uid
+      _editable
+    }
+    uuid
+  }
+}

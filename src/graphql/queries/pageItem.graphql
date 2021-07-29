@@ -1,10 +1,11 @@
 query pageItem($slug: ID!) {
-  PageItem(id: $slug, resolve_relations: "price_selector.price", resolve_links: "url") {
+  PageItem(id: $slug, resolve_relations: "price_selector.price,newsletter_component.newsletter", resolve_links: "url") {
     content {
       seo
       body
       component
       _editable
+      _uid
     }
     uuid
   }

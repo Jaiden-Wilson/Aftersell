@@ -11,6 +11,7 @@ type ContainerProps = {
   childProps?: any;
   space?: number | number[];
   background?: 'none' | 'color' | 'gradient';
+  noBgAnimation?: boolean;
 } & SystemProps;
 
 export const ContainerWrapper = ({
@@ -45,6 +46,7 @@ export const Container = ({
   children,
   childProps,
   background,
+  noBgAnimation,
   ...props
 }: ContainerProps) => {
   return (
@@ -53,7 +55,7 @@ export const Container = ({
         position="relative"
         pt={background !== 'none' && [4, 10]}
         pb={background !== 'none' && [4, 10]}
-        px={[0, 6]}
+        px={[0, 0, 6]}
         css={css({
           background:
             background === 'gradient' &&
@@ -65,50 +67,86 @@ export const Container = ({
         })}
         textAlign="center"
         overflow={background === 'color' ? 'visible' : 'hidden'}
+        zIndex="docked"
         {...props}
       >
         {background === 'color' && (
-          <Fade
-            duration={1200}
-            fraction={0.3}
-            triggerOnce
-            style={{
-              position: 'absolute',
-              left: 0,
-              top: 0,
-              height: '100%',
-              width: '100%',
-            }}
-          >
-            <Parallax
-              y={['-40px', '40px']}
-              styleOuter={{
-                position: 'absolute',
-                left: 0,
-                top: 0,
-                height: '100%',
-                width: '100%',
-              }}
-              styleInner={{
-                position: 'absolute',
-                left: 0,
-                top: 0,
-                height: '100%',
-                width: '100%',
-              }}
-            >
-              <Box
-                position="absolute"
-                borderRadius={[0, 'lg']}
-                bg="primary100"
-                top={[4, 5]}
-                left={[0, 6]}
-                bottom={[4, 5]}
-                right={[0, 6]}
-                className="background"
-              />
-            </Parallax>
-          </Fade>
+          <>
+            {noBgAnimation ? (
+              <Parallax
+                y={['-40px', '40px']}
+                styleOuter={{
+                  position: 'absolute',
+                  left: 0,
+                  top: 0,
+                  height: '100%',
+                  width: '100%',
+                }}
+                styleInner={{
+                  position: 'absolute',
+                  left: 0,
+                  top: 0,
+                  height: '100%',
+                  width: '100%',
+                }}
+              >
+                <Box
+                  position="absolute"
+                  borderRadius={['none', 'none', 'lg']}
+                  bg="primary100"
+                  top={[4, 5]}
+                  left={[0, 0, 6]}
+                  bottom={[4, 5]}
+                  right={[0, 0, 6]}
+                  className="background"
+                  boxShadow={['none', 'none', 'sm']}
+                />
+              </Parallax>
+            ) : (
+              <Fade
+                duration={1200}
+                fraction={0.3}
+                triggerOnce
+                style={{
+                  position: 'absolute',
+                  left: 0,
+                  top: 0,
+                  height: '100%',
+                  width: '100%',
+                }}
+              >
+                <Parallax
+                  y={['-40px', '40px']}
+                  styleOuter={{
+                    position: 'absolute',
+                    left: 0,
+                    top: 0,
+                    height: '100%',
+                    width: '100%',
+                  }}
+                  styleInner={{
+                    position: 'absolute',
+                    left: 0,
+                    top: 0,
+                    height: '100%',
+                    width: '100%',
+                  }}
+                >
+                  <Box
+                    position="absolute"
+                    borderRadius={['none', 'none', 'lg']}
+                    bg="primary100"
+                    top={[4, 5]}
+                    left={[0, 0, 6]}
+                    bottom={[4, 5]}
+                    right={[0, 0, 6]}
+                    className="background"
+                    boxShadow={['none', 'none', 'sm']}
+                  />
+                </Parallax>
+              </Fade>
+            )}
+          </>
         )}
         <Stack
           space={space}
@@ -117,8 +155,8 @@ export const Container = ({
           alignItems="center"
           width="100%"
           maxWidth="maxWidth"
-          pt={background === 'color' && [4, 10]}
-          pb={background === 'color' && [4, 10]}
+          pt={background === 'color' && [4, 4, 10]}
+          pb={background === 'color' && [4, 4, 10]}
           px={[2, 6]}
           margin="0 auto"
           zIndex="docked"
@@ -149,9 +187,9 @@ export const Container = ({
                 borderRadius="full"
                 bottom={[0, '50%']}
                 left="50%"
-                width={['100%', 'calc(100% - 96px)']}
+                width={['100%', 'calc(100% - 240px)']}
                 mt="0 !important"
-                pt={['100%', 'calc(100% - 96px)']}
+                pt={['100%', 'calc(100% - 240px)']}
                 transform="translate(-50%, 50%)"
                 zIndex="hide"
                 css={css({
