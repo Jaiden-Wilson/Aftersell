@@ -21,8 +21,11 @@ export const Newsletter = ({ content, ...props }: NewsletterProps) => {
   } = useForm();
 
   const onSubmit = (input) => {
+    setError('');
+    setSuccess('');
+
     return axios
-      .post(`/api/newsletter`, { email: input.newsletterEmail })
+      .post(`/api/newsletter`, { email: input.email })
       .then((response) => {
         if (response.status !== 200) {
           setError(response.statusText);
@@ -76,7 +79,7 @@ export const Newsletter = ({ content, ...props }: NewsletterProps) => {
         >
           <Input
             type="email"
-            id="newsletterEmail"
+            id="email"
             aria-label="Your email address"
             placeholder="Your email address"
             required
@@ -90,6 +93,7 @@ export const Newsletter = ({ content, ...props }: NewsletterProps) => {
             input
             boxShadow="none"
             isLoading={isSubmitting}
+            cursor={isSubmitting ? 'wait' : 'pointer'}
             width={['100%', 'auto']}
           />
         </Flex>
