@@ -161,8 +161,31 @@ export default class MyDocument extends Document {
           `,
             }}
           />
+
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                dataLayer.push({ 'gtm.start': new Date().getTime(), event:'gtm.js' });
+              `,
+            }}
+          />
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtm.js?id=${process.env.NEXT_PUBLIC_GTM}`}
+          />
         </Head>
         <body>
+          <noscript>
+            <iframe
+              title="tag"
+              src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GTM}`}
+              height="0"
+              width="0"
+              style={{ display: 'none', visibility: 'hidden' }}
+            />
+          </noscript>
+
           <Main />
           <NextScript />
         </body>
