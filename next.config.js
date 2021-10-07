@@ -183,6 +183,15 @@ module.exports = withBundleAnalyzer(
         },
       ];
     },
+    redirects() {
+      return [
+        {
+          source: '/blog/benefits',
+          destination: 'https://storyofams.com/blog/articles/the-benefits-of-guided-selling',
+          permanent: true,
+        },
+      ];
+    },
     rewrites() {
       return [
         {
