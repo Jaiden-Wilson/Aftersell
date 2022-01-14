@@ -9,8 +9,7 @@ variables:
 
 stages:
   - test
-  - deploy
-  - audit
+  - deploy 
 
 test:
   before_script:
@@ -48,20 +47,4 @@ production:
     name: production
     url: https://productfinder.app
   only:
-    - master
-
-runLighthouse:
-  stage: audit
-  image: cypress/browsers:node14.15.0-chrome86-ff82
-  script:
-    - |
-      npx @lhci/cli autorun \
-        --collect.url=https://staging.productfinder.app \
-        --collect.settings.chromeFlags="--no-sandbox" \
-        --collect.settings.throttling.cpuSlowdownMultiplier=2.5 \
-        --collect.settings.extraHeaders="{\"Cookie\": \"next-password-protect=$NEXT_PASSWORD_JWT\"}" \
-        --upload.target=lhci \
-        --upload.serverBaseUrl=https://lighthouse.storyofams.dev/ \
-        --upload.token=$LIGHTHOUSE_CI_BUILD_TOKEN
-  only:
-    - staging
+    - master 
