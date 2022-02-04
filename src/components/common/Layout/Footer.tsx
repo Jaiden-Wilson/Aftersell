@@ -104,7 +104,7 @@ export const Footer: FC<FooterProps> = ({ content }) => {
               {content?.description}
             </Text>
             {content?.shopify_plus_logo && (
-              <Link href="https://apps.shopify.com/">
+              <Link href="https://apps.shopify.com/perfect-product-finder">
                 <Shape
                   as="a"
                   mt={[2, 4]}
@@ -135,17 +135,7 @@ export const Footer: FC<FooterProps> = ({ content }) => {
           width="100%"
           alignItems="center"
           justifyContent="center"
-        >
-          <Link href="https://storyofams.com/">
-            <a>
-              <Shape width="76px" height="48px" icon={<StoryOfAms />} />
-              <div className="hidden">Open storyofams.com</div>
-            </a>
-          </Link>
-          <Text lineHeight="1.2" mt={1.5} color="grey500" fontSize={1.5}>
-            Copyright © {new Date().getFullYear()} Story of AMS
-          </Text>
-        </Flex>
+        ></Flex>
       </Box>
     </Box>
   );
