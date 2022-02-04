@@ -33,3 +33,4 @@ export const getStaticProps: GetStaticProps = enhancedStaticProps(
     };
   },
 );
+// Vercel GitLab test
