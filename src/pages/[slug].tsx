@@ -42,11 +42,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
   } catch (e) {}
 
   return {
-    paths: stories
-      ?.filter(({ slug }) => slug !== 'home')
-      ?.map(({ slug }) => ({
-        params: { slug },
-      })),
+    paths: [
+      stories
+        ?.filter(({ slug }) => slug !== 'home')
+        ?.map(({ slug }) => ({
+          params: { slug },
+        })),
+    ],
     fallback: 'blocking',
   };
 };
