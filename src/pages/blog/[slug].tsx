@@ -44,9 +44,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   } catch (e) {}
 
   return {
-    paths: stories?.map(({ slug }) => ({
+    paths: [stories?.map(({ slug }) => ({
       params: { slug },
-    })),
+    }))],
     fallback: 'blocking',
   };
 };
